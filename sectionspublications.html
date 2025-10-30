@@ -1,0 +1,30 @@
+<section id="pubs" aria-label="Publications">
+  <h2>Publications & Selected Presentations</h2>
+
+  <div class="toolbar" role="region" aria-label="Publication tools">
+    <input id="q" class="search" type="search" placeholder="Search title, venue, year, or keyword…" aria-label="Search publications">
+    <button class="filter" data-tag="journal" aria-pressed="false">Journals</button>
+    <button class="filter" data-tag="proceedings" aria-pressed="false">Proceedings</button>
+    <button class="filter" data-tag="presentation" aria-pressed="false">Presentations</button>
+    <button class="filter" data-tag="under-review" aria-pressed="false">Under review</button>
+    <button class="filter" id="clear">Clear</button>
+  </div>
+
+  <div id="publist" class="grid"></div>
+
+  <template id="pub-item">
+    <div class="li">
+      <div class="muted small"></div>
+      <div class="title"></div>
+      <div class="meta muted"></div>
+      <div class="tags chiprow" style="margin-top:8px"></div>
+    </div>
+  </template>
+
+  <details style="margin-top:10px">
+    <summary>Show citation note</summary>
+    <div class="content muted">
+      Entries are summarized from your CV. For the authoritative list, please refer to your current CV PDF.
+    </div>
+  </details>
+</section>
