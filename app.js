@@ -1,54 +1,47 @@
-/* Shell loader: injects /sections/*.html into <main>, attaches behaviors */
+/* Root-only loader: expects about.html, education.html, etc. in repo root */
 const routes = ["about","education","experience","grants","awards","publications","contact"];
 const contentEl = document.getElementById("content");
 const yearEl = document.getElementById("year");
 const topBtn = document.getElementById("top");
 yearEl.textContent = new Date().getFullYear();
 
-// SPA-ish: load fragment based on hash or default to #about
 function currentRoute(){
   const h = (location.hash || "#about").replace("#","");
   return routes.includes(h) ? h : "about";
 }
 
 async function loadSection(name){
-  // set active tab
   document.querySelectorAll(".tab").forEach(a=>{
     a.classList.toggle("active", a.dataset.section === name);
   });
 
-  // fetch and inject
-  const res = await fetch(`sections/${name}.html`);
+  // fetch from ROOT (about.html, education.html, etc.)
+  const res = await fetch(`${name}.html`);
+  if(!res.ok){
+    contentEl.innerHTML = `<section class="card"><h2>Not found</h2><p>Couldn’t load <code>${name}.html</code>. Check the filename and path.</p></section>`;
+    return;
+  }
   const html = await res.text();
   contentEl.innerHTML = html;
 
-  // run section-specific hooks
+  // section hooks
   if(name === "publications"){ publicationsInit(); }
   if(name === "about"){ aboutInit(); }
 
-  // reveal back-to-top when scrolling
   document.addEventListener("scroll", ()=>{
     topBtn.style.display = window.scrollY > 400 ? "grid" : "none";
   }, { passive: true });
 }
-
 window.addEventListener("hashchange", ()=> loadSection(currentRoute()));
 window.addEventListener("DOMContentLoaded", ()=> loadSection(currentRoute()));
 topBtn.addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
 
-// nav links (progressive enhancement)
+// nav links
 document.querySelectorAll('.tab').forEach(a=>{
-  a.addEventListener('click', (e)=>{
-    const section = a.dataset.section;
-    if (!section) return;
-    // allow default hash change, loader will run
-  });
+  a.addEventListener('click', ()=> {/* default hash change is fine */});
 });
 
-/* ===== About small hook (optional) ===== */
-function aboutInit(){
-  // nothing mandatory here; placeholder for any future micro-interaction
-}
+function aboutInit(){ /* placeholder for future micro-interactions */ }
 
 /* ===== Publications: filter + search ===== */
 async function publicationsInit(){
@@ -60,7 +53,7 @@ async function publicationsInit(){
 
   let pubs = [];
   try{
-    const res = await fetch("data/pubs.json");
+    const res = await fetch("datapubs.json"); // ROOT, not data/pubs.json
     pubs = await res.json();
   }catch(e){
     console.error("Failed to load publications:", e);
@@ -68,21 +61,18 @@ async function publicationsInit(){
 
   function render(items){
     list.innerHTML = "";
-    items
-      .slice()
-      .sort((a,b)=> (b.year||0) - (a.year||0))
-      .forEach(p=>{
-        const node = tmpl.content.cloneNode(true);
-        node.querySelector(".small").textContent = p.year ?? "";
-        node.querySelector(".title").textContent = p.title ?? "";
-        node.querySelector(".meta").textContent = p.venue ?? "";
-        const tags = node.querySelector(".tags");
-        const tag = document.createElement("span");
-        tag.className = "chip";
-        tag.textContent = (p.type || "").replace("-", " ");
-        tags.appendChild(tag);
-        list.appendChild(node);
-      });
+    items.slice().sort((a,b)=> (b.year||0)-(a.year||0)).forEach(p=>{
+      const node = tmpl.content.cloneNode(true);
+      node.querySelector(".small").textContent = p.year ?? "";
+      node.querySelector(".title").textContent = p.title ?? "";
+      node.querySelector(".meta").textContent = p.venue ?? "";
+      const tags = node.querySelector(".tags");
+      const tag = document.createElement("span");
+      tag.className = "chip";
+      tag.textContent = (p.type || "").replace("-", " ");
+      tags.appendChild(tag);
+      list.appendChild(node);
+    });
   }
 
   function apply(){
