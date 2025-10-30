@@ -3,326 +3,844 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Salah Esmaeiligoujar · Educational Technology Portfolio</title>
-  <meta name="description" content="Ph.D. student in Educational Technology at the University of Florida. Research, projects, publications, talks, and contact." />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <meta name="theme-color" content="#0ea5e9" />
+  <title>Salah Esmaeiligoujar · Educational Technology</title>
+  <meta name="description" content="Personal website of Salah Esmaeiligoujar, Ph.D. student in Educational Technology at the University of Florida." />
   <style>
-    :root{
-      --bg:#0b0f14;--panel:#0f1620;--panel-2:#0c1320;--text:#e6edf3;--muted:#9db3c7;--brand:#0ea5e9;--brand2:#22d3ee;--ring:#38bdf8;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --maxw:1200px
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface-alt: #eef1f8;
+      --text: #122740;
+      --muted: #52637c;
+      --accent: #3a82f7;
+      --accent-soft: rgba(58, 130, 247, .15);
+      --radius: 18px;
+      --shadow: 0 16px 45px rgba(17, 34, 68, .15);
+      --max: 1100px;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    @media (prefers-color-scheme:light){:root{--bg:#f7fafc;--panel:#ffffff;--panel-2:#f4f7fb;--text:#0f172a;--muted:#475569}}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;line-height:1.6;background:
-      radial-gradient(1000px 600px at 120% -10%, rgba(34,211,238,.15), transparent 60%),
-      radial-gradient(800px 500px at -20% -10%, rgba(14,165,233,.18), transparent 50%),
-      var(--bg);color:var(--text)}
-    a{color:inherit}
-
-    /* Skip link */
-    .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip:focus{left:1rem;top:1rem;width:auto;height:auto;background:var(--panel);padding:.5rem .7rem;border-radius:.6rem;z-index:1000}
-
-    /* Header / Navbar */
-    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color-mix(in oklab,var(--bg),transparent 55%);border-bottom:1px solid color-mix(in oklab,var(--text),transparent 90%)}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px;padding:0 1rem;max-width:var(--maxw);margin:0 auto}
-    .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:.2px;text-decoration:none}
-    .brand .dot{width:.75rem;height:.75rem;border-radius:999px;background:linear-gradient(180deg,var(--brand2),var(--brand))}
-    .nav{display:flex;align-items:center;gap:.2rem}
-    .menu{display:flex;gap:.2rem;list-style:none;margin:0;padding:0}
-    .menu a{display:block;padding:.55rem .75rem;border-radius:.6rem;text-decoration:none;border:1px solid transparent}
-    .menu a:hover,.menu a.active{border-color:color-mix(in oklab,var(--brand),transparent 55%)}
-    .hamburger{display:none}
-    @media (max-width:980px){
-      .menu{display:none}
-      .hamburger{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:.6rem;border:1px solid color-mix(in oklab,var(--text),transparent 85%);background:transparent;color:var(--text)}
-      .nav.open .menu{position:absolute;left:1rem;right:1rem;top:64px;display:grid;gap:.4rem;background:var(--panel);padding:.6rem;border:1px solid color-mix(in oklab,var(--text),transparent 88%);border-radius:.8rem;box-shadow:var(--shadow)}
-      .menu a{padding:.7rem}
+    *, *:before, *:after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+      background-image: radial-gradient(500px circle at 10% 10%, rgba(58,130,247,.12), transparent),
+                        radial-gradient(600px circle at 90% 5%, rgba(53,208,173,.16), transparent);
     }
-
-    /* Layout helpers */
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 1rem}
-    section{padding:4rem 0}
-    h2{font-size:1.5rem;margin:0 0 1rem}
-
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.2rem .55rem;border-radius:999px;border:1px solid color-mix(in oklab,var(--ring),transparent 55%);color:var(--ring);font-size:.8rem}
-    .title{font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin:.6rem 0 1rem}
-    .lead{color:var(--muted)}
-    .cta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1rem;border-radius:.8rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in oklab,var(--brand),transparent 35%);background:linear-gradient(180deg,color-mix(in oklab,var(--brand),transparent 85%),color-mix(in oklab,var(--brand2),transparent 90%))}
-    .btn.ghost{background:transparent;border-color:color-mix(in oklab,var(--text),transparent 85%)}
-    .card{background:color-mix(in oklab,var(--panel),transparent 0%);border:1px solid color-mix(in oklab,var(--text),transparent 90%);border-radius:1rem;padding:1rem;box-shadow:0 1px 0 color-mix(in oklab,var(--text),transparent 90%)}
-    .portrait{width:100%;aspect-ratio:1/1;border-radius:1rem;background:
-      radial-gradient(60% 50% at 70% 0%, rgba(34,211,238,.18), transparent 70%),
-      radial-gradient(60% 50% at 0% 100%, rgba(14,165,233,.14), transparent 70%),
-      color-mix(in oklab,var(--panel),transparent 0%);
-      display:grid;place-items:center;color:var(--muted);font-weight:700}
-
-    /* Grids */
-    .grid{display:grid;gap:1rem}
-    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid.two,.grid.three{grid-template-columns:1fr}}
-
-    /* Timeline */
-    .timeline{position:relative;margin-left:.8rem;padding-left:1rem}
-    .timeline:before{content:"";position:absolute;left:0;top:.2rem;bottom:.2rem;width:2px;background:color-mix(in oklab,var(--ring),transparent 60%)}
-    .t{position:relative;padding:.8rem;border-radius:.8rem;background:var(--panel-2);border:1px solid color-mix(in oklab,var(--text),transparent 90%)}
-    .t:before{content:"";position:absolute;left:-1.05rem;top:1.2rem;width:.6rem;height:.6rem;border-radius:999px;background:linear-gradient(180deg,var(--brand2),var(--brand))}
-    .meta{color:var(--muted);font-size:.92rem}
-
-    /* Project cards */
-    .project{display:grid;gap:.6rem}
-    .thumb{width:100%;aspect-ratio:16/9;border-radius:.8rem;background:
-      linear-gradient(120deg,color-mix(in oklab,var(--brand),transparent 85%),transparent),
-      linear-gradient(240deg,color-mix(in oklab,var(--brand2),transparent 90%),transparent),
-      color-mix(in oklab,var(--panel),transparent 0%);border:1px solid color-mix(in oklab,var(--text),transparent 90%);display:grid;place-items:center;color:var(--muted);font-weight:700}
-    .tagrow{display:flex;flex-wrap:wrap;gap:.35rem}
-    .tag{font-size:.78rem;padding:.15rem .45rem;border-radius:999px;border:1px solid color-mix(in oklab,var(--text),transparent 85%);color:var(--muted)}
-
-    /* Publications */
-    .toolbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
-    .search{flex:1;min-width:220px;padding:.55rem .6rem;border-radius:.6rem;border:1px solid color-mix(in oklab,var(--text),transparent 85%);background:transparent;color:var(--text)}
-    .pub{padding:1rem;border-radius:.8rem;border:1px solid color-mix(in oklab,var(--text),transparent 90%);background:var(--panel-2)}
-    .pub .actions{display:flex;gap:.4rem;margin-top:.4rem}
-    .small{font-size:.86rem}
-
-    /* Footer */
-    footer{padding:3rem 0 4rem;color:var(--muted);border-top:1px dashed color-mix(in oklab,var(--text),transparent 88%)}
-
-    /* Print CV */
-    @media print{
-      header,.btn,.thumb,.portrait,.toolbar{display:none !important}
-      section{padding:0}
-      body{background:#fff;color:#000}
-      a{color:#000}
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(244, 246, 251, .85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(18, 39, 64, .08);
+    }
+    .nav-shell {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: .6rem 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      letter-spacing: .2px;
+    }
+    .brand span {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      font-weight: 800;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: .4rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: .55rem .85rem;
+      font-weight: 600;
+      font-size: .92rem;
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: background .2s ease, color .2s ease;
+    }
+    nav a:hover, nav a.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      font-size: 1.6rem;
+      padding: .4rem .65rem;
+      border-radius: 12px;
+    }
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.5rem 1.3rem 5rem;
+    }
+    section { margin-bottom: 4.5rem; }
+    h1, h2, h3 { margin: 0 0 1rem; line-height: 1.2; letter-spacing: .2px; }
+    h1 { font-size: clamp(2.25rem, 4vw, 3.2rem); }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
+    h3 { font-size: 1.15rem; }
+    p { margin: 0 0 1rem; }
+    .hero {
+      display: grid;
+      gap: 2.5rem;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      align-items: center;
+    }
+    .hero-card {
+      background: var(--surface);
+      padding: 1.8rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(18, 39, 64, .05);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .3rem .7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 1.4rem;
+    }
+    .btn {
+      padding: .75rem 1.1rem;
+      border-radius: 14px;
+      border: none;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #49a5ff);
+      color: #fff;
+      box-shadow: 0 18px 35px rgba(58,130,247,.28);
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost {
+      background: rgba(18, 39, 64, .05);
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      gap: 1.2rem;
+    }
+    .grid.three { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .tile {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      border: 1px solid rgba(18, 39, 64, .08);
+      box-shadow: var(--shadow);
+      transition: transform .2s ease;
+    }
+    .tile:hover { transform: translateY(-4px); }
+    .tile h3 { margin-bottom: .5rem; }
+    .muted { color: var(--muted); font-size: .95rem; }
+    .accordion {
+      display: grid;
+      gap: 1rem;
+    }
+    .accordion-item {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(18,39,64,.08);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: border-color .2s ease;
+    }
+    .accordion-item.open { border-color: rgba(58,130,247,.45); }
+    .accordion-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: none;
+      border: none;
+      font: inherit;
+      padding: 1.2rem 1.4rem;
+      cursor: pointer;
+      text-align: left;
+    }
+    .accordion-toggle span {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .accordion-toggle small { color: var(--muted); font-weight: 600; }
+    .accordion-toggle svg {
+      width: 22px;
+      height: 22px;
+      transition: transform .2s ease;
+      flex: none;
+    }
+    .accordion-item.open .accordion-toggle svg { transform: rotate(180deg); }
+    .accordion-content {
+      display: grid;
+      gap: .6rem;
+      padding: 0 1.4rem 1.4rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    ul.inline {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+    .list {
+      display: grid;
+      gap: 1rem;
+    }
+    .list li {
+      list-style: none;
+      background: var(--surface);
+      border: 1px solid rgba(18,39,64,.08);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.4rem;
+      box-shadow: var(--shadow);
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin: .5rem 0 0;
+    }
+    .chip {
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      font-size: .8rem;
+      background: rgba(18,39,64,.06);
+      color: var(--muted);
+    }
+    .publication-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 1.3rem;
+    }
+    .filter-btn {
+      border: 1px solid rgba(18,39,64,.12);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: .45rem .95rem;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 12px 30px rgba(58,130,247,.35);
+    }
+    .pub-card {
+      padding: 1.2rem 1.4rem;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid rgba(18,39,64,.08);
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+    footer {
+      margin-top: 4rem;
+      padding: 2.5rem 1.3rem 3rem;
+      background: rgba(18, 39, 64, .05);
+      text-align: center;
+      color: var(--muted);
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    @media (max-width: 960px) {
+      nav ul { display: none; }
+      nav.open ul {
+        display: grid;
+        gap: .6rem;
+        position: absolute;
+        right: 1.3rem;
+        top: 70px;
+        background: rgba(244, 246, 251, .95);
+        padding: 1rem 1.2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+      .menu-toggle { display: block; }
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero-card { order: -1; }
+      .hero-actions { justify-content: center; }
     }
   </style>
 </head>
 <body>
-  <a href="#main" class="skip">Skip to content</a>
   <header>
-    <div class="topbar">
-      <a class="brand" href="#"><span class="dot" aria-hidden="true"></span> Salah Esmaeiligoujar</a>
-      <nav class="nav" id="nav" aria-label="Main">
-        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
-        <ul class="menu" id="menu">
-          <li><a href="#about" class="active">About</a></li>
+    <div class="nav-shell">
+      <a class="brand" href="#about"><span>SE</span> Salah Esmaeiligoujar</a>
+      <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a class="active" href="#about">About</a></li>
+          <li><a href="#highlights">Highlights</a></li>
           <li><a href="#experience">Experience</a></li>
+          <li><a href="#education">Education</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#talks">Talks</a></li>
+          <li><a href="#grants">Grants</a></li>
           <li><a href="#awards">Awards</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#service">Service</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main" class="container">
-    <!-- HERO -->
-    <section class="hero" id="about">
+  <main>
+    <section id="about" class="hero">
       <div>
-        <span class="eyebrow">Educational Technology · UF</span>
-        <h1 class="title">Hi, I'm <span style="color:var(--brand)">Salah Esmaeiligoujar</span>.</h1>
-        <p class="lead">Ph.D. student at the University of Florida. I research technology‑rich learning environments, game‑based learning, usability, and AI‑powered tools for language learning and assessment.</p>
-        <div class="cta">
-          <a class="btn" href="#projects">See projects</a>
-          <a class="btn ghost" href="cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
-          <a class="btn ghost" href="#contact">Email me</a>
+        <span class="pill">Ph.D. student · Educational Technology</span>
+        <h1>Hello, I'm Salah Esmaeiligoujar</h1>
+        <p class="muted">I design playful, data-informed learning experiences that empower teachers and students. I am a Ph.D. student in Educational Technology at the University of Florida, studying AI-powered instruction, game-based learning, and learning analytics.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Connect with me</a>
+          <a class="btn btn-ghost" href="#publications">Browse my work</a>
         </div>
       </div>
-      <div class="card">
-        <div class="portrait" role="img" aria-label="Headshot placeholder">Your headshot here</div>
-        <p class="meta" style="margin:.6rem 0 0">Replace with <code>headshot.jpg</code> and set as CSS <code>background-image</code> on <code>.portrait</code>.</p>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="timeline">
-        <div class="t">
-          <div><strong>Research Assistant</strong> — University of Florida <span class="meta">Aug 2023–present</span></div>
-          <div class="small meta">CLASS Lab — Research on technology‑rich learning environments.</div>
+      <div class="hero-card">
+        <h3>Currently</h3>
+        <p class="muted">Research Assistant at the University of Florida GAME Lab focusing on AI-driven tools that enhance K–12 learning and teacher creativity.</p>
+        <div class="chips">
+          <span class="chip">AI & Creativity</span>
+          <span class="chip">Game-Based Learning</span>
+          <span class="chip">Instructional Design</span>
         </div>
-        <div class="t">
-          <div><strong>Instructional Designer</strong> — TadrisYaran Group <span class="meta">May 2020–present</span></div>
-          <div class="small meta">Developed online workshops and courses; evaluated course quality; supported instructors; social media management.</div>
-        </div>
-        <div class="t">
-          <div><strong>Usability Testing Coordinator</strong> — UF <span class="meta">Jan 2023–May 2024</span></div>
-          <div class="small meta">Designed and ran usability tests for EarSketch; recruited participants; analyzed feedback; delivered reports.</div>
-        </div>
-        <div class="t">
-          <div><strong>Co‑Designer</strong> — Metalingual (AI English learning) <span class="meta">Jan 2023–May 2024</span></div>
-          <div class="small meta">Integrated AI‑driven features and personalized feedback; user testing.</div>
-        </div>
-        <div class="t"><div><strong>Project Manager</strong> — Innovation House of Education (Chaharsoogh) <span class="meta">2020–2022</span></div></div>
-        <div class="t"><div><strong>Assessment Manager</strong> — OREP · Roshd Fanavari Journal <span class="meta">2019–2022</span></div></div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <h2>Selected Projects</h2>
+    <section id="highlights">
+      <h2>Quick Highlights</h2>
       <div class="grid three">
-        <article class="project card">
-          <div class="thumb" aria-label="Project image placeholder">Project image</div>
-          <h3>AI‑powered Algebra Problem Generator</h3>
-          <p class="meta">Supports teachers to prepare for productive failure; poster at AERA 2025.</p>
-          <div class="tagrow">
-            <span class="tag">Generative AI</span><span class="tag">Assessment</span><span class="tag">K‑12</span>
+        <div class="tile">
+          <h3>Designing engaging learning</h3>
+          <p class="muted">Over eight years building workshops, online courses, and playful learning experiences for teachers and students in Iran and the U.S.</p>
+        </div>
+        <div class="tile">
+          <h3>Research to practice</h3>
+          <p class="muted">Co-author of systematic reviews on digital games, growth mindset, computational thinking, and stealth assessment.</p>
+        </div>
+        <div class="tile">
+          <h3>Awarded and recognized</h3>
+          <p class="muted">Recipient of the Fenton Family Scholarship, AECT Presidential Presentation, and multiple national academic awards.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Professional Experience</h2>
+      <p class="muted">Tap a card to explore responsibilities and impact.</p>
+      <div class="accordion">
+        <article class="accordion-item open" data-tags="research">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Research Assistant · University of Florida</span>
+              <small>Aug 2023 – Present</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content">
+            <p>Member of the GAME Lab working alongside interdisciplinary teams to investigate AI-supported learning and game-based experiences.</p>
+            <ul class="inline">
+              <li>Lead research design, data collection, and reporting for multi-institutional studies.</li>
+              <li>Coordinate usability studies and translate findings into actionable design guidance.</li>
+              <li>Collaborate with faculty and students to publish peer-reviewed work.</li>
+            </ul>
           </div>
         </article>
-        <article class="project card">
-          <div class="thumb" aria-label="Project image placeholder">Project image</div>
-          <h3>Metalingual</h3>
-          <p class="meta">AI‑powered tool for TOEFL speaking preparation; presented at AECT 2024.</p>
-          <div class="tagrow">
-            <span class="tag">EdTech</span><span class="tag">NLP</span><span class="tag">Usability</span>
+
+        <article class="accordion-item" data-tags="design">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Instructional Designer · TadrisYaran Group</span>
+              <small>May 2020 – Present</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Designs online professional development experiences for Iranian teachers, emphasizing accessibility and learner motivation.</p>
+            <ul class="inline">
+              <li>Developed interactive workshops, webinars, and asynchronous courses.</li>
+              <li>Evaluated course quality and provided coaching for instructors.</li>
+              <li>Led social media outreach to connect educators with resources.</li>
+            </ul>
           </div>
         </article>
-        <article class="project card">
-          <div class="thumb" aria-label="Project image placeholder">Project image</div>
-          <h3>Clues in the News</h3>
-          <p class="meta">Designing a stealth assessment of critical thinking (AECT 2024).</p>
-          <div class="tagrow">
-            <span class="tag">Critical Thinking</span><span class="tag">Games</span>
+
+        <article class="accordion-item" data-tags="research">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Usability Testing Coordinator · University of Florida</span>
+              <small>Jan 2023 – May 2024</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Designed and conducted usability tests for Ear Sketch, a creative coding platform for youth.</p>
+            <ul class="inline">
+              <li>Recruited and managed test participants and workflows.</li>
+              <li>Analyzed data and surfaced usability issues.</li>
+              <li>Presented recommendations to improve engagement.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="design">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Co-Designer · Metalingual (AI English Learning Tool)</span>
+              <small>Jan 2023 – May 2024</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Collaborated to build an AI-powered TOEFL preparation companion delivering personalized speaking practice.</p>
+            <ul class="inline">
+              <li>Integrated AI feedback loops to guide learners in real time.</li>
+              <li>Ran iterative user testing to refine engagement.</li>
+              <li>Aligned product decisions with educational objectives.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="leadership">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Project Manager · Innovation House of Education</span>
+              <small>Sep 2020 – Nov 2022</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Oversaw Chaharsoogh, a nationwide educational event, coordinating stakeholders and ensuring impact.</p>
+            <ul class="inline">
+              <li>Planned program logistics and evaluation metrics.</li>
+              <li>Managed cross-functional teams and partnerships.</li>
+              <li>Measured project outcomes and disseminated insights.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="assessment">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Assessment Manager · Ministry of Education (OREP)</span>
+              <small>Nov 2019 – May 2022</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Evaluated national educational content to support quality assurance within Iran's Ministry of Education.</p>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="research">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Research Assistant · Tehran Education Department</span>
+              <small>Jun 2018 – Feb 2019</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Supported a case study on collaborative learning platforms in Tehran's District 12 schools.</p>
+            <ul class="inline">
+              <li>Gathered and analyzed qualitative and quantitative data.</li>
+              <li>Co-authored reports with actionable recommendations.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="research">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Research Assistant · Allameh Tabataba’i University</span>
+              <small>May 2018 – Jul 2019</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Evaluated skill development across university courses, partnering with Dr. Hamidreza Maghami.</p>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="instruction">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Educational Consultant · Cultural & Social Department of Tehran</span>
+              <small>Jul 2018 – Sep 2018</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Developed workshops and courses for teachers and students, emphasizing learner-centered experiences.</p>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="instruction">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Instructor · Mobtaker Elementary School</span>
+              <small>Oct 2017 – Jan 2018</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Taught computer literacy to students aged 8–12, combining playful practice with foundational skills.</p>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="leadership">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Referee · Top Teaching Methods Festival</span>
+              <small>Dec 2018</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Evaluated innovative teaching approaches for the Iranian Ministry of Education.</p>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="design">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Content Developer · Hedayat Farhikhtegan Javan Institute</span>
+              <small>Jan – Mar 2017</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Evaluated and refined digital content to improve learner engagement.</p>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="instruction">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Educational Consultant · Hekmat Institute</span>
+              <small>2016 – 2017</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Designed programs supporting teachers with new technologies and collaborative learning.</p>
+          </div>
+        </article>
+
+        <article class="accordion-item" data-tags="instruction">
+          <button class="accordion-toggle" type="button">
+            <div>
+              <span>Teaching Assistant · Allameh Tabataba’i University</span>
+              <small>2015 – 2017</small>
+            </div>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div class="accordion-content" hidden>
+            <p>Supported undergraduate courses in educational technology and research methods.</p>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- PUBLICATIONS -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="list">
+        <li>
+          <strong>Ph.D. in Educational Technology</strong> — University of Florida, USA (2023 – Present)<br />
+          Advisor: Dr. Seyedahmad Rahimi
+        </li>
+        <li>
+          <strong>M.A. in Educational Technology</strong> — Allameh Tabataba’i University, Iran (2017)<br />
+          Thesis: <em>The Effect of Kahoot! As a Game-Based Environment on Student’s Learning and Motivation</em><br />
+          Advisor: Dr. Khadijeh Aliabadi
+        </li>
+        <li>
+          <strong>B.S. in Learning Sciences</strong> — Tabriz University, Iran (2015)
+        </li>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Research & Projects</h2>
+      <div class="grid three">
+        <div class="tile">
+          <h3>Metalingual</h3>
+          <p class="muted">AI-powered TOEFL speaking preparation tool offering adaptive feedback to English learners.</p>
+          <div class="chips">
+            <span class="chip">AI Tutoring</span>
+            <span class="chip">UX Research</span>
+          </div>
+        </div>
+        <div class="tile">
+          <h3>ProductiveMath</h3>
+          <p class="muted">Generative AI app supporting teachers with productive failure strategies in mathematics.</p>
+          <div class="chips">
+            <span class="chip">Teacher Support</span>
+            <span class="chip">Generative AI</span>
+          </div>
+        </div>
+        <div class="tile">
+          <h3>Clues in the News</h3>
+          <p class="muted">Stealth assessment experience that nurtures critical thinking through narrative-driven inquiry.</p>
+          <div class="chips">
+            <span class="chip">Critical Thinking</span>
+            <span class="chip">Assessment Design</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="grants">
+      <h2>Research Grants</h2>
+      <div class="list">
+        <li>
+          <strong>Let’s Fail Together: Supporting Teachers to Prepare for Productive Failure Using an AI-powered Math Problem Generator</strong><br />
+          University of Florida · $10,000 · 2024 (May – December)
+        </li>
+        <li>
+          <strong>Master Thesis Research Grant</strong> — Iran's National Elites Foundation · 2017
+        </li>
+        <li>
+          <strong>Web-based Collaborative Learning Platforms</strong> — Research Grant · 80 Million Rial · 2018
+        </li>
+      </div>
+    </section>
+
+    <section id="awards">
+      <h2>Awards & Fellowships</h2>
+      <div class="list">
+        <li>Fenton Family Scholarship, University of Florida (2024).</li>
+        <li>Presidential Presentation, AECT 2024 International Convention.</li>
+        <li>Best Student Award, Graduate Student Excellence, Allameh Tabataba’i University (2017).</li>
+        <li>Ranked 1st in Educational Technology entrance exam, Allameh Tabataba’i University (2016).</li>
+        <li>Ranked 1st among 20,221 educational sciences applicants (2014).</li>
+        <li>Bronze Medal, Scientific Students’ Olympiad (2014).</li>
+      </div>
+    </section>
+
     <section id="publications">
       <h2>Publications</h2>
-      <div class="toolbar">
-        <input id="pubq" class="search" type="search" placeholder="Search titles/authors/years…" aria-label="Search publications">
-        <button class="btn ghost small" id="btn-all">All</button>
-        <button class="btn ghost small" data-type="journal">Journals</button>
-        <button class="btn ghost small" data-type="proceeding">Proceedings</button>
+      <div class="publication-controls">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="journal">Journal Articles</button>
+        <button class="filter-btn" data-filter="proceeding">Proceedings</button>
+        <button class="filter-btn" data-filter="manuscript">Under Review</button>
+        <button class="filter-btn" data-filter="book">Books & Chapters</button>
       </div>
-      <div id="publist" class="grid">
-        <div class="pub" data-type="journal">
-          <div>Fardavoodi, M., <strong>Esmaeiligoujar, S.</strong>, & Bakhtiarvand, M. (2020). Investigating the effect of using educational podcasts on listening comprehension of language learners. <em>Randwick International of Education and Linguistics Science Journal</em>, 1(1), 101–106.</div>
-          <div class="actions">
-            <button class="btn ghost small" data-bib='@article{Fardavoodi2020, title={Investigating the effect of using educational podcasts...}, author={Fardavoodi, M. and Esmaeiligoujar, S. and Bakhtiarvand, M.}, journal={RIELSJ}, year={2020}}'>Copy BibTeX</button>
-          </div>
+      <div id="publication-list">
+        <article class="pub-card" data-type="journal">
+          <strong>Investigating the effect of using educational podcasts on listening comprehension of language learners</strong><br />
+          Randwick International of Education and Linguistics Science Journal, 1(1), 101-106 (2020).
+        </article>
+        <article class="pub-card" data-type="journal">
+          <strong>The effect of online multi-player educational computer games on social skills and cognitive abilities of students</strong><br />
+          Educational Psychology, 15(51), 211-230 (2019) — Persian.
+        </article>
+        <article class="pub-card" data-type="journal">
+          <strong>The effect of using computer games on students’ cognitive regulation and mindfulness</strong><br />
+          Technology of Education Journal, 13(3), 521-535 (2019) — Persian.
+        </article>
+        <article class="pub-card" data-type="journal">
+          <strong>The effect of educational augmented reality on students’ lifelong learning and performance</strong><br />
+          Technology of Instruction and Learning, 3(9), 63-91 (2017) — Persian.
+        </article>
+        <article class="pub-card" data-type="journal">
+          <strong>The effect of multiplayer serious games on students’ learning and motivation</strong><br />
+          New Media Research, 3(11), 195-223 (2017) — Persian.
+        </article>
+
+        <article class="pub-card" data-type="manuscript">
+          <strong>A comparative study of human and AI reviews on the effectiveness of Quizizz for learning and engagement</strong><br />
+          International Journal of Information and Learning Technology — under review.
+        </article>
+        <article class="pub-card" data-type="manuscript">
+          <strong>Digital games can enhance K–12 students’ 21st-century skills: A systematic review</strong><br />
+          Educational Technology Research and Development — under review.
+        </article>
+        <article class="pub-card" data-type="manuscript">
+          <strong>Game on for growth mindset: A systematic review of digital games designed to promote growth mindset in PreK–12 education</strong><br />
+          Educational Technology Research and Development — under review.
+        </article>
+        <article class="pub-card" data-type="manuscript">
+          <strong>Improving Pre-K–12 Students’ Executive Functions Using Digital Games: A Systematic Review</strong><br />
+          Under review.
+        </article>
+        <article class="pub-card" data-type="book">
+          <strong>Augmenting human creativity with responsible and ethical use of generative AI</strong><br />
+          In <em>Generative Artificial Intelligence and Creativity</em> (Elsevier, 2026).
+        </article>
+        <article class="pub-card" data-type="book">
+          <strong>Creativity and generative AI</strong><br />
+          In <em>The Oxford Handbook of AI and Creativity in Education</em> (in preparation).
+        </article>
+
+        <article class="pub-card" data-type="proceeding">
+          <strong>ProductiveMath: A Generative-AI-Powered App to Support Productive Failure Teaching</strong><br />
+          International Conference on Artificial Intelligence in Education, 2025.
+        </article>
+        <article class="pub-card" data-type="proceeding">
+          <strong>The Effects of Digital Games on Pre-K-12 Students’ Growth Mindset: A Systematic Review</strong><br />
+          ICLS 2025.
+        </article>
+        <article class="pub-card" data-type="proceeding">
+          <strong>Improving Pre-K–12 Students’ Executive Functions Using Digital Games: A Systematic Review</strong><br />
+          ICLS 2025.
+        </article>
+        <article class="pub-card" data-type="proceeding">
+          <strong>University of Florida’s AI in Education Workshop: A Perspective from Academia and Learning Industry</strong><br />
+          2024 Proceedings.
+        </article>
+        <article class="pub-card" data-type="proceeding">
+          <strong>Fostering K-12 Students’ Computational Thinking Skills Using Collaborative Technology-rich Learning Environments</strong><br />
+          ICLS 2024.
+        </article>
+        <article class="pub-card" data-type="proceeding">
+          <strong>Using Digital Games to Enhance 21st-Century Skills Development in K-12 Education</strong><br />
+          ICLS 2024.
+        </article>
+        <article class="pub-card" data-type="proceeding">
+          <strong>Stealth Assessment: A Systematic Review of the Literature</strong><br />
+          ISLS Proceedings, 2023.
+        </article>
+      </div>
+    </section>
+
+    <section id="service">
+      <h2>Professional Service & Membership</h2>
+      <div class="grid">
+        <div class="tile">
+          <h3>Peer Review</h3>
+          <p class="muted">Reviewer for British Journal of Educational Technology, Creativity Research Journal, Journal of Research on Technology in Education, and ISLS Annual Meeting (2024–2025).</p>
         </div>
-        <div class="pub" data-type="journal">
-          <div><strong>Esmaeiligoujar, S.</strong>, & Poorrostaeiardakani, S. (2019). Online multi‑player educational games and students’ social skills and cognitive abilities. <em>Educational Psychology</em>, 15(51), 211–230. [Persian]</div>
-          <div class="actions"><button class="btn ghost small" data-bib='@article{Esmaeiligoujar2019, title={Online multi-player educational games...}, author={Esmaeiligoujar, S. and Poorrostaeiardakani, S.}, journal={Educational Psychology}, year={2019}}'>Copy BibTeX</button></div>
+        <div class="tile">
+          <h3>Memberships</h3>
+          <p class="muted">OREP Roshd Fanavari, Iranian Association of Educational Technology, AECT, AERA, and ISLS.</p>
         </div>
-        <div class="pub" data-type="journal">
-          <div>Rajabiyan Dehzireh, M., Dortaj, F., Pourroostaei Ardakani, S., & <strong>Esmaeiligoujar, S.</strong> (2019). Computer games, cognitive regulation, and mindfulness. <em>Technology of Education Journal</em>, 13(3), 521–535. [Persian]</div>
-          <div class="actions"><button class="btn ghost small" data-bib='@article{Dehzireh2019, title={Computer games, cognitive regulation, and mindfulness}, author={Dehzireh, M.R. and Dortaj, F. and Pourroostaei Ardakani, S. and Esmaeiligoujar, S.}, journal={Technology of Education Journal}, year={2019}}'>Copy BibTeX</button></div>
-        </div>
-        <div class="pub" data-type="proceeding">
-          <div>Babaee, M., Rahimi, S., & <strong>Esmaeiligoujar, S.</strong> (2024). Fostering K‑12 students’ computational thinking using collaborative technology‑rich learning environments: A systematic review. <em>ICLS 2024</em>, 786–792.</div>
-        </div>
-        <div class="pub" data-type="proceeding">
-          <div><strong>Esmaeiligoujar, S.</strong>, Rahimi, S., & Babaee, M. (2024). Using digital games to enhance 21st‑century skills development in K‑12 education: A systematic review. <em>ICLS 2024</em>, 2197–2198.</div>
-        </div>
-        <div class="pub" data-type="proceeding">
-          <div>Rahimi, S., Shute, V. J., Khodabandelou, R., Kuba, R., Babaee, M., <strong>Esmaeiligoujar, S.</strong> (2023). Stealth assessment: A systematic review of the literature. <em>ISLS 2023</em>.</div>
+        <div class="tile">
+          <h3>Community Engagement</h3>
+          <p class="muted">Volunteer at STEM on the Lawn, Florida Semiconductor Institute (2025).</p>
         </div>
       </div>
     </section>
 
-    <!-- TALKS -->
-    <section id="talks">
-      <h2>Recent Talks</h2>
-      <div class="grid two">
-        <div class="card"><strong>AERA 2025</strong> — AI‑powered algebra problem generator (poster)</div>
-        <div class="card"><strong>AERA 2025</strong> — Generative AI for creativity assessment (presentation)</div>
-        <div class="card"><strong>AECT 2024</strong> — Metalingual (AI‑powered TOEFL speaking)</div>
-        <div class="card"><strong>AECT 2024</strong> — Clues in the News: stealth assessment of critical thinking</div>
-      </div>
-    </section>
-
-    <!-- AWARDS -->
-    <section id="awards">
-      <h2>Grants & Awards</h2>
-      <div class="grid two">
-        <div class="card"><strong>Let’s Fail Together</strong> — AI‑powered math problem generator · University of Florida · $10,000 (2024)</div>
-        <div class="card"><strong>Fenton Family Scholarship</strong> — University of Florida (2024)</div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
     <section id="contact">
-      <h2>Contact</h2>
-      <div class="card">
-        <p>Email: <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a></p>
-        <form action="https://formspree.io/f/your-id" method="POST">
-          <label class="small">Your email</label>
-          <input class="search" name="email" type="email" placeholder="you@email.com" required>
-          <div style="height:.6rem"></div>
-          <label class="small">Message</label>
-          <textarea name="message" rows="5" placeholder="Say hello..." required class="search" style="min-height:140px"></textarea>
-          <div style="height:.6rem"></div>
-          <button class="btn" type="submit">Send</button>
-        </form>
+      <h2>Let's Collaborate</h2>
+      <div class="tile">
+        <p class="muted">I'm always excited to talk about research collaborations, instructional design partnerships, and playful approaches to teaching with technology.</p>
+        <div class="chips">
+          <span class="chip">Email: salah@ufl.edu</span>
+          <span class="chip">LinkedIn: /in/salahe</span>
+          <span class="chip">Gainesville, Florida</span>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      <p>© <span id="year"></span> Salah Esmaeiligoujar · University of Florida · Built with clean HTML/CSS</p>
-    </div>
+    Crafted with curiosity and care — © Salah Esmaeiligoujar
   </footer>
 
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('header nav');
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('open');
+    });
 
-    // Mobile nav toggle
-    const nav = document.getElementById('nav');
-    const burger = document.getElementById('hamburger');
-    if(burger){ burger.addEventListener('click', ()=> nav.classList.toggle('open')); }
+    const links = nav.querySelectorAll('a');
+    links.forEach(link => link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }));
 
-    // Scrollspy active link
-    const links = [...document.querySelectorAll('.menu a')];
-    const ids = links.map(a => a.getAttribute('href')).filter(h=>h.startsWith('#'));
-    const sections = ids.map(id => document.querySelector(id)).filter(Boolean);
-    const spy = () => {
-      let idx = 0; const y = window.scrollY + 120;
-      sections.forEach((s,i)=>{ if(s.offsetTop <= y) idx = i; });
-      links.forEach(l=>l.classList.remove('active'));
-      const current = document.querySelector(`.menu a[href="${ids[idx]}"]`);
-      if(current) current.classList.add('active');
-    };
-    window.addEventListener('scroll', spy); spy();
-
-    // Publications: search + type filter
-    const q = document.getElementById('pubq');
-    const list = document.getElementById('publist');
-    const pubs = [...list.querySelectorAll('.pub')];
-    const buttons = document.querySelectorAll('[data-type], #btn-all');
-    let type = 'all';
-    function apply(){
-      const term = (q.value||'').toLowerCase();
-      pubs.forEach(p=>{
-        const okType = type==='all' || p.dataset.type===type;
-        const okText = p.textContent.toLowerCase().includes(term);
-        p.style.display = okType && okText ? '' : 'none';
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    accordionItems.forEach(item => {
+      const toggle = item.querySelector('.accordion-toggle');
+      const content = item.querySelector('.accordion-content');
+      toggle.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        accordionItems.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('open');
+            other.querySelector('.accordion-content').setAttribute('hidden', '');
+          }
+        });
+        if (isOpen) {
+          item.classList.remove('open');
+          content.setAttribute('hidden', '');
+        } else {
+          item.classList.add('open');
+          content.removeAttribute('hidden');
+        }
       });
-    }
-    if(q){ q.addEventListener('input', apply); }
-    buttons.forEach(b=>b.addEventListener('click', e=>{ type = b.dataset.type || 'all'; apply(); }));
+    });
 
-    // Copy BibTeX
-    document.querySelectorAll('[data-bib]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        navigator.clipboard.writeText(btn.getAttribute('data-bib'));
-        btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent='Copy BibTeX',1200);
+    const filters = document.querySelectorAll('.filter-btn');
+    const publications = document.querySelectorAll('#publication-list .pub-card');
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        publications.forEach(pub => {
+          if (filter === 'all' || pub.dataset.type === filter) {
+            pub.style.display = 'block';
+          } else {
+            pub.style.display = 'none';
+          }
+        });
       });
     });
   </script>
