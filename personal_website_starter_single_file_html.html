@@ -4,327 +4,585 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Salah Esmaeiligoujar · Educational Technology Portfolio</title>
-  <meta name="description" content="Ph.D. student in Educational Technology at the University of Florida. Research, projects, publications, talks, and contact." />
+  <meta name="description" content="Personal website of Salah Esmaeiligoujar, educational technology researcher focusing on game-based learning, AI-enhanced instruction, and learning sciences." />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <meta name="theme-color" content="#0ea5e9" />
+  <meta name="theme-color" content="#38bdf8" />
   <style>
     :root{
-      --bg:#0b0f14;--panel:#0f1620;--panel-2:#0c1320;--text:#e6edf3;--muted:#9db3c7;--brand:#0ea5e9;--brand2:#22d3ee;--ring:#38bdf8;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --maxw:1200px
+      --bg:#050b14;--surface:#0f172a;--surface-2:#111b2f;--surface-3:#142138;--text:#f8fafc;--muted:#93b1d0;--brand:#38bdf8;--brand2:#22d3ee;--accent:#a855f7;
+      --shadow:0 24px 60px rgba(15,23,42,.45);
+      --maxw:1180px;
+      color-scheme:dark;
     }
-    @media (prefers-color-scheme:light){:root{--bg:#f7fafc;--panel:#ffffff;--panel-2:#f4f7fb;--text:#0f172a;--muted:#475569}}
-    *{box-sizing:border-box}
+    @media (prefers-color-scheme:light){
+      :root{--bg:#f8fafc;--surface:#ffffff;--surface-2:#f1f5f9;--surface-3:#e2e8f0;--text:#0f172a;--muted:#475569;--shadow:0 20px 50px rgba(15,23,42,.15);color-scheme:light}
+      body{background:linear-gradient(160deg,#e0f2fe 0%,#f1f5f9 60%,#fff 100%)}
+    }
+    *,*:before,*:after{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;line-height:1.6;background:
-      radial-gradient(1000px 600px at 120% -10%, rgba(34,211,238,.15), transparent 60%),
-      radial-gradient(800px 500px at -20% -10%, rgba(14,165,233,.18), transparent 50%),
-      var(--bg);color:var(--text)}
+    body{margin:0;font-family:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65;background:
+      radial-gradient(800px 560px at 120% -20%, rgba(56,189,248,.22), transparent 70%),
+      radial-gradient(1200px 680px at -10% -10%, rgba(168,85,247,.18), transparent 70%),
+      linear-gradient(135deg,rgba(15,23,42,.95),rgba(15,23,42,.8)),var(--bg);color:var(--text);min-height:100vh}
     a{color:inherit}
+    img{max-width:100%;display:block}
+    .skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.6rem 1rem;background:var(--surface-2);border-radius:.75rem;z-index:200}
 
-    /* Skip link */
-    .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip:focus{left:1rem;top:1rem;width:auto;height:auto;background:var(--panel);padding:.5rem .7rem;border-radius:.6rem;z-index:1000}
-
-    /* Header / Navbar */
-    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color-mix(in oklab,var(--bg),transparent 55%);border-bottom:1px solid color-mix(in oklab,var(--text),transparent 90%)}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px;padding:0 1rem;max-width:var(--maxw);margin:0 auto}
-    .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:.2px;text-decoration:none}
-    .brand .dot{width:.75rem;height:.75rem;border-radius:999px;background:linear-gradient(180deg,var(--brand2),var(--brand))}
-    .nav{display:flex;align-items:center;gap:.2rem}
-    .menu{display:flex;gap:.2rem;list-style:none;margin:0;padding:0}
-    .menu a{display:block;padding:.55rem .75rem;border-radius:.6rem;text-decoration:none;border:1px solid transparent}
-    .menu a:hover,.menu a.active{border-color:color-mix(in oklab,var(--brand),transparent 55%)}
+    header{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);background:color-mix(in oklab,var(--bg),transparent 45%);border-bottom:1px solid color-mix(in oklab,var(--text),transparent 90%)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:.35rem 1rem;height:70px;max-width:var(--maxw);margin:0 auto}
+    .brand{display:flex;align-items:center;gap:.75rem;font-weight:700;text-decoration:none;letter-spacing:.4px}
+    .brand .mark{width:38px;height:38px;border-radius:12px;background:conic-gradient(from 120deg,var(--brand),var(--accent),var(--brand2));display:grid;place-items:center;color:#0f172a;font-weight:800;box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+    .nav{display:flex;align-items:center;gap:1.5rem}
+    .menu{display:flex;list-style:none;gap:.35rem;padding:0;margin:0}
+    .menu a{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .95rem;border-radius:.8rem;font-size:.92rem;font-weight:600;border:1px solid transparent;text-decoration:none;transition:all .2s ease}
+    .menu a span{display:inline-block;width:.35rem;height:.35rem;border-radius:999px;background:var(--brand);transform:scale(0);transition:transform .2s}
+    .menu a:hover,.menu a.active{border-color:color-mix(in oklab,var(--brand),transparent 65%);background:color-mix(in oklab,var(--surface-2),transparent 10%)}
+    .menu a.active span{transform:scale(1)}
     .hamburger{display:none}
     @media (max-width:980px){
       .menu{display:none}
-      .hamburger{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:.6rem;border:1px solid color-mix(in oklab,var(--text),transparent 85%);background:transparent;color:var(--text)}
-      .nav.open .menu{position:absolute;left:1rem;right:1rem;top:64px;display:grid;gap:.4rem;background:var(--panel);padding:.6rem;border:1px solid color-mix(in oklab,var(--text),transparent 88%);border-radius:.8rem;box-shadow:var(--shadow)}
-      .menu a{padding:.7rem}
+      .hamburger{display:grid;place-items:center;width:44px;height:44px;border-radius:.9rem;border:1px solid color-mix(in oklab,var(--text),transparent 85%);background:transparent;color:inherit;font-size:1.35rem}
+      .nav.open .menu{display:grid;position:absolute;left:1rem;right:1rem;top:74px;padding:1rem;border-radius:1rem;background:var(--surface);border:1px solid color-mix(in oklab,var(--text),transparent 90%);box-shadow:var(--shadow);gap:.4rem}
+      .menu a{width:100%;justify-content:flex-start}
     }
 
-    /* Layout helpers */
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 1rem}
-    section{padding:4rem 0}
-    h2{font-size:1.5rem;margin:0 0 1rem}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 1.2rem}
+    section{padding:4.5rem 0;position:relative}
+    section:before{content:"";position:absolute;inset:1rem -40vw auto;top:2rem;height:1px;background:linear-gradient(90deg,transparent,var(--surface-3) 20%,transparent 80%);opacity:.4}
+    section:first-of-type:before{display:none}
+    h2{font-size:clamp(1.6rem,1.6rem + .8vw,2.3rem);margin:0 0 1.5rem;font-weight:700;letter-spacing:.3px}
+    h3{margin:.4rem 0;font-size:1.15rem}
+    p{margin:.4rem 0 1rem}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.2rem .55rem;border-radius:999px;border:1px solid color-mix(in oklab,var(--ring),transparent 55%);color:var(--ring);font-size:.8rem}
-    .title{font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin:.6rem 0 1rem}
-    .lead{color:var(--muted)}
-    .cta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1rem;border-radius:.8rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in oklab,var(--brand),transparent 35%);background:linear-gradient(180deg,color-mix(in oklab,var(--brand),transparent 85%),color-mix(in oklab,var(--brand2),transparent 90%))}
-    .btn.ghost{background:transparent;border-color:color-mix(in oklab,var(--text),transparent 85%)}
-    .card{background:color-mix(in oklab,var(--panel),transparent 0%);border:1px solid color-mix(in oklab,var(--text),transparent 90%);border-radius:1rem;padding:1rem;box-shadow:0 1px 0 color-mix(in oklab,var(--text),transparent 90%)}
-    .portrait{width:100%;aspect-ratio:1/1;border-radius:1rem;background:
-      radial-gradient(60% 50% at 70% 0%, rgba(34,211,238,.18), transparent 70%),
-      radial-gradient(60% 50% at 0% 100%, rgba(14,165,233,.14), transparent 70%),
-      color-mix(in oklab,var(--panel),transparent 0%);
-      display:grid;place-items:center;color:var(--muted);font-weight:700}
+    .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2.5rem;align-items:center;padding:5rem 0 4rem}
+    .hero .badge{display:inline-flex;align-items:center;gap:.45rem;padding:.25rem .75rem;border-radius:999px;background:rgba(56,189,248,.12);border:1px solid rgba(34,211,238,.35);color:var(--brand);font-weight:600;letter-spacing:.3px;text-transform:uppercase;font-size:.75rem}
+    .hero .title{margin:.75rem 0 1.2rem;font-size:clamp(2.4rem,3vw + 1rem,3.6rem);line-height:1.05}
+    .hero .lead{color:var(--muted);font-size:1.05rem;max-width:36ch}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.6rem}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.15rem;border-radius:.9rem;font-weight:700;text-decoration:none;border:1px solid transparent;background:linear-gradient(135deg,color-mix(in oklab,var(--brand),transparent 10%),color-mix(in oklab,var(--brand2),transparent 15%));color:#0f172a;box-shadow:0 10px 35px rgba(34,211,238,.25);transition:transform .2s ease,box-shadow .2s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(34,211,238,.28)}
+    .btn.ghost{background:transparent;color:var(--text);border-color:color-mix(in oklab,var(--text),transparent 80%);box-shadow:none}
+    .btn.ghost:hover{border-color:color-mix(in oklab,var(--brand),transparent 65%)}
+    .hero-card{position:relative;padding:1.5rem;border-radius:1.5rem;background:var(--surface);border:1px solid color-mix(in oklab,var(--text),transparent 90%);box-shadow:var(--shadow);overflow:hidden}
+    .hero-card:after{content:"";position:absolute;inset:-40% 30%;background:radial-gradient(circle at center,rgba(34,211,238,.18),transparent 65%);filter:blur(20px)}
+    .portrait{position:relative;z-index:1;width:100%;aspect-ratio:1;border-radius:1.2rem;background:
+      linear-gradient(160deg,rgba(34,211,238,.15),transparent 45%),
+      linear-gradient(320deg,rgba(168,85,247,.2),transparent 55%),
+      var(--surface-2);display:grid;place-items:center;font-weight:700;color:var(--muted);letter-spacing:.6px;text-transform:uppercase}
+    .meta{color:var(--muted);font-size:.9rem}
 
-    /* Grids */
-    .grid{display:grid;gap:1rem}
-    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid.two,.grid.three{grid-template-columns:1fr}}
+    .quick-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:2.5rem}
+    .stat-card{position:relative;padding:1.4rem;border-radius:1.2rem;background:var(--surface-2);border:1px solid color-mix(in oklab,var(--text),transparent 92%);box-shadow:0 12px 40px rgba(15,23,42,.35)}
+    .stat-card strong{font-size:2rem;display:block;margin-bottom:.2rem;color:var(--brand)}
+    .stat-card span{display:block;font-size:.92rem;color:var(--muted)}
 
-    /* Timeline */
-    .timeline{position:relative;margin-left:.8rem;padding-left:1rem}
-    .timeline:before{content:"";position:absolute;left:0;top:.2rem;bottom:.2rem;width:2px;background:color-mix(in oklab,var(--ring),transparent 60%)}
-    .t{position:relative;padding:.8rem;border-radius:.8rem;background:var(--panel-2);border:1px solid color-mix(in oklab,var(--text),transparent 90%)}
-    .t:before{content:"";position:absolute;left:-1.05rem;top:1.2rem;width:.6rem;height:.6rem;border-radius:999px;background:linear-gradient(180deg,var(--brand2),var(--brand))}
-    .meta{color:var(--muted);font-size:.92rem}
+    .grid{display:grid;gap:1.2rem}
+    .grid.two{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .grid.three{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 
-    /* Project cards */
-    .project{display:grid;gap:.6rem}
-    .thumb{width:100%;aspect-ratio:16/9;border-radius:.8rem;background:
-      linear-gradient(120deg,color-mix(in oklab,var(--brand),transparent 85%),transparent),
-      linear-gradient(240deg,color-mix(in oklab,var(--brand2),transparent 90%),transparent),
-      color-mix(in oklab,var(--panel),transparent 0%);border:1px solid color-mix(in oklab,var(--text),transparent 90%);display:grid;place-items:center;color:var(--muted);font-weight:700}
-    .tagrow{display:flex;flex-wrap:wrap;gap:.35rem}
-    .tag{font-size:.78rem;padding:.15rem .45rem;border-radius:999px;border:1px solid color-mix(in oklab,var(--text),transparent 85%);color:var(--muted)}
+    .card{position:relative;padding:1.4rem;border-radius:1.2rem;background:var(--surface-2);border:1px solid color-mix(in oklab,var(--text),transparent 92%);box-shadow:0 16px 40px rgba(15,23,42,.28)}
+    .card .tagrow{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+    .tag{font-size:.78rem;letter-spacing:.3px;padding:.2rem .55rem;border-radius:999px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);color:var(--brand)}
 
-    /* Publications */
-    .toolbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
-    .search{flex:1;min-width:220px;padding:.55rem .6rem;border-radius:.6rem;border:1px solid color-mix(in oklab,var(--text),transparent 85%);background:transparent;color:var(--text)}
-    .pub{padding:1rem;border-radius:.8rem;border:1px solid color-mix(in oklab,var(--text),transparent 90%);background:var(--panel-2)}
-    .pub .actions{display:flex;gap:.4rem;margin-top:.4rem}
-    .small{font-size:.86rem}
+    .timeline{position:relative;margin-left:.8rem;padding-left:1.4rem}
+    .timeline:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--brand) 0%,rgba(56,189,248,.1) 70%,transparent)}
+    .entry{position:relative;margin-bottom:1.5rem;padding:1.4rem;border-radius:1.1rem;background:var(--surface-2);border:1px solid color-mix(in oklab,var(--text),transparent 92%);box-shadow:0 12px 35px rgba(14,23,42,.25)}
+    .entry:before{content:"";position:absolute;left:-1.35rem;top:1.7rem;width:.85rem;height:.85rem;border-radius:50%;background:conic-gradient(from 160deg,var(--brand),var(--accent));box-shadow:0 0 0 4px rgba(56,189,248,.12)}
+    .entry h3{margin:0 0 .35rem;font-size:1.05rem}
+    .entry .period{font-size:.9rem;color:var(--muted);font-weight:500}
+    .entry ul{margin:.7rem 0 0 0;padding-left:1.1rem;color:var(--muted);font-size:.95rem}
 
-    /* Footer */
-    footer{padding:3rem 0 4rem;color:var(--muted);border-top:1px dashed color-mix(in oklab,var(--text),transparent 88%)}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+    .feature-card{position:relative;padding:1.6rem;border-radius:1.4rem;background:var(--surface);border:1px solid color-mix(in oklab,var(--text),transparent 90%);box-shadow:var(--shadow)}
+    .feature-card h3{font-size:1.2rem}
+    .feature-card p{color:var(--muted)}
 
-    /* Print CV */
+    .toolbar{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.2rem}
+    .search{flex:1;min-width:220px;padding:.65rem .8rem;border-radius:.9rem;border:1px solid color-mix(in oklab,var(--text),transparent 85%);background:color-mix(in oklab,var(--surface-3),transparent 10%);color:var(--text);font-size:.95rem}
+    .pill{padding:.45rem .85rem;border-radius:999px;border:1px solid color-mix(in oklab,var(--text),transparent 85%);background:transparent;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer}
+    .pill.active{background:rgba(56,189,248,.15);border-color:rgba(56,189,248,.55);color:var(--brand)}
+    .pub{padding:1.2rem;border-radius:1.1rem;background:var(--surface-2);border:1px solid color-mix(in oklab,var(--text),transparent 92%);box-shadow:0 12px 30px rgba(15,23,42,.25)}
+    .pub strong{color:var(--text)}
+
+    .list{display:grid;gap:.8rem;color:var(--muted);font-size:.96rem}
+    .list li{background:var(--surface-2);padding:1rem 1.2rem;border-radius:1rem;border:1px solid color-mix(in oklab,var(--text),transparent 92%);box-shadow:0 12px 30px rgba(15,23,42,.22)}
+
+    footer{padding:3rem 0 4rem;color:var(--muted);border-top:1px dashed color-mix(in oklab,var(--text),transparent 85%)}
+
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;padding:4.2rem 0 2rem;text-align:center}
+      .hero .lead{margin:0 auto}
+      .hero-actions{justify-content:center}
+      .hero-card{max-width:360px;margin:0 auto}
+      .timeline{margin-left:0;padding-left:0}
+      .entry:before{left:calc(50% - .4rem);top:-.45rem}
+      .entry{margin-top:1.8rem}
+      .timeline:before{display:none}
+    }
+
     @media print{
-      header,.btn,.thumb,.portrait,.toolbar{display:none !important}
-      section{padding:0}
+      header,.hero-actions,.hero-card:after,.btn,.hamburger,.nav{display:none !important}
+      section{padding:1.5rem 0 !important}
       body{background:#fff;color:#000}
       a{color:#000}
+      .card,.entry,.pub,.stat-card,.feature-card{box-shadow:none;background:#fff;border:1px solid #d0d5dd}
     }
   </style>
 </head>
 <body>
-  <a href="#main" class="skip">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
   <header>
     <div class="topbar">
-      <a class="brand" href="#"><span class="dot" aria-hidden="true"></span> Salah Esmaeiligoujar</a>
-      <nav class="nav" id="nav" aria-label="Main">
-        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
-        <ul class="menu" id="menu">
-          <li><a href="#about" class="active">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#talks">Talks</a></li>
-          <li><a href="#awards">Awards</a></li>
-          <li><a href="#contact">Contact</a></li>
+      <a class="brand" href="#about"><span class="mark">SE</span> Salah Esmaeiligoujar</a>
+      <nav id="nav" class="nav" aria-label="Main">
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation">☰</button>
+        <ul id="menu" class="menu">
+          <li><a href="#about" class="active"><span></span>About</a></li>
+          <li><a href="#research"><span></span>Research</a></li>
+          <li><a href="#projects"><span></span>Projects</a></li>
+          <li><a href="#experience"><span></span>Experience</a></li>
+          <li><a href="#education"><span></span>Education</a></li>
+          <li><a href="#grants"><span></span>Grants</a></li>
+          <li><a href="#awards"><span></span>Awards</a></li>
+          <li><a href="#publications"><span></span>Publications</a></li>
+          <li><a href="#presentations"><span></span>Presentations</a></li>
+          <li><a href="#service"><span></span>Service</a></li>
+          <li><a href="#contact"><span></span>Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main id="main" class="container">
-    <!-- HERO -->
-    <section class="hero" id="about">
+    <section id="about" class="hero">
       <div>
-        <span class="eyebrow">Educational Technology · UF</span>
-        <h1 class="title">Hi, I'm <span style="color:var(--brand)">Salah Esmaeiligoujar</span>.</h1>
-        <p class="lead">Ph.D. student at the University of Florida. I research technology‑rich learning environments, game‑based learning, usability, and AI‑powered tools for language learning and assessment.</p>
-        <div class="cta">
-          <a class="btn" href="#projects">See projects</a>
+        <span class="badge">Educational Technology · University of Florida</span>
+        <h1 class="title">Designing joyful, data-informed learning with games, AI, and human-centered research.</h1>
+        <p class="lead">I'm Salah Esmaeiligoujar, a Ph.D. candidate in Educational Technology and research assistant at the University of Florida. My work bridges learning sciences, generative AI, and playful design to empower teachers and learners worldwide.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#projects">Explore highlights</a>
           <a class="btn ghost" href="cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
-          <a class="btn ghost" href="#contact">Email me</a>
+          <a class="btn ghost" href="#contact">Connect with me</a>
+        </div>
+        <div class="quick-stats">
+          <div class="stat-card"><strong>10+</strong><span>Years designing and researching technology-rich learning experiences.</span></div>
+          <div class="stat-card"><strong>25+</strong><span>Peer-reviewed publications, proceedings, and conference presentations.</span></div>
+          <div class="stat-card"><strong>6</strong><span>Educational grants & fellowships supporting equitable EdTech innovations.</span></div>
         </div>
       </div>
-      <div class="card">
-        <div class="portrait" role="img" aria-label="Headshot placeholder">Your headshot here</div>
-        <p class="meta" style="margin:.6rem 0 0">Replace with <code>headshot.jpg</code> and set as CSS <code>background-image</code> on <code>.portrait</code>.</p>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="timeline">
-        <div class="t">
-          <div><strong>Research Assistant</strong> — University of Florida <span class="meta">Aug 2023–present</span></div>
-          <div class="small meta">CLASS Lab — Research on technology‑rich learning environments.</div>
-        </div>
-        <div class="t">
-          <div><strong>Instructional Designer</strong> — TadrisYaran Group <span class="meta">May 2020–present</span></div>
-          <div class="small meta">Developed online workshops and courses; evaluated course quality; supported instructors; social media management.</div>
-        </div>
-        <div class="t">
-          <div><strong>Usability Testing Coordinator</strong> — UF <span class="meta">Jan 2023–May 2024</span></div>
-          <div class="small meta">Designed and ran usability tests for EarSketch; recruited participants; analyzed feedback; delivered reports.</div>
-        </div>
-        <div class="t">
-          <div><strong>Co‑Designer</strong> — Metalingual (AI English learning) <span class="meta">Jan 2023–May 2024</span></div>
-          <div class="small meta">Integrated AI‑driven features and personalized feedback; user testing.</div>
-        </div>
-        <div class="t"><div><strong>Project Manager</strong> — Innovation House of Education (Chaharsoogh) <span class="meta">2020–2022</span></div></div>
-        <div class="t"><div><strong>Assessment Manager</strong> — OREP · Roshd Fanavari Journal <span class="meta">2019–2022</span></div></div>
+      <div class="hero-card">
+        <div class="portrait" role="img" aria-label="Headshot placeholder">Add headshot</div>
+        <p class="meta" style="margin-top:1rem">Replace with <code>headshot.jpg</code> by adding <code>background-image</code> to the <code>.portrait</code> class.</p>
+        <p class="meta">Gainesville, Florida · s.esmaeiligoujar@ufl.edu</p>
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <section id="research">
+      <h2>Research & Design Interests</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Game-Based Learning & Motivation</h3>
+          <p>I investigate how playful, technology-rich environments cultivate motivation, critical thinking, and 21st-century skills for K–12 learners.</p>
+          <div class="tagrow"><span class="tag">Serious Games</span><span class="tag">Productive Failure</span><span class="tag">Growth Mindset</span></div>
+        </div>
+        <div class="feature-card">
+          <h3>AI-Augmented Teaching & Assessment</h3>
+          <p>From Metalingual to AI-powered math tools, I co-design equitable systems that scaffold personalized feedback, creativity, and formative assessment.</p>
+          <div class="tagrow"><span class="tag">Generative AI</span><span class="tag">Language Learning</span><span class="tag">Stealth Assessment</span></div>
+        </div>
+        <div class="feature-card">
+          <h3>Learning Experience Design</h3>
+          <p>As an instructional designer, I develop culturally responsive digital curricula, train educators, and evaluate large-scale online learning ecosystems.</p>
+          <div class="tagrow"><span class="tag">UX Research</span><span class="tag">Teacher Support</span><span class="tag">Online Learning</span></div>
+        </div>
+      </div>
+    </section>
+
     <section id="projects">
-      <h2>Selected Projects</h2>
+      <h2>Project Spotlights</h2>
       <div class="grid three">
-        <article class="project card">
-          <div class="thumb" aria-label="Project image placeholder">Project image</div>
-          <h3>AI‑powered Algebra Problem Generator</h3>
-          <p class="meta">Supports teachers to prepare for productive failure; poster at AERA 2025.</p>
-          <div class="tagrow">
-            <span class="tag">Generative AI</span><span class="tag">Assessment</span><span class="tag">K‑12</span>
-          </div>
+        <article class="card">
+          <h3>Let’s Fail Together</h3>
+          <p class="meta">University of Florida · 2024</p>
+          <p>An AI-powered math problem generator helping teachers design productive failure experiences. Funded grant, co-developed with the GAME Lab.</p>
+          <div class="tagrow"><span class="tag">Generative AI</span><span class="tag">Teacher Tools</span><span class="tag">Assessment</span></div>
         </article>
-        <article class="project card">
-          <div class="thumb" aria-label="Project image placeholder">Project image</div>
+        <article class="card">
           <h3>Metalingual</h3>
-          <p class="meta">AI‑powered tool for TOEFL speaking preparation; presented at AECT 2024.</p>
-          <div class="tagrow">
-            <span class="tag">EdTech</span><span class="tag">NLP</span><span class="tag">Usability</span>
-          </div>
+          <p class="meta">AECT 2024 · University of Florida</p>
+          <p>Co-designed an AI-driven TOEFL speaking preparation platform that offers adaptive guidance, personalized feedback, and analytics.</p>
+          <div class="tagrow"><span class="tag">Language Learning</span><span class="tag">LLMs</span><span class="tag">UX Testing</span></div>
         </article>
-        <article class="project card">
-          <div class="thumb" aria-label="Project image placeholder">Project image</div>
+        <article class="card">
           <h3>Clues in the News</h3>
-          <p class="meta">Designing a stealth assessment of critical thinking (AECT 2024).</p>
-          <div class="tagrow">
-            <span class="tag">Critical Thinking</span><span class="tag">Games</span>
-          </div>
+          <p class="meta">AECT 2024</p>
+          <p>Designed a stealth assessment experience that embeds critical thinking measurement within narrative-driven news literacy challenges.</p>
+          <div class="tagrow"><span class="tag">Critical Thinking</span><span class="tag">Assessment</span><span class="tag">Game Design</span></div>
+        </article>
+        <article class="card">
+          <h3>EarSketch Usability Research</h3>
+          <p class="meta">University of Florida · 2023–2024</p>
+          <p>Led mixed-method usability testing cycles for EarSketch to improve accessibility and engagement for music-based coding learners.</p>
+          <div class="tagrow"><span class="tag">Usability</span><span class="tag">STEM Education</span></div>
+        </article>
+        <article class="card">
+          <h3>Chaharsoogh Nationwide Event</h3>
+          <p class="meta">Innovation House of Education · 2020–2022</p>
+          <p>Managed planning, partnerships, and evaluation for a large-scale Iranian educational innovation event serving students and teachers nationwide.</p>
+          <div class="tagrow"><span class="tag">Project Management</span><span class="tag">Community</span></div>
+        </article>
+        <article class="card">
+          <h3>Teacher Empowerment Workshops</h3>
+          <p class="meta">TadrisYaran Group · 2020–present</p>
+          <p>Design and deliver online workshops, webinars, and coaching that support Iranian teachers in adopting emerging educational technologies.</p>
+          <div class="tagrow"><span class="tag">Instructional Design</span><span class="tag">Professional Learning</span></div>
         </article>
       </div>
     </section>
 
-    <!-- PUBLICATIONS -->
+    <section id="experience">
+      <h2>Professional Appointments</h2>
+      <div class="timeline">
+        <div class="entry">
+          <h3>Research Assistant · University of Florida</h3>
+          <div class="period">Aug 2023 – Present</div>
+          <p>GAME Lab · Educational Technology</p>
+          <ul>
+            <li>Lead data collection, mixed-method analysis, and publication efforts on game-based learning and AI-enabled assessment.</li>
+            <li>Collaborate with interdisciplinary teams across UF to translate research into teacher-facing tools.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Instructional Designer · TadrisYaran Group</h3>
+          <div class="period">May 2020 – Present</div>
+          <ul>
+            <li>Developed 50+ online courses, webinars, and workshops tailored to Iranian teachers and students.</li>
+            <li>Evaluate learning experiences, support instructors, and steward community engagement across social channels.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Usability Testing Coordinator · University of Florida</h3>
+          <div class="period">Jan 2023 – May 2024</div>
+          <ul>
+            <li>Designed usability protocols for EarSketch, managed recruitment, and synthesized user insights into actionable reports.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Co-Designer · Metalingual AI English Learning Tool</h3>
+          <div class="period">Jan 2023 – May 2024</div>
+          <ul>
+            <li>Integrated AI-powered scaffolds to deliver personalized practice and feedback for TOEFL speaking learners.</li>
+            <li>Conducted user testing to iterate interface, content, and alignment with pedagogical goals.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Project Manager · Innovation House of Education</h3>
+          <div class="period">Sep 2020 – Nov 2022</div>
+          <ul>
+            <li>Directed the Chaharsoogh nationwide educational event, including planning, stakeholder partnerships, and impact evaluation.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Assessment Manager · Ministry of Education (OREP)</h3>
+          <div class="period">Nov 2019 – May 2022</div>
+          <ul>
+            <li>Led evaluation and quality assurance of educational content for national dissemination.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Research Assistant Roles</h3>
+          <div class="period">2018 – 2019</div>
+          <ul>
+            <li>Tehran Education Department: Investigated web-based collaborative learning in Tehran’s 12th district.</li>
+            <li>Allameh Tabataba’i University: Assessed students’ skills development across curricula.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Educational Consultant & Instructor</h3>
+          <div class="period">2015 – 2019</div>
+          <ul>
+            <li>Designed teacher development programs and student courses for cultural and social initiatives across Tehran.</li>
+            <li>Facilitated computer literacy instruction for young learners and reviewed top teaching methods.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>Ph.D. in Educational Technology</h3>
+          <p class="meta">University of Florida · 2023 – Present</p>
+          <p>Advisor: Dr. Seyedahmad Rahimi · Researching AI-powered learning design, game-based assessment, and creativity support.</p>
+        </article>
+        <article class="card">
+          <h3>M.A. in Educational Technology</h3>
+          <p class="meta">Allameh Tabataba’i University · 2017</p>
+          <p>Thesis: The Effect of Kahoot! as a Game-Based Environment on Student Learning and Motivation. Advisor: Dr. Khadijeh Aliabadi.</p>
+        </article>
+        <article class="card">
+          <h3>B.S. in Learning Sciences</h3>
+          <p class="meta">Tabriz University · 2015</p>
+          <p>Laid the foundation for expertise in instructional design, educational psychology, and research methodologies.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="grants">
+      <h2>Research Grants & Funding</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>Let’s Fail Together</h3>
+          <p class="meta">University of Florida · $10,000 · 2024</p>
+          <p>Supporting teachers with an AI-powered math problem generator that enables productive failure-oriented instruction.</p>
+        </article>
+        <article class="card">
+          <h3>Master Thesis Research Grant</h3>
+          <p class="meta">Iran's National Elites Foundation · 20 Million Rial · 2017</p>
+          <p>Funded experimental research on the motivational impact of Kahoot! as a game-based learning platform.</p>
+        </article>
+        <article class="card">
+          <h3>Web-Based Collaborative Learning Grant</h3>
+          <p class="meta">Tehran Education Department · 80 Million Rial · 2018</p>
+          <p>Investigated collaborative digital platforms for boosting student motivation in Tehran’s district schools.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="awards">
+      <h2>Awards & Distinctions</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>Fenton Family Scholarship</h3>
+          <p class="meta">University of Florida · 2024</p>
+        </article>
+        <article class="card">
+          <h3>Presidential Presentation</h3>
+          <p class="meta">AECT 2024 International Convention</p>
+        </article>
+        <article class="card">
+          <h3>Graduate Student Excellence Award</h3>
+          <p class="meta">Allameh Tabataba’i University · 2017</p>
+        </article>
+        <article class="card">
+          <h3>Top Ranked in Educational Technology</h3>
+          <p class="meta">Allameh Tabataba’i University Entrance · 2016</p>
+        </article>
+        <article class="card">
+          <h3>1st Place among 20,221 Applicants</h3>
+          <p class="meta">Iranian Educational Sciences Entrance Exam · 2014</p>
+        </article>
+        <article class="card">
+          <h3>Bronze Medal · Scientific Students’ Olympiad</h3>
+          <p class="meta">Iran · 2014</p>
+        </article>
+      </div>
+    </section>
+
     <section id="publications">
-      <h2>Publications</h2>
+      <h2>Selected Publications</h2>
       <div class="toolbar">
-        <input id="pubq" class="search" type="search" placeholder="Search titles/authors/years…" aria-label="Search publications">
-        <button class="btn ghost small" id="btn-all">All</button>
-        <button class="btn ghost small" data-type="journal">Journals</button>
-        <button class="btn ghost small" data-type="proceeding">Proceedings</button>
+        <input id="pubq" class="search" type="search" placeholder="Search by title, author, year..." aria-label="Search publications" />
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="journal">Journal Articles</button>
+        <button class="pill" data-filter="proceeding">Proceedings</button>
+        <button class="pill" data-filter="under-review">Under Review</button>
+        <button class="pill" data-filter="book">Books & Chapters</button>
       </div>
       <div id="publist" class="grid">
         <div class="pub" data-type="journal">
-          <div>Fardavoodi, M., <strong>Esmaeiligoujar, S.</strong>, & Bakhtiarvand, M. (2020). Investigating the effect of using educational podcasts on listening comprehension of language learners. <em>Randwick International of Education and Linguistics Science Journal</em>, 1(1), 101–106.</div>
-          <div class="actions">
-            <button class="btn ghost small" data-bib='@article{Fardavoodi2020, title={Investigating the effect of using educational podcasts...}, author={Fardavoodi, M. and Esmaeiligoujar, S. and Bakhtiarvand, M.}, journal={RIELSJ}, year={2020}}'>Copy BibTeX</button>
+          <div>Fardavoodi, M., <strong>Esmaeiligoujar, S. I.</strong>, & Bakhtiarvand, M. (2020). Investigating the effect of using educational podcasts on listening comprehension of language learners. <em>Randwick International of Education and Linguistics Science Journal</em>, 1(1), 101–106.</div>
+        </div>
+        <div class="pub" data-type="journal">
+          <div><strong>Esmaeiligoujar, S.</strong>, & Poorrostaeiardakani, S. (2019). The effect of online multi-player educational computer games on social skills and cognitive abilities of students. <em>Educational Psychology</em>, 15(51), 211–230. [Persian]</div>
+        </div>
+        <div class="pub" data-type="journal">
+          <div>Rajabiyan Dehzireh, M., Dortaj, F., Pourroostaei Ardakani, S., & <strong>Esmaeiligoujar, S.</strong> (2019). The effect of using computer games on students’ cognitive regulation and mindfulness. <em>Technology of Education Journal</em>, 13(3), 521–535. [Persian]</div>
+        </div>
+        <div class="pub" data-type="journal">
+          <div>Rajabiyan Dehzireh, M., Maghami, H., <strong>Esmaeiligoujar, S.</strong>, & Sharifati, S. (2017). The effect of educational augmented reality on students’ lifelong learning and performance. <em>Technology of Instruction and Learning</em>, 3(9), 63–91. [Persian]</div>
+        </div>
+        <div class="pub" data-type="journal">
+          <div><strong>Esmaeiligoujar, S.</strong>, Aliabadi, K., & Poorrostaei, S. (2017). The effect of multiplayer serious games on students’ learning and motivation. <em>New Media Research</em>, 3(11), 195–223. [Persian]</div>
+        </div>
+        <div class="pub" data-type="under-review">
+          <div>Khodabandelou, R., <strong>Esmaeiligoujar, S.</strong>, Joneidi, F., & Razban, S. (under review). A comparative study of human and AI reviews on the effectiveness of Quizizz for learning and engagement. <em>International Journal of Information and Learning Technology</em>.</div>
+        </div>
+        <div class="pub" data-type="under-review">
+          <div><strong>Esmaeiligoujar, S.</strong>, & Rahimi, S. (under review). Digital games can enhance K–12 students’ 21st-century skills: A systematic review. <em>Educational Technology Research and Development</em>.</div>
+        </div>
+        <div class="pub" data-type="under-review">
+          <div>Rahimi, S., <strong>Esmaeiligoujar, S.</strong>, Ercan, D., Gao, R., & Keawphonkrang, S. (under review). Game on for growth mindset: A systematic review of digital games designed to promote growth mindset in PreK–12 education. <em>Educational Technology Research and Development</em>.</div>
+        </div>
+        <div class="pub" data-type="book">
+          <div>Rahimi, S., & <strong>Esmaeiligoujar, S.</strong>, Babaee, M., & Dede, C. (2026). Augmenting human creativity with responsible and ethical use of generative AI. In <em>Generative Artificial Intelligence and Creativity</em> (Part 2, Chapter 7). Elsevier.</div>
+        </div>
+        <div class="pub" data-type="book">
+          <div>Rahimi, S., Babaee, M., <strong>Esmaeiligoujar, S.</strong>, & Dede, C. (in preparation). Creativity and generative AI. In R. A. Beghetto (Ed.), <em>The Oxford Handbook of AI and Creativity in Education</em>. Oxford University Press.</div>
+        </div>
+        <div class="pub" data-type="book">
+          <div>Dehghan, Z., Khodamoradi, H., & <strong>Esmaeiligoujar, S.</strong> (2018). <em>Handbook for Teachers: 90 Minutes Teaching, 90 Minutes Life</em>. Avaye Noor Press. [Persian]</div>
+        </div>
+        <div class="pub" data-type="proceeding">
+          <div>Rahimi, S., Ercan, D., Gao, R., <strong>Esmaeiligoujar, S.</strong>, Babaee, M., Li, H., ... & Botelho, A. (2025). ProductiveMath: A generative-AI-powered app to support productive failure teaching. In <em>Artificial Intelligence in Education</em> (pp. 344–351). Springer.</div>
+        </div>
+        <div class="pub" data-type="proceeding">
+          <div><strong>Esmaeiligoujar, S.</strong>, Rahimi, S., & Babaee, M. (2024). Using digital games to enhance 21st-century skills development in K–12 education: A systematic review. In <em>ICLS 2024</em>, 2197–2198.</div>
+        </div>
+        <div class="pub" data-type="proceeding">
+          <div>Babaee, M., Rahimi, S., & <strong>Esmaeiligoujar, S.</strong> (2024). Fostering K–12 students’ computational thinking skills using collaborative technology-rich learning environments: A systematic review. In <em>ICLS 2024</em>, 786–792.</div>
+        </div>
+        <div class="pub" data-type="proceeding">
+          <div>Rahimi, S., Shute, V. J., Khodabandelou, R., Kuba, R., Babaee, M., & <strong>Esmaeiligoujar, S.</strong> (2023). Stealth assessment: A systematic review of the literature. <em>ISLS 2023</em>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="presentations">
+      <h2>Conference Highlights</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>AECT 2024 · Kansas City, MO</h3>
+          <ul>
+            <li>Metalingual: Empowering TOEFL speaking preparation through AI-powered learning.</li>
+            <li>Clues in the News: Designing a stealth assessment of critical thinking.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>AERA 2024 & 2025</h3>
+          <ul>
+            <li>Exploring collaboration in technology-infused settings for computational thinking (AERA 2024).</li>
+            <li>AI-powered algebra problem generator supporting productive failure (AERA 2025).</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>ISLS & ICLS</h3>
+          <ul>
+            <li>Stealth assessment: A systematic review of the literature (ISLS 2023).</li>
+            <li>Using digital games to enhance 21st-century skills in K–12 education (ICLS 2024).</li>
+            <li>Improving executive functions with digital games (ICLS 2025).</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Design & Creativity Spotlights</h3>
+          <ul>
+            <li>University of Florida’s AI in Education Workshop: A Perspective from Academia and Learning Industry (2024).</li>
+            <li>Clues in the News: Designing a Stealth Assessment of Critical Thinking (AECT 2024).</li>
+            <li>Exploring collaboration in technology-rich settings for computational thinking (AERA 2024).</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="service">
+      <h2>Service & Professional Engagement</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Peer Review & Editorial Service</h3>
+          <ul>
+            <li>Journal of Research on Technology in Education (2025).</li>
+            <li>Creativity Research Journal (2024–2025).</li>
+            <li>British Journal of Educational Technology (2024–2025).</li>
+            <li>International Society of the Learning Sciences Annual Meeting (2024–2025).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Community & Outreach</h3>
+          <ul>
+            <li>Volunteer, STEM on the Lawn · Florida Semiconductor Institute (2025).</li>
+            <li>Designed teacher professional development workshops for Tehran Education Department (2016).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Professional Memberships</h3>
+          <div class="tagrow">
+            <span class="tag">AECT</span>
+            <span class="tag">AERA</span>
+            <span class="tag">ISLS</span>
+            <span class="tag">OREP</span>
+            <span class="tag">Educational Design & New Technologies Core</span>
+            <span class="tag">IAET</span>
           </div>
         </div>
-        <div class="pub" data-type="journal">
-          <div><strong>Esmaeiligoujar, S.</strong>, & Poorrostaeiardakani, S. (2019). Online multi‑player educational games and students’ social skills and cognitive abilities. <em>Educational Psychology</em>, 15(51), 211–230. [Persian]</div>
-          <div class="actions"><button class="btn ghost small" data-bib='@article{Esmaeiligoujar2019, title={Online multi-player educational games...}, author={Esmaeiligoujar, S. and Poorrostaeiardakani, S.}, journal={Educational Psychology}, year={2019}}'>Copy BibTeX</button></div>
-        </div>
-        <div class="pub" data-type="journal">
-          <div>Rajabiyan Dehzireh, M., Dortaj, F., Pourroostaei Ardakani, S., & <strong>Esmaeiligoujar, S.</strong> (2019). Computer games, cognitive regulation, and mindfulness. <em>Technology of Education Journal</em>, 13(3), 521–535. [Persian]</div>
-          <div class="actions"><button class="btn ghost small" data-bib='@article{Dehzireh2019, title={Computer games, cognitive regulation, and mindfulness}, author={Dehzireh, M.R. and Dortaj, F. and Pourroostaei Ardakani, S. and Esmaeiligoujar, S.}, journal={Technology of Education Journal}, year={2019}}'>Copy BibTeX</button></div>
-        </div>
-        <div class="pub" data-type="proceeding">
-          <div>Babaee, M., Rahimi, S., & <strong>Esmaeiligoujar, S.</strong> (2024). Fostering K‑12 students’ computational thinking using collaborative technology‑rich learning environments: A systematic review. <em>ICLS 2024</em>, 786–792.</div>
-        </div>
-        <div class="pub" data-type="proceeding">
-          <div><strong>Esmaeiligoujar, S.</strong>, Rahimi, S., & Babaee, M. (2024). Using digital games to enhance 21st‑century skills development in K‑12 education: A systematic review. <em>ICLS 2024</em>, 2197–2198.</div>
-        </div>
-        <div class="pub" data-type="proceeding">
-          <div>Rahimi, S., Shute, V. J., Khodabandelou, R., Kuba, R., Babaee, M., <strong>Esmaeiligoujar, S.</strong> (2023). Stealth assessment: A systematic review of the literature. <em>ISLS 2023</em>.</div>
+        <div class="card">
+          <h3>Selected Workshop Leadership</h3>
+          <p>Learning Theories & New Technologies for Teachers (3-day workshop), Tehran Education Department (2016).</p>
         </div>
       </div>
     </section>
 
-    <!-- TALKS -->
-    <section id="talks">
-      <h2>Recent Talks</h2>
-      <div class="grid two">
-        <div class="card"><strong>AERA 2025</strong> — AI‑powered algebra problem generator (poster)</div>
-        <div class="card"><strong>AERA 2025</strong> — Generative AI for creativity assessment (presentation)</div>
-        <div class="card"><strong>AECT 2024</strong> — Metalingual (AI‑powered TOEFL speaking)</div>
-        <div class="card"><strong>AECT 2024</strong> — Clues in the News: stealth assessment of critical thinking</div>
-      </div>
-    </section>
-
-    <!-- AWARDS -->
-    <section id="awards">
-      <h2>Grants & Awards</h2>
-      <div class="grid two">
-        <div class="card"><strong>Let’s Fail Together</strong> — AI‑powered math problem generator · University of Florida · $10,000 (2024)</div>
-        <div class="card"><strong>Fenton Family Scholarship</strong> — University of Florida (2024)</div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
     <section id="contact">
-      <h2>Contact</h2>
-      <div class="card">
-        <p>Email: <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a></p>
-        <form action="https://formspree.io/f/your-id" method="POST">
-          <label class="small">Your email</label>
-          <input class="search" name="email" type="email" placeholder="you@email.com" required>
-          <div style="height:.6rem"></div>
-          <label class="small">Message</label>
-          <textarea name="message" rows="5" placeholder="Say hello..." required class="search" style="min-height:140px"></textarea>
-          <div style="height:.6rem"></div>
-          <button class="btn" type="submit">Send</button>
-        </form>
+      <h2>Let's Collaborate</h2>
+      <div class="grid two">
+        <div class="card">
+          <p>Whether you’re interested in AI-powered assessments, playful learning design, or collaborative research opportunities, I’d love to connect.</p>
+          <p><strong>Email:</strong> <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a></p>
+          <p><strong>Location:</strong> Gainesville, Florida, USA</p>
+          <p><strong>Download:</strong> <a href="cv.pdf" target="_blank" rel="noreferrer">Full academic CV (PDF)</a></p>
+        </div>
+        <div class="card">
+          <form action="https://formspree.io/f/your-id" method="POST">
+            <label class="meta" for="email">Your email</label>
+            <input class="search" id="email" name="email" type="email" placeholder="you@email.com" required />
+            <div style="height:.7rem"></div>
+            <label class="meta" for="message">Message</label>
+            <textarea class="search" id="message" name="message" rows="6" placeholder="Tell me about your project..." required></textarea>
+            <div style="height:.8rem"></div>
+            <button class="btn" type="submit">Send message</button>
+          </form>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container">
-      <p>© <span id="year"></span> Salah Esmaeiligoujar · University of Florida · Built with clean HTML/CSS</p>
+      <p>© <span id="year"></span> Salah Esmaeiligoujar · Educational Technology · Crafted with care and curiosity.</p>
     </div>
   </footer>
 
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
 
-    // Mobile nav toggle
     const nav = document.getElementById('nav');
     const burger = document.getElementById('hamburger');
-    if(burger){ burger.addEventListener('click', ()=> nav.classList.toggle('open')); }
+    if(burger){ burger.addEventListener('click',()=> nav.classList.toggle('open')); }
 
-    // Scrollspy active link
     const links = [...document.querySelectorAll('.menu a')];
-    const ids = links.map(a => a.getAttribute('href')).filter(h=>h.startsWith('#'));
-    const sections = ids.map(id => document.querySelector(id)).filter(Boolean);
+    const ids = links.map(l=>l.getAttribute('href')).filter(Boolean).filter(h=>h.startsWith('#'));
+    const sections = ids.map(id=>document.querySelector(id)).filter(Boolean);
     const spy = () => {
-      let idx = 0; const y = window.scrollY + 120;
-      sections.forEach((s,i)=>{ if(s.offsetTop <= y) idx = i; });
-      links.forEach(l=>l.classList.remove('active'));
+      const offset = window.scrollY + 120;
+      let idx = 0;
+      sections.forEach((section,i)=>{ if(section.offsetTop - 100 <= offset) idx = i; });
+      links.forEach(link=>link.classList.remove('active'));
       const current = document.querySelector(`.menu a[href="${ids[idx]}"]`);
       if(current) current.classList.add('active');
     };
     window.addEventListener('scroll', spy); spy();
 
-    // Publications: search + type filter
-    const q = document.getElementById('pubq');
-    const list = document.getElementById('publist');
-    const pubs = [...list.querySelectorAll('.pub')];
-    const buttons = document.querySelectorAll('[data-type], #btn-all');
-    let type = 'all';
-    function apply(){
-      const term = (q.value||'').toLowerCase();
-      pubs.forEach(p=>{
-        const okType = type==='all' || p.dataset.type===type;
-        const okText = p.textContent.toLowerCase().includes(term);
-        p.style.display = okType && okText ? '' : 'none';
+    const pubSearch = document.getElementById('pubq');
+    const pubCards = [...document.querySelectorAll('#publist .pub')];
+    const filters = [...document.querySelectorAll('.pill')];
+    let activeType = 'all';
+    const applyFilter = () => {
+      const term = (pubSearch?.value || '').toLowerCase();
+      pubCards.forEach(card => {
+        const matchesType = activeType === 'all' || card.dataset.type === activeType;
+        const matchesTerm = card.textContent.toLowerCase().includes(term);
+        card.style.display = matchesType && matchesTerm ? '' : 'none';
       });
-    }
-    if(q){ q.addEventListener('input', apply); }
-    buttons.forEach(b=>b.addEventListener('click', e=>{ type = b.dataset.type || 'all'; apply(); }));
-
-    // Copy BibTeX
-    document.querySelectorAll('[data-bib]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        navigator.clipboard.writeText(btn.getAttribute('data-bib'));
-        btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent='Copy BibTeX',1200);
-      });
-    });
+    };
+    pubSearch?.addEventListener('input', applyFilter);
+    filters.forEach(btn => btn.addEventListener('click', () => {
+      filters.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      activeType = btn.dataset.filter || 'all';
+      applyFilter();
+    }));
   </script>
 </body>
 </html>
