@@ -2,408 +2,306 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Salah Esmaeiligoujar — Academic CV</title>
-<meta name="description" content="Salah Esmaeiligoujar — Ph.D. student in Educational Technology at University of Florida. Research: AI in Education, Learning Sciences, Games for Learning.">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Salah Esmaeiligoujar</title>
+<meta name="description" content="Minimal interactive personal website for Salah Esmaeiligoujar">
 <style>
   :root{
-    --bg:#f7fbff;           /* light blue tint */
+    --bg:#f7fbff;        /* light blue background */
     --card:#ffffff;
-    --ink:#17212b;
-    --muted:#536471;
-    --brand:#2da8ff;        /* light blue */
-    --accent:#ff8b2d;       /* orange */
-    --ring: rgba(45,168,255,.35);
-    --radius:14px;
-    --shadow: 0 2px 12px rgba(0,0,0,.06);
+    --ink:#0f1720;
+    --muted:#587086;
+    --brand:#2da8ff;     /* light blue */
+    --accent:#ff8b2d;    /* orange */
+    --ring:rgba(45,168,255,.35);
+    --shadow: 0 10px 30px rgba(16,24,40,.08);
+    --radius:18px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0b1320; --card:#0f1a2a; --ink:#e6f0fb; --muted:#a4b7ca; --shadow:0 10px 30px rgba(0,0,0,.4)}
   }
   *{box-sizing:border-box}
   body{
-    margin:0;
-    font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-    color:var(--ink);
-    background:linear-gradient(180deg,var(--bg),#fff 220px);
+    margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    color:var(--ink); background:
+      radial-gradient(1200px 600px at 105% -10%, rgba(45,168,255,.15), transparent 60%),
+      radial-gradient(900px 600px at -10% 20%, rgba(255,139,45,.12), transparent 55%),
+      var(--bg);
   }
   a{color:var(--brand); text-decoration:none}
   a:hover{ text-decoration:underline }
-  .wrap{max-width:1020px; margin:0 auto; padding:24px}
+  .wrap{max-width:1080px; margin:0 auto; padding:20px}
   /* Header */
-  header{
-    position:sticky; top:0; z-index:3;
-    background:rgba(255,255,255,.85); backdrop-filter:saturate(180%) blur(12px);
-    border-bottom:1px solid #e9f2f8;
-  }
+  header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(180%) blur(10px)}
   .nav{
-    display:flex; gap:14px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    display:flex; gap:12px; align-items:center; justify-content:space-between;
     padding:10px 0;
   }
-  .brand{
-    display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.2px;
-  }
+  .brand{display:flex; gap:10px; align-items:center; font-weight:800}
   .logo{
-    width:36px; height:36px; display:grid; place-items:center; border-radius:12px;
-    background: conic-gradient(from 210deg, var(--brand), var(--accent));
-    color:white; font-weight:900; box-shadow:var(--shadow);
+    width:42px; height:42px; border-radius:14px;
+    display:grid; place-items:center; color:#fff; font-weight:900;
+    background: conic-gradient(from 210deg, var(--brand), var(--accent) 70%, var(--brand));
+    box-shadow:var(--shadow);
   }
   .tabs{display:flex; gap:10px; flex-wrap:wrap}
   .tab{
-    border:1px solid #dbeaf3; background:#fff; color:#0e1b25;
-    padding:8px 12px; border-radius:12px; text-decoration:none; font-weight:600;
+    padding:8px 12px; border-radius:999px; font-weight:700; background:#fff; border:1px solid #e6f1f8;
   }
   .tab:hover{ border-color:var(--brand) }
+  .toggle{border:0; background:#fff; border-radius:12px; padding:8px 12px; cursor:pointer; border:1px solid #e6f1f8}
+
   /* Hero */
   .hero{
-    display:grid; grid-template-columns:1.1fr .9fr; gap:18px; align-items:center; padding:18px 0 8px;
+    display:grid; grid-template-columns:1.2fr .8fr; gap:20px; align-items:center; margin-top:10px;
   }
   .card{
-    background:var(--card); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border:1px solid #eef4f8;
+    background:var(--card); border:1px solid #e6f1f8; border-radius:var(--radius); box-shadow:var(--shadow);
   }
-  h1{margin:0 0 6px; font-size:32px}
-  .subtitle{color:var(--muted)}
-  .chiprow{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
-  .chip{
-    padding:6px 10px; border-radius:999px; border:1px solid #e9f2f8; background:#fbfdff; font-size:13px; color:#1a2a35;
-  }
-  .cta{
-    display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;
-  }
+  .hero .left{ padding:26px }
+  h1{margin:0 0 6px; font-size:34px}
+  .subtitle{color:var(--muted); margin-bottom:14px}
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 16px}
+  .chip{padding:6px 10px; border:1px solid #e6f1f8; border-radius:999px; background:#fbfdff; font-size:13px}
+  .cta{display:flex; gap:10px; flex-wrap:wrap}
   .btn{
-    display:inline-flex; gap:8px; align-items:center;
-    padding:10px 14px; border-radius:12px; font-weight:700; border:1px solid transparent;
-    background:linear-gradient(180deg,var(--brand),#1e98f1); color:white; box-shadow:var(--shadow);
+    display:inline-flex; align-items:center; gap:8px; font-weight:800;
+    padding:10px 14px; border-radius:12px; border:1px solid transparent; cursor:pointer;
+    background:linear-gradient(180deg,var(--brand),#138be8); color:#fff;
+    box-shadow:var(--shadow);
   }
   .btn.alt{ background:linear-gradient(180deg,var(--accent),#ff7a09) }
-  .btn:focus,.filter:focus,.search:focus{ outline:3px solid var(--ring); outline-offset:2px }
-  .kv{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
-  .kv div{ background:#f7fbff; border:1px solid #e6f1f8; padding:14px; border-radius:12px }
 
-  /* Sections */
-  section{scroll-margin-top:90px; margin:18px 0}
-  section h2{margin:0 0 12px; font-size:22px}
-  details{border:1px solid #e7eef4; border-radius:12px; background:#fff}
-  details+details{margin-top:10px}
-  summary{list-style:none; cursor:pointer; padding:14px 16px; font-weight:700; display:flex; align-items:center; gap:10px}
-  summary::marker, summary::-webkit-details-marker{display:none}
-  .pill{font-size:12px; font-weight:800; color:#fff; background:var(--accent); padding:2px 8px; border-radius:999px}
-  .content{padding:0 16px 16px}
-  .grid{display:grid; gap:10px}
-  .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .li{padding:10px 12px; border:1px solid #edf3f7; border-radius:10px; background:#fff}
+  .hero .right{
+    position:relative; overflow:hidden; padding:0; aspect-ratio:1/1; display:grid; place-items:center;
+  }
+  .pfp{
+    width:78%; aspect-ratio:1/1; border-radius:22px; overflow:hidden; position:relative;
+    border:6px solid rgba(255,255,255,.7); box-shadow:var(--shadow); transform:rotate(-2deg);
+  }
+  .pfp img{width:100%; height:100%; object-fit:cover; display:block}
+  .blob{
+    position:absolute; inset:auto auto -10% -10%; width:220px; height:220px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(255,139,45,.4), transparent 60%), 
+               radial-gradient(circle at 70% 70%, rgba(45,168,255,.45), transparent 60%);
+    filter:blur(14px); transform:rotate(25deg);
+  }
+
+  /* Quick Cards */
+  .grid{display:grid; gap:16px}
+  .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tile{
+    background:var(--card); border:1px solid #e6f1f8; border-radius:18px; padding:16px;
+    box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease;
+    will-change:transform;
+  }
+  .tile:hover{ transform:translateY(-4px) rotate(-.4deg) }
+  .k{font-size:28px; font-weight:900}
   .muted{color:var(--muted)}
 
-  /* Publications search */
-  .toolbar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:10px}
-  .search{
-    flex:1 1 260px; padding:10px 12px; border:1px solid #dfeaf2; border-radius:12px;
-    background:#fff;
+  /* Gallery */
+  .gallery{ display:grid; gap:12px; grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .photo{
+    border-radius:16px; overflow:hidden; position:relative; aspect-ratio:4/3;
+    border:1px solid #e6f1f8; background:#eef6ff; cursor:pointer; transform:translateZ(0);
   }
-  .filter{
-    padding:10px 12px; border:1px solid #dfeaf2; border-radius:12px; background:#fff; cursor:pointer
-  }
-
-  /* Footer + to top */
-  footer{padding:20px 0 50px; color:var(--muted)}
-  .top{
-    position:fixed; right:16px; bottom:16px; border:0; border-radius:50%;
-    width:46px; height:46px; display:grid; place-items:center; cursor:pointer;
-    background:linear-gradient(180deg,var(--brand),#1e98f1); color:#fff; box-shadow:var(--shadow)
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .badge{
+    position:absolute; left:10px; top:10px; background:rgba(15,23,32,.76); color:#fff;
+    font-size:12px; padding:4px 8px; border-radius:999px;
   }
 
+  /* Lightbox */
+  .lightbox{
+    position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.6);
+    z-index:50; padding:20px;
+  }
+  .lightbox.open{ display:grid }
+  .lightbox .frame{
+    max-width:min(100%,1000px); width:100%; background:#000; border-radius:16px; overflow:hidden; position:relative;
+  }
+  .lightbox img{ width:100%; height:auto; display:block }
+  .close, .prev, .next{
+    position:absolute; top:10px; background:rgba(255,255,255,.9); border:0; border-radius:10px; padding:8px 12px; cursor:pointer;
+  }
+  .close{ right:10px }
+  .prev{ left:10px; top:50%; transform:translateY(-50%) }
+  .next{ right:10px; top:50%; transform:translateY(-50%) }
+
+  /* Footer */
+  footer{padding:28px 0 46px; color:var(--muted); text-align:center}
+  /* Responsive */
   @media (max-width: 900px){
-    .hero{grid-template-columns:1fr}
-    .grid.cols-2{grid-template-columns:1fr}
+    .hero{ grid-template-columns:1fr }
+    .grid.cols-3{ grid-template-columns:1fr }
+    .gallery{ grid-template-columns:1fr 1fr }
   }
 </style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="logo">SE</div>
-        <div>Salah Esmaeiligoujar</div>
-      </div>
-      <nav class="tabs" aria-label="Sections">
-        <a class="tab" href="#about">About</a>
-        <a class="tab" href="#education">Education</a>
-        <a class="tab" href="#experience">Experience</a>
-        <a class="tab" href="#grants">Grants</a>
-        <a class="tab" href="#awards">Awards</a>
-        <a class="tab" href="#pubs">Publications</a>
-        <a class="tab" href="#contact">Contact</a>
-      </nav>
+<header class="wrap">
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">SE</div>
+      <div>Salah Esmaeiligoujar</div>
     </div>
-  </header>
+    <nav class="tabs" aria-label="Sections">
+      <a class="tab" href="#about">About</a>
+      <a class="tab" href="#work">Highlights</a>
+      <a class="tab" href="#gallery">Gallery</a>
+      <a class="tab" href="#contact">Contact</a>
+    </nav>
+    <button id="theme" class="toggle" title="Toggle theme">☀︎/☾</button>
+  </div>
+</header>
 
-  <main class="wrap">
-    <!-- HERO -->
-    <section class="hero" id="about" aria-label="About">
-      <div class="card">
-        <h1>Salah Esmaeiligoujar</h1>
-        <div class="subtitle">Ph.D. Student, Educational Technology — University of Florida</div>
-        <div class="chiprow" role="list" aria-label="Focus areas">
-          <span class="chip" role="listitem">AI in Education</span>
-          <span class="chip" role="listitem">Learning Sciences</span>
-          <span class="chip" role="listitem">Games & Assessment</span>
-          <span class="chip" role="listitem">Productive Failure</span>
-        </div>
-        <div class="cta">
-          <a class="btn" href="#pubs" title="Jump to publications">View Publications</a>
-          <a class="btn alt" href="#contact" title="Contact">Get in Touch</a>
-        </div>
+<main class="wrap">
+  <!-- HERO -->
+  <section id="about" class="hero">
+    <div class="left card">
+      <h1>Hi, I’m Salah</h1>
+      <div class="subtitle">EdTech researcher @ UF · GAME Lab</div>
+      <div class="chips" aria-label="Focus">
+        <span class="chip">AI in Education</span>
+        <span class="chip">Learning Sciences</span>
+        <span class="chip">Games for Learning</span>
       </div>
-      <div class="kv">
-        <div><strong>Affiliation</strong><br>College of Education, University of Florida — Gainesville, FL</div>
-        <div><strong>Lab</strong><br>GAME Lab (Research Assistant)</div>
-        <div><strong>Recent Highlight</strong><br>AIED 2025 Late-Breaking Results Best Paper Nominee</div>
-        <div><strong>Interests</strong><br>Generative AI, Creativity, Growth Mindset, EdTech Evaluation</div>
+      <div class="cta">
+        <a class="btn" href="#gallery">See my work</a>
+        <a class="btn alt" href="#contact">Contact</a>
       </div>
-    </section>
+    </div>
 
-    <!-- EDUCATION -->
-    <section id="education" aria-label="Education">
-      <h2>Education</h2>
-      <details open>
-        <summary><span class="pill">Current</span> Ph.D., Educational Technology — University of Florida (2023–Present)</summary>
-        <div class="content">
-          Advisor: Dr. Seyedahmad Rahimi
-        </div>
-      </details>
-      <details>
-        <summary>M.A., Educational Technology — Allameh Tabataba’i University (2017)</summary>
-        <div class="content">
-          Thesis: The Effect of Kahoot! as a Game-Based Environment on Student Learning & Motivation.
-        </div>
-      </details>
-      <details>
-        <summary>B.S., Learning Sciences — Tabriz University (2015)</summary>
-      </details>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" aria-label="Experience">
-      <h2>Professional Appointments</h2>
-
-      <details open>
-        <summary><span class="pill">Now</span> Research Assistant — University of Florida (Aug 2023–Present)</summary>
-        <div class="content grid cols-2">
-          <div class="li">
-            Member of GAME Lab; contribute to research projects and data collection.
-          </div>
-          <div class="li">
-            Co-authored work on Productive Failure and AI-powered tools for teachers.
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Usability Testing Coordinator — University of Florida (Jan 2023–May 2024)</summary>
-        <div class="content grid cols-2">
-          <div class="li">Designed and ran tests for EarSketch; recruited participants; analyzed feedback.</div>
-          <div class="li">Reported findings and recommendations to stakeholders.</div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Project Manager — Innovation House of Education, Tehran (Sep 2020–Nov 2022)</summary>
-        <div class="content grid cols-2">
-          <div class="li">Chaharsoogh educational event: planning, progress monitoring, and evaluation.</div>
-          <div class="li">Developed partnerships and networks across stakeholders.</div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Assessment Manager — OREP, Roshd Fanavari Journal (Nov 2019–May 2022)</summary>
-        <div class="content">
-          Evaluated educational content quality and alignment.
-        </div>
-      </details>
-
-      <details>
-        <summary>Additional Roles (2017–2019)</summary>
-        <div class="content grid cols-2">
-          <div class="li">Research Assistant — Tehran Education Dept. & Allameh Tabataba’i University (data collection, mixed-methods analysis, reporting).</div>
-          <div class="li">Educational Consultant — Cultural & Social Dept. of Tehran; workshop/course design.</div>
-          <div class="li">Instructor — Computer use for ages 8–12 (Mobtaker Elementary School).</div>
-          <div class="li">Content Developer & Educational Consultant at private institutes.</div>
-        </div>
-      </details>
-    </section>
-
-    <!-- GRANTS -->
-    <section id="grants" aria-label="Grants">
-      <h2>Research Grants</h2>
-      <details open>
-        <summary><strong>Let’s Fail Together</strong> — AI-powered Math Problem Generator (UF, $10,000; 2024)</summary>
-        <div class="content muted">Supported teacher preparation for Productive Failure using a generative system.</div>
-      </details>
-      <details>
-        <summary>Master’s Thesis Grant — Kahoot! & Motivation (2017)</summary>
-        <div class="content muted">Iran’s National Elites Foundation.</div>
-      </details>
-      <details>
-        <summary>Web-based Collaborative Learning in Tehran Schools (2018–2019)</summary>
-        <div class="content muted">Funded project on platforms that promote learning and motivation.</div>
-      </details>
-    </section>
-
-    <!-- AWARDS -->
-    <section id="awards" aria-label="Awards">
-      <h2>Awards & Fellowships</h2>
-      <div class="grid cols-2">
-        <div class="li"><strong>AIED 2025 LBR Best Paper Nomination</strong> — ProductiveMath.</div>
-        <div class="li">Best Paper Runner-Up — UF COE Research Symposium (2025).</div>
-        <div class="li">Fenton Family Scholarship — University of Florida (2024).</div>
-        <div class="li">Presidential Presentation — AECT 2024.</div>
-        <div class="li">Graduate Student Excellence — Allameh Tabataba’i University (2017).</div>
-        <div class="li">Top ranks in national exams & Olympiad (2014–2016).</div>
+    <!-- Visual panel -->
+    <figure class="right card" aria-label="Portrait">
+      <div class="pfp" data-tilt>
+        <!-- Replace this image with your own -->
+        <img src="img/salah-1.jpg" alt="Salah Esmaeiligoujar" />
       </div>
-    </section>
+      <div class="blob" aria-hidden="true"></div>
+    </figure>
+  </section>
 
-    <!-- PUBLICATIONS -->
-    <section id="pubs" aria-label="Publications">
-      <h2>Publications & Selected Presentations</h2>
-
-      <div class="toolbar" role="region" aria-label="Publication tools">
-        <input id="q" class="search" type="search" placeholder="Search title, venue, year, or keyword…" aria-label="Search publications">
-        <button class="filter" data-tag="journal" aria-pressed="false">Journals</button>
-        <button class="filter" data-tag="proceedings" aria-pressed="false">Proceedings</button>
-        <button class="filter" data-tag="presentation" aria-pressed="false">Presentations</button>
-        <button class="filter" data-tag="under-review" aria-pressed="false">Under review</button>
-        <button class="filter" id="clear">Clear</button>
+  <!-- QUICK HIGHLIGHTS -->
+  <section id="work" style="margin:22px 0">
+    <div class="grid cols-3">
+      <div class="tile" data-tilt>
+        <div class="k">AIED ’25</div>
+        <div class="muted">LBR Best Paper nominee</div>
       </div>
-
-      <div id="publist" class="grid"></div>
-
-      <template id="pub-item">
-        <div class="li">
-          <div class="muted small"></div>
-          <div class="title"></div>
-          <div class="meta muted"></div>
-          <div class="tags chiprow" style="margin-top:8px"></div>
-        </div>
-      </template>
-
-      <details style="margin-top:10px">
-        <summary>Show citation note</summary>
-        <div class="content muted">
-          Entries are summarized from the uploaded CV. For the authoritative list, please refer to the CV PDF. :contentReference[oaicite:1]{index=1}
-        </div>
-      </details>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" aria-label="Contact">
-      <h2>Contact</h2>
-      <div class="card">
-        <p><strong>Email:</strong> <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a></p>
-        <p><strong>Affiliation:</strong> College of Education, University of Florida — Gainesville, FL</p>
-        <p class="muted">Prefer a PDF? Add or replace a link here to your current CV.</p>
-        <p><a class="btn" href="#" onclick="alert('Add your CV URL in the HTML href!'); return false;">Download CV (PDF)</a></p>
+      <div class="tile" data-tilt>
+        <div class="k">PF Math</div>
+        <div class="muted">Generative app for teachers</div>
       </div>
-    </section>
+      <div class="tile" data-tilt>
+        <div class="k">ICLS</div>
+        <div class="muted">Games & 21C skills</div>
+      </div>
+    </div>
+  </section>
 
-    <footer class="muted">
-      <div>© <span id="year"></span> Salah Esmaeiligoujar ·</div>
-    </footer>
-  </main>
+  <!-- GALLERY (LIGHTBOX) -->
+  <section id="gallery" aria-label="Gallery" style="margin:22px 0">
+    <h2 style="margin:0 0 10px">Gallery</h2>
+    <div class="gallery">
+      <!-- Replace these three with your own images -->
+      <figure class="photo" data-idx="0" tabindex="0" aria-label="Project image 1">
+        <img src="img/salah-2.jpg" alt="Project image 1" />
+        <figcaption class="badge">Project</figcaption>
+      </figure>
+      <figure class="photo" data-idx="1" tabindex="0" aria-label="Project image 2">
+        <img src="img/salah-3.jpg" alt="Project image 2" />
+        <figcaption class="badge">Talk</figcaption>
+      </figure>
+      <figure class="photo" data-idx="2" tabindex="0" aria-label="Project image 3">
+        <img src="img/salah-4.jpg" alt="Project image 3" />
+        <figcaption class="badge">Lab</figcaption>
+      </figure>
+    </div>
 
-  <button class="top" id="top" title="Back to top" aria-label="Back to top">↑</button>
+    <!-- Lightbox -->
+    <div class="lightbox" id="box" aria-modal="true" role="dialog" aria-label="Image viewer">
+      <div class="frame">
+        <button class="close" id="close" aria-label="Close">✕</button>
+        <button class="prev" id="prev" aria-label="Previous">‹</button>
+        <img id="big" src="" alt="Expanded image" />
+        <button class="next" id="next" aria-label="Next">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="card" style="padding:20px">
+    <h2 style="margin:0 0 6px">Contact</h2>
+    <p>Email: <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a></p>
+    <div class="chips">
+      <a class="chip" href="#" onclick="alert('Add your CV PDF link to this button in the HTML.');return false;">Download CV (PDF)</a>
+      <a class="chip" href="#about">Back to top ↑</a>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> Salah — built with light-blue & orange.</footer>
+</main>
 
 <script>
-  // Data distilled from CV (titles abbreviated for readability)
-  const pubs = [
-    // Journals
-    {type:'journal', year:2022, title:'The Role of Gamification in Learning', venue:'Educational Psychology 17(62):107–130', note:'(Persian)'},
-    {type:'journal', year:2020, title:'Educational Podcasts & Listening Comprehension', venue:'RIELS Journal 1(1):101–106'},
-    {type:'journal', year:2019, title:'Online Multiplayer Educational Games: Social & Cognitive Effects', venue:'Educational Psychology 15(51):211–230 (Persian)'},
-    {type:'journal', year:2019, title:'Computer Games, Cognitive Regulation, Mindfulness', venue:'Technology of Education Journal 13(3):521–535 (Persian)'},
-    {type:'journal', year:2017, title:'Augmented Reality for Lifelong Learning & Performance', venue:'Technology of Instruction & Learning 3(9):63–91 (Persian)'},
-    {type:'journal', year:2017, title:'Multiplayer Serious Games: Learning & Motivation', venue:'New Media Research 3(11):195–223 (Persian)'},
+  // Theme toggle
+  const themeBtn = document.getElementById('theme');
+  themeBtn.addEventListener('click', ()=>{
+    const dark = document.documentElement.classList.toggle('dark');
+    if(dark){
+      document.documentElement.style.setProperty('--bg','#0b1320');
+      document.documentElement.style.setProperty('--card','#0f1a2a');
+      document.documentElement.style.setProperty('--ink','#e6f0fb');
+      document.documentElement.style.setProperty('--muted','#a4b7ca');
+      document.documentElement.style.setProperty('--shadow','0 10px 30px rgba(0,0,0,.4)');
+    }else{
+      document.documentElement.style.setProperty('--bg','#f7fbff');
+      document.documentElement.style.setProperty('--card','#ffffff');
+      document.documentElement.style.setProperty('--ink','#0f1720');
+      document.documentElement.style.setProperty('--muted','#587086');
+      document.documentElement.style.setProperty('--shadow','0 10px 30px rgba(16,24,40,.08)');
+    }
+  });
 
-    // Under review
-    {type:'under-review', year:2025, title:'Human vs. AI Reviews of Quizizz Effectiveness', venue:'International Journal of Information and Learning Technology'},
-    {type:'under-review', year:2025, title:'Digital Games & 21st-Century Skills (Systematic Review)', venue:'ETR&D'},
-    {type:'under-review', year:2025, title:'Digital Games for Growth Mindset (Systematic Review)', venue:'ETR&D'},
+  // Simple tilt on hover (no library)
+  const tilts = [...document.querySelectorAll('[data-tilt]')];
+  tilts.forEach(el=>{
+    const strength = 12;
+    el.addEventListener('mousemove', (e)=>{
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5;
+      const y = (e.clientY - r.top) / r.height - .5;
+      el.style.transform = `rotateX(${(-y*strength)}deg) rotateY(${(x*strength)}deg) translateY(-2px)`;
+    });
+    el.addEventListener('mouseleave', ()=> el.style.transform = 'rotate(0) translateY(0)');
+  });
 
-    // Proceedings (selected)
-    {type:'proceedings', year:2025, title:'ProductiveMath: A Generative-AI App for Productive Failure Teaching', venue:'AIED 2025 (LBR Best Paper Nominee)'},
-    {type:'proceedings', year:2025, title:'Digital Games & Pre-K–12 Growth Mindset', venue:'ICLS 2025'},
-    {type:'proceedings', year:2024, title:'Using Digital Games to Enhance 21st-Century Skills', venue:'ICLS 2024'},
-    {type:'proceedings', year:2024, title:'Collaborative Technology-Rich Environments & CT Skills', venue:'ICLS 2024'},
-
-    // Presentations (selected)
-    {type:'presentation', year:2025, title:'Human-in-the-Loop AI for Productive Failure in Algebra', venue:'FERA 2025'},
-    {type:'presentation', year:2025, title:'Comparing Small vs. Large LMs for PF Problems', venue:'FERA 2025'},
-    {type:'presentation', year:2025, title:'Quality Rubric for PF Algebra Problems', venue:'FERA 2025'},
-    {type:'presentation', year:2024, title:'Clues in the News: Stealth Assessment of Critical Thinking', venue:'AECT 2024'},
-    {type:'presentation', year:2024, title:'TOEFL Speaking: Metalingual (AI-powered learning)', venue:'AECT 2024'},
+  // Lightbox
+  const imgs = [
+    'img/salah-2.jpg',
+    'img/salah-3.jpg',
+    'img/salah-4.jpg',
   ];
+  const box = document.getElementById('box');
+  const big = document.getElementById('big');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const close = document.getElementById('close');
+  let idx = 0;
 
-  const list = document.getElementById('publist');
-  const tmpl = document.getElementById('pub-item');
+  function open(i){ idx = i; big.src = imgs[idx]; box.classList.add('open'); }
+  function nav(n){ idx = (idx + n + imgs.length) % imgs.length; big.src = imgs[idx]; }
+  function esc(e){ if(e.key === 'Escape'){ box.classList.remove('open'); } }
 
-  function render(items){
-    list.innerHTML = '';
-    items.sort((a,b)=> b.year - a.year).forEach(p=>{
-      const node = tmpl.content.cloneNode(true);
-      node.querySelector('.small').textContent = p.year;
-      node.querySelector('.title').textContent = p.title;
-      node.querySelector('.meta').textContent = p.venue;
-      const tags = node.querySelector('.tags');
-      const tag = document.createElement('span');
-      tag.className = 'chip';
-      tag.textContent = p.type.replace('-', ' ');
-      tags.appendChild(tag);
-      list.appendChild(node);
-    });
-  }
-
-  // Filters
-  const q = document.getElementById('q');
-  const btns = [...document.querySelectorAll('.filter')];
-  const active = new Set();
-
-  function apply(){
-    const text = (q.value || '').toLowerCase().trim();
-    let items = pubs.slice();
-    if(active.size){
-      items = items.filter(p => active.has(p.type));
-    }
-    if(text){
-      items = items.filter(p =>
-        String(p.title).toLowerCase().includes(text) ||
-        String(p.venue).toLowerCase().includes(text) ||
-        String(p.year).includes(text)
-      );
-    }
-    render(items);
-  }
-
-  btns.forEach(b=>{
-    if(b.id==='clear'){
-      b.addEventListener('click', ()=>{
-        active.clear(); btns.forEach(x=>x.setAttribute('aria-pressed','false'));
-        q.value=''; apply();
-      });
-      return;
-    }
-    b.addEventListener('click', ()=>{
-      const t = b.dataset.tag;
-      const pressed = b.getAttribute('aria-pressed') === 'true';
-      if(pressed){ active.delete(t); b.setAttribute('aria-pressed','false'); }
-      else { active.add(t); b.setAttribute('aria-pressed','true'); }
-      apply();
-    });
+  document.querySelectorAll('.photo').forEach(p=>{
+    p.addEventListener('click', ()=> open(+p.dataset.idx));
+    p.addEventListener('keypress', (e)=>{ if(e.key==='Enter') open(+p.dataset.idx); });
   });
-  q.addEventListener('input', apply);
-  render(pubs);
+  prev.addEventListener('click', ()=> nav(-1));
+  next.addEventListener('click', ()=> nav(1));
+  close.addEventListener('click', ()=> box.classList.remove('open'));
+  document.addEventListener('keydown', esc);
 
-  // Back to top button
-  const topBtn = document.getElementById('top');
-  topBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-  document.addEventListener('scroll', ()=>{
-    topBtn.style.display = window.scrollY > 400 ? 'grid' : 'none';
-  });
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
