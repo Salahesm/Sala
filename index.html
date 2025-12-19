@@ -1,309 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Salah Esmaeiligoujar</title>
-<meta name="description" content="Minimal interactive personal website for Salah Esmaeiligoujar">
-<style>
-  :root{
-    --bg:#f7fbff;        /* light blue background */
-    --card:#ffffff;
-    --ink:#0f1720;
-    --muted:#587086;
-    --brand:#2da8ff;     /* light blue */
-    --accent:#ff8b2d;    /* orange */
-    --ring:rgba(45,168,255,.35);
-    --shadow: 0 10px 30px rgba(16,24,40,.08);
-    --radius:18px;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:#0b1320; --card:#0f1a2a; --ink:#e6f0fb; --muted:#a4b7ca; --shadow:0 10px 30px rgba(0,0,0,.4)}
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    color:var(--ink); background:
-      radial-gradient(1200px 600px at 105% -10%, rgba(45,168,255,.15), transparent 60%),
-      radial-gradient(900px 600px at -10% 20%, rgba(255,139,45,.12), transparent 55%),
-      var(--bg);
-  }
-  a{color:var(--brand); text-decoration:none}
-  a:hover{ text-decoration:underline }
-  .wrap{max-width:1080px; margin:0 auto; padding:20px}
-  /* Header */
-  header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(180%) blur(10px)}
-  .nav{
-    display:flex; gap:12px; align-items:center; justify-content:space-between;
-    padding:10px 0;
-  }
-  .brand{display:flex; gap:10px; align-items:center; font-weight:800}
-  .logo{
-    width:42px; height:42px; border-radius:14px;
-    display:grid; place-items:center; color:#fff; font-weight:900;
-    background: conic-gradient(from 210deg, var(--brand), var(--accent) 70%, var(--brand));
-    box-shadow:var(--shadow);
-  }
-  .tabs{display:flex; gap:10px; flex-wrap:wrap}
-  .tab{
-    padding:8px 12px; border-radius:999px; font-weight:700; background:#fff; border:1px solid #e6f1f8;
-  }
-  .tab:hover{ border-color:var(--brand) }
-  .toggle{border:0; background:#fff; border-radius:12px; padding:8px 12px; cursor:pointer; border:1px solid #e6f1f8}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salah Esmaeiligoujar | Ph.D. in Educational Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0021A5; /* UF Blue */
+            --accent: #FA4616;  /* UF Orange */
+            --light-bg: #f8f9fa;
+            --text-main: #2d3436;
+            --transition: all 0.3s ease;
+        }
 
-  /* Hero */
-  .hero{
-    display:grid; grid-template-columns:1.2fr .8fr; gap:20px; align-items:center; margin-top:10px;
-  }
-  .card{
-    background:var(--card); border:1px solid #e6f1f8; border-radius:var(--radius); box-shadow:var(--shadow);
-  }
-  .hero .left{ padding:26px }
-  h1{margin:0 0 6px; font-size:34px}
-  .subtitle{color:var(--muted); margin-bottom:14px}
-  .chips{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 16px}
-  .chip{padding:6px 10px; border:1px solid #e6f1f8; border-radius:999px; background:#fbfdff; font-size:13px}
-  .cta{display:flex; gap:10px; flex-wrap:wrap}
-  .btn{
-    display:inline-flex; align-items:center; gap:8px; font-weight:800;
-    padding:10px 14px; border-radius:12px; border:1px solid transparent; cursor:pointer;
-    background:linear-gradient(180deg,var(--brand),#138be8); color:#fff;
-    box-shadow:var(--shadow);
-  }
-  .btn.alt{ background:linear-gradient(180deg,var(--accent),#ff7a09) }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Inter', -apple-system, sans-serif; line-height: 1.6; color: var(--text-main); margin: 0; background: #fff; }
 
-  .hero .right{
-    position:relative; overflow:hidden; padding:0; aspect-ratio:1/1; display:grid; place-items:center;
-  }
-  .pfp{
-    width:78%; aspect-ratio:1/1; border-radius:22px; overflow:hidden; position:relative;
-    border:6px solid rgba(255,255,255,.7); box-shadow:var(--shadow); transform:rotate(-2deg);
-  }
-  .pfp img{width:100%; height:100%; object-fit:cover; display:block}
-  .blob{
-    position:absolute; inset:auto auto -10% -10%; width:220px; height:220px; border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, rgba(255,139,45,.4), transparent 60%), 
-               radial-gradient(circle at 70% 70%, rgba(45,168,255,.45), transparent 60%);
-    filter:blur(14px); transform:rotate(25deg);
-  }
+        /* Navigation */
+        nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { font-weight: 800; color: var(--primary); text-decoration: none; font-size: 1.2rem; }
+        nav ul { display: flex; list-style: none; gap: 2rem; margin: 0; }
+        nav ul a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: var(--transition); }
+        nav ul a:hover { color: var(--accent); }
 
-  /* Quick Cards */
-  .grid{display:grid; gap:16px}
-  .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .tile{
-    background:var(--card); border:1px solid #e6f1f8; border-radius:18px; padding:16px;
-    box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease;
-    will-change:transform;
-  }
-  .tile:hover{ transform:translateY(-4px) rotate(-.4deg) }
-  .k{font-size:28px; font-weight:900}
-  .muted{color:var(--muted)}
+        /* Sections */
+        section { padding: 100px 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-title { font-size: 2rem; border-bottom: 3px solid var(--accent); display: inline-block; margin-bottom: 2rem; color: var(--primary); }
 
-  /* Gallery */
-  .gallery{ display:grid; gap:12px; grid-template-columns:repeat(3,minmax(0,1fr)); }
-  .photo{
-    border-radius:16px; overflow:hidden; position:relative; aspect-ratio:4/3;
-    border:1px solid #e6f1f8; background:#eef6ff; cursor:pointer; transform:translateZ(0);
-  }
-  .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .badge{
-    position:absolute; left:10px; top:10px; background:rgba(15,23,32,.76); color:#fff;
-    font-size:12px; padding:4px 8px; border-radius:999px;
-  }
+        /* Hero/About Me */
+        .hero { background: var(--light-bg); text-align: center; padding: 150px 2rem 100px; }
+        .hero h1 { font-size: 3rem; margin: 0; color: var(--primary); }
+        .hero p { font-size: 1.2rem; color: #636e72; max-width: 700px; margin: 1rem auto; }
+        .interest-tags { margin-top: 1.5rem; }
+        .tag { background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin: 5px; display: inline-block; font-size: 0.9rem; border: 1px solid #eee; }
 
-  /* Lightbox */
-  .lightbox{
-    position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.6);
-    z-index:50; padding:20px;
-  }
-  .lightbox.open{ display:grid }
-  .lightbox .frame{
-    max-width:min(100%,1000px); width:100%; background:#000; border-radius:16px; overflow:hidden; position:relative;
-  }
-  .lightbox img{ width:100%; height:auto; display:block }
-  .close, .prev, .next{
-    position:absolute; top:10px; background:rgba(255,255,255,.9); border:0; border-radius:10px; padding:8px 12px; cursor:pointer;
-  }
-  .close{ right:10px }
-  .prev{ left:10px; top:50%; transform:translateY(-50%) }
-  .next{ right:10px; top:50%; transform:translateY(-50%) }
+        /* Experience & Projects */
+        .card { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e1e8ed; transition: var(--transition); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card h3 { margin-top: 0; color: var(--primary); }
+        .meta { font-size: 0.9rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Research & Interest Section */
+        .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .interest-card { background: var(--primary); color: white; padding: 2rem; border-radius: 12px; }
 
-  /* Footer */
-  footer{padding:28px 0 46px; color:var(--muted); text-align:center}
-  /* Responsive */
-  @media (max-width: 900px){
-    .hero{ grid-template-columns:1fr }
-    .grid.cols-3{ grid-template-columns:1fr }
-    .gallery{ grid-template-columns:1fr 1fr }
-  }
-</style>
+        /* Project Highlight */
+        .project-link { display: inline-block; margin-top: 1rem; padding: 10px 20px; background: var(--accent); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
+
+        /* Publications */
+        .pub-item { border-left: 4px solid #eee; padding-left: 1.5rem; margin-bottom: 1.5rem; }
+
+        footer { text-align: center; padding: 3rem; background: var(--light-bg); color: #636e72; }
+
+        @media (max-width: 768px) {
+            .research-grid { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+        }
+    </style>
 </head>
 <body>
-<header class="wrap">
-  <div class="nav">
-    <div class="brand">
-      <div class="logo">SE</div>
-      <div>Salah Esmaeiligoujar</div>
-    </div>
-    <nav class="tabs" aria-label="Sections">
-      <a class="tab" href="#about">About</a>
-      <a class="tab" href="#work">Highlights</a>
-      <a class="tab" href="#gallery">Gallery</a>
-      <a class="tab" href="#contact">Contact</a>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">S. ESMAEILIGOUJAR</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
-    <button id="theme" class="toggle" title="Toggle theme">☀︎/☾</button>
-  </div>
-</header>
 
-<main class="wrap">
-  <!-- HERO -->
-  <section id="about" class="hero">
-    <div class="left card">
-      <h1>Hi, I’m Salah</h1>
-      <div class="subtitle">EdTech researcher @ UF · GAME Lab</div>
-      <div class="chips" aria-label="Focus">
-        <span class="chip">AI in Education</span>
-        <span class="chip">Learning Sciences</span>
-        <span class="chip">Games for Learning</span>
-      </div>
-      <div class="cta">
-        <a class="btn" href="#gallery">See my work</a>
-        <a class="btn alt" href="#contact">Contact</a>
-      </div>
-    </div>
+    <section id="about" class="hero">
+        <h1>Salah Esmaeiligoujar</h1>
+        <p>Ph.D. Candidate in Educational Technology at the University of Florida[cite: 3, 6]. Dedicated to bridging the gap between advanced technology and human cognition[cite: 176, 177, 178].</p>
+        <div class="interest-tags">
+            <span class="tag"><i class="fas fa-brain"></i> Critical Thinking</span>
+            <span class="tag"><i class="fas fa-gamepad"></i> Game-Based Learning</span>
+            <span class="tag"><i class="fas fa-robot"></i> Generative AI</span>
+            <span class="tag"><i class="fas fa-search"></i> Stealth Assessment</span>
+        </div>
+    </section>
 
-    <!-- Visual panel -->
-    <figure class="right card" aria-label="Portrait">
-      <div class="pfp" data-tilt>
-        <!-- Replace this image with your own -->
-        <img src="img/salah-1.jpg" alt="Salah Esmaeiligoujar" />
-      </div>
-      <div class="blob" aria-hidden="true"></div>
-    </figure>
-  </section>
+    <section id="research">
+        <h2 class="section-title">Research & Interests</h2>
+        <div class="research-grid">
+            <div class="interest-card">
+                <h3>Primary Focus</h3>
+                <p>My research centers on the <strong>improvement and assessment of critical thinking skills</strong>[cite: 255, 267]. I explore how digital environments can be leveraged to measure cognitive growth without interrupting the learning experience[cite: 199, 200, 269, 270].</p>
+            </div>
+            <div>
+                <h3>Ongoing Inquiries</h3>
+                <ul>
+                    <li>The role of Generative AI in fostering productive failure in mathematics[cite: 112, 128, 129, 220].</li>
+                    <li>Using digital games to enhance 21st-century skills in K-12 education[cite: 170, 196, 257].</li>
+                    <li>Automated assessment of human creativity using LLMs[cite: 229, 251, 252].</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-  <!-- QUICK HIGHLIGHTS -->
-  <section id="work" style="margin:22px 0">
-    <div class="grid cols-3">
-      <div class="tile" data-tilt>
-        <div class="k">AIED ’25</div>
-        <div class="muted">LBR Best Paper nominee</div>
-      </div>
-      <div class="tile" data-tilt>
-        <div class="k">PF Math</div>
-        <div class="muted">Generative app for teachers</div>
-      </div>
-      <div class="tile" data-tilt>
-        <div class="k">ICLS</div>
-        <div class="muted">Games & 21C skills</div>
-      </div>
-    </div>
-  </section>
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="card">
+            <div class="meta">Featured Project</div>
+            <h3>LegalMind: Stealth Assessment of Critical Thinking</h3>
+            <p>A specialized project focused on designing and validating assessments for critical thinking skills through immersive scenarios. This work explores how learners analyze "clues in the news" to develop higher-order reasoning[cite: 255, 267].</p>
+            <a href="https://legalmind.imsalah.com" class="project-link" target="_blank">Visit LegalMind <i class="fas fa-external-link-alt"></i></a>
+        </div>
 
-  <!-- GALLERY (LIGHTBOX) -->
-  <section id="gallery" aria-label="Gallery" style="margin:22px 0">
-    <h2 style="margin:0 0 10px">Gallery</h2>
-    <div class="gallery">
-      <!-- Replace these three with your own images -->
-      <figure class="photo" data-idx="0" tabindex="0" aria-label="Project image 1">
-        <img src="img/salah-2.jpg" alt="Project image 1" />
-        <figcaption class="badge">Project</figcaption>
-      </figure>
-      <figure class="photo" data-idx="1" tabindex="0" aria-label="Project image 2">
-        <img src="img/salah-3.jpg" alt="Project image 2" />
-        <figcaption class="badge">Talk</figcaption>
-      </figure>
-      <figure class="photo" data-idx="2" tabindex="0" aria-label="Project image 3">
-        <img src="img/salah-4.jpg" alt="Project image 3" />
-        <figcaption class="badge">Lab</figcaption>
-      </figure>
-    </div>
+        <div class="card">
+            <div class="meta">AI Tools</div>
+            <h3>Metalingual</h3>
+            <p>Collaborated as a Co-Designer on an AI-powered tool designed to enhance English language learning through personalized feedback and automated instruction[cite: 38, 40, 41, 264].</p>
+        </div>
+    </section>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="box" aria-modal="true" role="dialog" aria-label="Image viewer">
-      <div class="frame">
-        <button class="close" id="close" aria-label="Close">✕</button>
-        <button class="prev" id="prev" aria-label="Previous">‹</button>
-        <img id="big" src="" alt="Expanded image" />
-        <button class="next" id="next" aria-label="Next">›</button>
-      </div>
-    </div>
-  </section>
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="card">
+            <div class="meta">2023 - Present</div>
+            <h3>Research Assistant, GAME Lab</h3>
+            <p><strong>University of Florida</strong>[cite: 22]. Leading data collection and research on digital games designed for growth mindset and executive functions[cite: 24, 25].</p>
+        </div>
+        <div class="card">
+            <div class="meta">2020 - 2022</div>
+            <h3>Project Manager</h3>
+            <p><strong>Innovation House of Education, Tehran</strong>[cite: 45]. Managed "Chaharsoogh," a nationwide educational event focused on networking and educational progress[cite: 46, 51].</p>
+        </div>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="card" style="padding:20px">
-    <h2 style="margin:0 0 6px">Contact</h2>
-    <p>Email: <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a></p>
-    <div class="chips">
-      <a class="chip" href="#" onclick="alert('Add your CV PDF link to this button in the HTML.');return false;">Download CV (PDF)</a>
-      <a class="chip" href="#about">Back to top ↑</a>
-    </div>
-  </section>
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="card" style="text-align: center;">
+            <p>Currently pursuing research in Gainesville, FL[cite: 3, 10].</p>
+            <p><strong>Email:</strong> <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a> [cite: 4]</p>
+            <div style="font-size: 2rem; margin-top: 1rem;">
+                <a href="#" style="color: var(--primary); margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="color: var(--primary); margin: 0 15px;"><i class="fab fa-google"></i></a>
+            </div>
+        </div>
+    </section>
 
-  <footer>© <span id="year"></span> Salah — built with light-blue & orange.</footer>
-</main>
+    <footer>
+        <p>&copy; 2025 Salah Esmaeiligoujar. Based at the College of Education, University of Florida[cite: 3, 10].</p>
+    </footer>
 
-<script>
-  // Theme toggle
-  const themeBtn = document.getElementById('theme');
-  themeBtn.addEventListener('click', ()=>{
-    const dark = document.documentElement.classList.toggle('dark');
-    if(dark){
-      document.documentElement.style.setProperty('--bg','#0b1320');
-      document.documentElement.style.setProperty('--card','#0f1a2a');
-      document.documentElement.style.setProperty('--ink','#e6f0fb');
-      document.documentElement.style.setProperty('--muted','#a4b7ca');
-      document.documentElement.style.setProperty('--shadow','0 10px 30px rgba(0,0,0,.4)');
-    }else{
-      document.documentElement.style.setProperty('--bg','#f7fbff');
-      document.documentElement.style.setProperty('--card','#ffffff');
-      document.documentElement.style.setProperty('--ink','#0f1720');
-      document.documentElement.style.setProperty('--muted','#587086');
-      document.documentElement.style.setProperty('--shadow','0 10px 30px rgba(16,24,40,.08)');
-    }
-  });
-
-  // Simple tilt on hover (no library)
-  const tilts = [...document.querySelectorAll('[data-tilt]')];
-  tilts.forEach(el=>{
-    const strength = 12;
-    el.addEventListener('mousemove', (e)=>{
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - .5;
-      const y = (e.clientY - r.top) / r.height - .5;
-      el.style.transform = `rotateX(${(-y*strength)}deg) rotateY(${(x*strength)}deg) translateY(-2px)`;
-    });
-    el.addEventListener('mouseleave', ()=> el.style.transform = 'rotate(0) translateY(0)');
-  });
-
-  // Lightbox
-  const imgs = [
-    'img/salah-2.jpg',
-    'img/salah-3.jpg',
-    'img/salah-4.jpg',
-  ];
-  const box = document.getElementById('box');
-  const big = document.getElementById('big');
-  const prev = document.getElementById('prev');
-  const next = document.getElementById('next');
-  const close = document.getElementById('close');
-  let idx = 0;
-
-  function open(i){ idx = i; big.src = imgs[idx]; box.classList.add('open'); }
-  function nav(n){ idx = (idx + n + imgs.length) % imgs.length; big.src = imgs[idx]; }
-  function esc(e){ if(e.key === 'Escape'){ box.classList.remove('open'); } }
-
-  document.querySelectorAll('.photo').forEach(p=>{
-    p.addEventListener('click', ()=> open(+p.dataset.idx));
-    p.addEventListener('keypress', (e)=>{ if(e.key==='Enter') open(+p.dataset.idx); });
-  });
-  prev.addEventListener('click', ()=> nav(-1));
-  next.addEventListener('click', ()=> nav(1));
-  close.addEventListener('click', ()=> box.classList.remove('open'));
-  document.addEventListener('keydown', esc);
-
-  // Year
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 </body>
 </html>
