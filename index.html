@@ -3,59 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salah Esmaeiligoujar | Ph.D. in Educational Technology</title>
+    <title>Salah Esmaeiligoujar | Educational Technology & AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0021A5; /* UF Blue */
             --accent: #FA4616;  /* UF Orange */
-            --light-bg: #f8f9fa;
-            --text-main: #2d3436;
-            --transition: all 0.3s ease;
+            --glass: rgba(255, 255, 255, 0.9);
+            --text: #1e272e;
+            --bg: #fdfdfd;
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Inter', -apple-system, sans-serif; line-height: 1.6; color: var(--text-main); margin: 0; background: #fff; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; }
 
         /* Navigation */
-        nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-        .logo { font-weight: 800; color: var(--primary); text-decoration: none; font-size: 1.2rem; }
+        nav { background: var(--glass); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #eee; }
+        .nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { font-weight: 800; color: var(--primary); text-decoration: none; font-size: 1.4rem; letter-spacing: -1px; }
         nav ul { display: flex; list-style: none; gap: 2rem; margin: 0; }
-        nav ul a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: var(--transition); }
+        nav ul a { text-decoration: none; color: var(--text); font-weight: 500; transition: 0.3s; font-size: 0.95rem; }
         nav ul a:hover { color: var(--accent); }
 
-        /* Sections */
-        section { padding: 100px 2rem; max-width: 1100px; margin: 0 auto; }
-        .section-title { font-size: 2rem; border-bottom: 3px solid var(--accent); display: inline-block; margin-bottom: 2rem; color: var(--primary); }
-
-        /* Hero/About Me */
-        .hero { background: var(--light-bg); text-align: center; padding: 150px 2rem 100px; }
-        .hero h1 { font-size: 3rem; margin: 0; color: var(--primary); }
-        .hero p { font-size: 1.2rem; color: #636e72; max-width: 700px; margin: 1rem auto; }
-        .interest-tags { margin-top: 1.5rem; }
-        .tag { background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin: 5px; display: inline-block; font-size: 0.9rem; border: 1px solid #eee; }
-
-        /* Experience & Projects */
-        .card { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid #e1e8ed; transition: var(--transition); }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .card h3 { margin-top: 0; color: var(--primary); }
-        .meta { font-size: 0.9rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        /* Hero Section */
+        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 2rem; background: radial-gradient(circle at top right, #f0f4ff, transparent); }
+        .hero h1 { font-size: 4rem; margin: 0; color: var(--primary); line-height: 1; }
+        .hero p { font-size: 1.4rem; color: #57606f; max-width: 800px; margin: 1.5rem 0; }
         
-        /* Research & Interest Section */
-        .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .interest-card { background: var(--primary); color: white; padding: 2rem; border-radius: 12px; }
+        /* Interactive Project Card on Home */
+        .featured-project { background: white; border: 2px solid var(--primary); border-radius: 20px; padding: 2rem; margin-top: 2rem; max-width: 700px; transition: 0.3s; cursor: pointer; position: relative; }
+        .featured-project:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,33,165,0.1); }
+        .featured-project h3 { margin: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .featured-project .tag { background: var(--accent); color: white; padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; text-transform: uppercase; }
 
-        /* Project Highlight */
-        .project-link { display: inline-block; margin-top: 1rem; padding: 10px 20px; background: var(--accent); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        /* Sections */
+        section { padding: 100px 2rem; max-width: 1200px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .card { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #f0f0f0; transition: 0.3s; position: relative; }
+        .card:hover { border-color: var(--primary); }
+        .card i { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
 
-        /* Publications */
-        .pub-item { border-left: 4px solid #eee; padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        /* Publication Styles */
+        .pub-item { padding: 1.5rem; border-bottom: 1px solid #f0f0f0; transition: 0.2s; }
+        .pub-item:hover { background: #f8f9ff; }
+        .pub-status { font-weight: bold; font-size: 0.8rem; color: #ff9f43; }
 
-        footer { text-align: center; padding: 3rem; background: var(--light-bg); color: #636e72; }
+        /* Footer */
+        footer { padding: 4rem 2rem; text-align: center; background: #0a0e17; color: white; }
+        .social-icons a { color: white; font-size: 1.5rem; margin: 0 15px; opacity: 0.7; transition: 0.3s; }
+        .social-icons a:hover { opacity: 1; color: var(--accent); }
 
         @media (max-width: 768px) {
-            .research-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
             nav ul { display: none; }
         }
     </style>
@@ -63,91 +63,108 @@
 <body>
 
     <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">S. ESMAEILIGOUJAR</a>
+        <div class="nav-content">
+            <a href="#" class="logo">SALAH E. G.</a>
             <ul>
-                <li><a href="#about">About</a></li>
+                <li><a href="#about">About Me</a></li>
                 <li><a href="#research">Research</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#awards">Honors</a></li>
             </ul>
         </div>
     </nav>
 
-    <section id="about" class="hero">
+    <header class="hero">
         <h1>Salah Esmaeiligoujar</h1>
-        <p>Ph.D. Candidate in Educational Technology at the University of Florida[cite: 3, 6]. Dedicated to bridging the gap between advanced technology and human cognition[cite: 176, 177, 178].</p>
-        <div class="interest-tags">
-            <span class="tag"><i class="fas fa-brain"></i> Critical Thinking</span>
-            <span class="tag"><i class="fas fa-gamepad"></i> Game-Based Learning</span>
-            <span class="tag"><i class="fas fa-robot"></i> Generative AI</span>
-            <span class="tag"><i class="fas fa-search"></i> Stealth Assessment</span>
+        <p>Ph.D. Student in Educational Technology at the University of Florida[cite: 6, 10].</p>
+        
+        <div class="featured-project" onclick="window.open('https://legalmind.imsalah.com', '_blank')">
+            <span class="tag">Flagship Project</span>
+            <h3><i class="fas fa-balance-scale"></i> LegalMind</h3>
+            <p>Empowering critical thinking through Law. Students analyze cases generated by AI and provide evidence-based arguments, while AI assesses the strength of their evidence.</p>
+            <small style="color: var(--primary)">Click to visit legalmind.imsalah.com <i class="fas fa-arrow-right"></i></small>
         </div>
-    </section>
+    </header>
 
-    <section id="research">
-        <h2 class="section-title">Research & Interests</h2>
-        <div class="research-grid">
-            <div class="interest-card">
-                <h3>Primary Focus</h3>
-                <p>My research centers on the <strong>improvement and assessment of critical thinking skills</strong>[cite: 255, 267]. I explore how digital environments can be leveraged to measure cognitive growth without interrupting the learning experience[cite: 199, 200, 269, 270].</p>
+    <section id="about">
+        <h2 style="font-size: 2.5rem;">The Intersection of AI & Cognition</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-brain"></i>
+                <h3>Core Interest</h3>
+                <p>Focused on the improvement and assessment of critical thinking skills. I explore how AI and digital tools can be used to scaffold complex reasoning[cite: 112, 113].</p>
             </div>
-            <div>
-                <h3>Ongoing Inquiries</h3>
-                <ul>
-                    <li>The role of Generative AI in fostering productive failure in mathematics[cite: 112, 128, 129, 220].</li>
-                    <li>Using digital games to enhance 21st-century skills in K-12 education[cite: 170, 196, 257].</li>
-                    <li>Automated assessment of human creativity using LLMs[cite: 229, 251, 252].</li>
-                </ul>
+            <div class="card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Learning Sciences</h3>
+                <p>Investigating how game-based environments like Kahoot! or digital physics games impact student motivation and learning outcomes[cite: 13, 14, 164].</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-microchip"></i>
+                <h3>Generative AI</h3>
+                <p>Utilizing LLMs for automated creativity assessment and supporting teachers through AI-powered problem generators[cite: 112, 113, 177].</p>
             </div>
         </div>
     </section>
 
-    <section id="projects">
-        <h2 class="section-title">Projects</h2>
-        <div class="card">
-            <div class="meta">Featured Project</div>
-            <h3>LegalMind: Stealth Assessment of Critical Thinking</h3>
-            <p>A specialized project focused on designing and validating assessments for critical thinking skills through immersive scenarios. This work explores how learners analyze "clues in the news" to develop higher-order reasoning[cite: 255, 267].</p>
-            <a href="https://legalmind.imsalah.com" class="project-link" target="_blank">Visit LegalMind <i class="fas fa-external-link-alt"></i></a>
-        </div>
-
-        <div class="card">
-            <div class="meta">AI Tools</div>
-            <h3>Metalingual</h3>
-            <p>Collaborated as a Co-Designer on an AI-powered tool designed to enhance English language learning through personalized feedback and automated instruction[cite: 38, 40, 41, 264].</p>
-        </div>
-    </section>
-
-    <section id="experience">
-        <h2 class="section-title">Experience</h2>
-        <div class="card">
-            <div class="meta">2023 - Present</div>
-            <h3>Research Assistant, GAME Lab</h3>
-            <p><strong>University of Florida</strong>[cite: 22]. Leading data collection and research on digital games designed for growth mindset and executive functions[cite: 24, 25].</p>
-        </div>
-        <div class="card">
-            <div class="meta">2020 - 2022</div>
-            <h3>Project Manager</h3>
-            <p><strong>Innovation House of Education, Tehran</strong>[cite: 45]. Managed "Chaharsoogh," a nationwide educational event focused on networking and educational progress[cite: 46, 51].</p>
+    <section id="research" style="background: #fcfcfc; border-radius: 50px;">
+        <h2>Research Appointments</h2>
+        <div class="grid">
+            <div class="card">
+                <div style="color: var(--accent); font-weight: bold;">2023 - Present</div>
+                <h3>Research Assistant, GAME Lab</h3>
+                <p>University of Florida. Leading data collection and analysis for projects involving growth mindset and computational thinking[cite: 21, 22, 24, 25].</p>
+            </div>
+            <div class="card">
+                <div style="color: var(--accent); font-weight: bold;">2023 - 2024</div>
+                <h3>Usability Coordinator</h3>
+                <p>Coordinated testing for EarSketch, managing participant recruitment and detailed user feedback reports[cite: 26, 27, 29, 30].</p>
+            </div>
         </div>
     </section>
 
-    <section id="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="card" style="text-align: center;">
-            <p>Currently pursuing research in Gainesville, FL[cite: 3, 10].</p>
-            <p><strong>Email:</strong> <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a> [cite: 4]</p>
-            <div style="font-size: 2rem; margin-top: 1rem;">
-                <a href="#" style="color: var(--primary); margin: 0 15px;"><i class="fab fa-linkedin"></i></a>
-                <a href="#" style="color: var(--primary); margin: 0 15px;"><i class="fab fa-google"></i></a>
+    <section id="publications">
+        <h2>Selected Publications & Manuscripts</h2>
+        <div class="pub-item">
+            <span class="pub-status">Under Review</span>
+            <p><strong>Esmaeiligoujar, S., & Rahimi, S.</strong> Digital games can enhance K-12 students' 21st-century skills: A systematic review. <em>Educational Technology Research and Development</em>[cite: 170, 171].</p>
+        </div>
+        <div class="pub-item">
+            <span class="pub-status">Book Chapter (2026)</span>
+            <p><strong>Rahimi, S., Esmaeiligoujar, S., et al.</strong> Augmenting human creativity with responsible and ethical use of generative AI. <em>Elsevier</em>[cite: 176, 177, 178].</p>
+        </div>
+        <div class="pub-item">
+            <span class="pub-status">Journal Article</span>
+            <p><strong>Baniamerian, S., & Esmaeeli Gojar, S. (2022).</strong> The role of gamification in learning. <em>Educational Psychology</em>[cite: 150].</p>
+        </div>
+    </section>
+
+    <section id="awards">
+        <h2>Honors & Grants</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            <div class="card" style="padding: 1.5rem;">
+                <h4 style="color: var(--primary); margin: 0;">Productive Failure Grant</h4>
+                <p>$10,000 | University of Florida[cite: 114, 115].</p>
+            </div>
+            <div class="card" style="padding: 1.5rem;">
+                <h4 style="color: var(--primary); margin: 0;">Best Paper Nomination</h4>
+                <p>International Conference on AI in Education (July 2025)[cite: 128].</p>
+            </div>
+            <div class="card" style="padding: 1.5rem;">
+                <h4 style="color: var(--primary); margin: 0;">Ranked 1st Candidate</h4>
+                <p>Educational Technology Program, ATU (2016)[cite: 145].</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Salah Esmaeiligoujar. Based at the College of Education, University of Florida[cite: 3, 10].</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-google-scholar"></i></a>
+            <a href="mailto:s.esmaeiligoujar@ufl.edu"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p style="margin-top: 2rem; opacity: 0.5;">&copy; 2025 Salah Esmaeiligoujar | Gainesville, FL[cite: 3].</p>
     </footer>
 
 </body>
