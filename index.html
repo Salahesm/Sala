@@ -6,11 +6,6 @@
   <title>Salah Esmaeili | Educational Technology</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-<nav>
-  <div class="nav-inner">
-    ...
-  </div>
-</nav>
 
   <style>
     :root{
@@ -416,41 +411,71 @@
 
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="container">
-      <div class="nav-inner">
-        <a href="#home" class="logo">SALAH ESMAEILI</a>
+<!-- NAV (NEW) -->
+<div class="nav-overlay" id="navOverlay"></div>
 
-        <ul class="nav-links">
-          <li><a href="#about">Profile</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#service">Service</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+<nav class="site-nav" id="siteNav">
+  <div class="container">
+    <div class="nav-wrap">
 
-        <div class="nav-cta">
-          <a class="btn primary" href="mailto:s.esmaeiligoujar@ufl.edu"><i class="fa-solid fa-envelope"></i> Email</a>
-          <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-        </div>
+      <a class="brand" href="#home" aria-label="Home">
+        <div class="brand-mark">SE</div>
+        <div class="brand-name">SALAH ESMAEILI</div>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" data-section="about">Profile</a></li>
+        <li><a href="#research" data-section="research">Research</a></li>
+        <li><a href="#projects" data-section="projects">Projects</a></li>
+        <li><a href="#experience" data-section="experience">Experience</a></li>
+        <li><a href="#publications" data-section="publications">Publications</a></li>
+        <li><a href="#service" data-section="service">Service</a></li>
+        <li><a href="#contact" data-section="contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn-email" href="mailto:s.esmaeiligoujar@ufl.edu">
+          <i class="fa-solid fa-envelope"></i> Email
+        </a>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
 
-      <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
-        <a href="#about">Profile</a>
-        <a href="#research">Research</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#publications">Publications</a>
-        <a href="#service">Service</a>
-        <a href="#contact">Contact</a>
-      </div>
     </div>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawer-top">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="brand-mark" style="width:40px;height:40px;border-radius:14px;">SE</div>
+      <div style="font-weight:900; color:var(--primary);">Menu</div>
+    </div>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <nav class="drawer-links" id="drawerLinks">
+    <a href="#about" data-section="about">Profile</a>
+    <a href="#research" data-section="research">Research</a>
+    <a href="#projects" data-section="projects">Projects</a>
+    <a href="#experience" data-section="experience">Experience</a>
+    <a href="#publications" data-section="publications">Publications</a>
+    <a href="#service" data-section="service">Service</a>
+    <a href="#contact" data-section="contact">Contact</a>
   </nav>
+
+  <div class="drawer-bottom">
+    <a class="btn-email" style="width:100%; justify-content:center;" href="mailto:s.esmaeiligoujar@ufl.edu">
+      <i class="fa-solid fa-envelope"></i> Email
+    </a>
+  </div>
+</aside>
+
 
   <!-- HERO -->
   <header class="hero" id="home">
@@ -1038,6 +1063,7 @@
 
 </body>
 </html>
+
 
 
 
