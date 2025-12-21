@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Salah Esmaeili | Educational Technology</title>
+  <title>Salah Esmaeiligoujar | Educational Technology</title>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-<nav>
-  <div class="nav-inner">
-    ...
-  </div>
-</nav>
 
+  
   <style>
     :root{
       --primary:#0021A5; /* UF Blue */
@@ -417,33 +414,40 @@
 <body>
 
 <!-- NAV -->
-<nav>
-  <div class="container">
-    <div class="nav-inner">
+  <nav>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#home" class="logo">SALAH ESMAEILIGOUJAR</a>
 
-      <a href="#home" class="logo">SALAH ESMAEILI</a>
+        <ul class="nav-links">
+          <li><a href="#about">Profile</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#service">Service</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
 
-      <ul class="nav-links">
-        <li><a href="#about">Profile</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#service">Service</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-
-      <div class="nav-cta">
-        <a class="btn primary" href="mailto:s.esmaeiligoujar@ufl.edu">
-          <i class="fa-solid fa-envelope"></i> Email
-        </a>
-
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="nav-cta">
+          <a class="btn primary" href="mailto:s.esmaeiligoujar@ufl.edu"><i class="fa-solid fa-envelope"></i> Email</a>
+          <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
       </div>
 
+      <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
+        <a href="#about">Profile</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+        <a href="#service">Service</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
+  </nav>
 
     <!-- Mobile menu -->
     <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
@@ -1075,6 +1079,7 @@
 
 </body>
 </html>
+
 
 
 
