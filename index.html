@@ -22,9 +22,9 @@
       --radius: 22px;
       --max: 1180px;
 
-      /* Nav button states */
-      --nav-bg:#f4f7fc;             /* light blue */
-      --nav-btn:#ffffff;            /* button base */
+      /* Nav */
+      --nav-bg:#f4f7fc;
+      --nav-btn:#ffffff;
       --nav-btn-border:#dbe2ff;
       --nav-btn-hover:#eef3ff;
       --nav-btn-active:#0021A5;
@@ -69,7 +69,6 @@
       white-space:nowrap;
     }
 
-    /* Nav links as "buttons" */
     .nav-links{
       display:flex;
       list-style:none;
@@ -86,7 +85,7 @@
       border-radius:14px;
       text-decoration:none;
       font-weight:700;
-      color: #1c2433;
+      color:#1c2433;
       background: var(--nav-btn);
       border:1px solid var(--nav-btn-border);
       transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
@@ -99,10 +98,7 @@
       box-shadow: 0 10px 22px rgba(0,33,165,0.08);
       color: var(--primary);
     }
-    .nav-link:active{
-      transform: translateY(0px) scale(0.98);
-    }
-    /* Active section highlight (added by JS) */
+    .nav-link:active{ transform: translateY(0px) scale(0.98); }
     .nav-link.is-active{
       background: var(--nav-btn-active);
       border-color: rgba(0,33,165,0.4);
@@ -166,7 +162,7 @@
       color:var(--text);
       font-weight:700;
       transition:0.2s;
-      border: 1px solid transparent;
+      border:1px solid transparent;
     }
     .mobile-panel a:hover{
       background:#eef3ff;
@@ -342,6 +338,27 @@
     }
     .bullets li{ margin:6px 0; }
 
+    /* PROJECT SCREENSHOTS */
+    .project-media{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .project-media img{
+      width:100%;
+      height:140px;
+      object-fit:cover;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    }
+    @media (max-width: 560px){
+      .project-media{ grid-template-columns: 1fr; }
+      .project-media img{ height:170px; }
+    }
+
     /* TIMELINE LIST */
     .list{
       list-style:none; margin:0; padding:0;
@@ -394,37 +411,6 @@
       grid-template-columns: 1fr 1fr;
       gap:18px;
     }
-
-    /* CONTACT ICON CARDS */
-    .icon-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:10px;
-    }
-    .icon-btn{
-      width:52px;
-      height:52px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:16px;
-      background:#fff;
-      border:1px solid #dbe2ff;
-      text-decoration:none;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-    }
-    .icon-btn i{
-      font-size:1.25rem;
-      color:var(--primary);
-    }
-    .icon-btn:hover{
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-      border-color: rgba(0,33,165,0.25);
-      background:#f6f8ff;
-    }
-    .icon-btn:active{ transform: translateY(0px) scale(0.98); }
 
     /* FOOTER */
     footer{
@@ -669,14 +655,23 @@
       </p>
 
       <div class="grid">
+        <!-- LegalMind -->
         <div class="card">
           <i class="big fa-solid fa-gavel"></i>
           <h3>LegalMind</h3>
-          <p class="meta">Learning environment for critical thinking through law cases</p>
+          <p class="meta">Critical Thinking • Case-Based Learning</p>
           <p>
-            An environment where learners analyze cases and practice constructing evidence-based arguments. Focused on critical thinking,
-            structured reasoning, and assessment-ready learning design.
+            A learning environment for cultivating critical thinking through law cases. Students engage with cases
+            and practice evidence-based reasoning and argumentation.
           </p>
+
+          <div class="project-media" aria-label="LegalMind screenshots">
+            <!-- Save your LegalMind screenshot as: assets/legalmind-1.png -->
+            <img src="assets/legalmind-1.png" alt="LegalMind sign-in screen">
+            <!-- Optional second image if you have it -->
+            <img src="assets/legalmind-2.png" alt="LegalMind learning interface">
+          </div>
+
           <p style="margin:12px 0 0;">
             <a class="btn primary" href="https://legalmind.imsalah.com" target="_blank" rel="noopener">
               Visit <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -684,6 +679,30 @@
           </p>
         </div>
 
+        <!-- SmarterFlash -->
+        <div class="card">
+          <i class="big fa-solid fa-layer-group"></i>
+          <h3>SmarterFlash</h3>
+          <p class="meta">Learning Support</p>
+          <p>AI-powered flashcards to transform learning and boost retention.</p>
+
+          <div class="project-media" aria-label="SmarterFlash screenshots">
+            <!-- Save your SmarterFlash screenshots as:
+                 assets/smarterflash-1.png
+                 assets/smarterflash-2.png
+            -->
+            <img src="assets/smarterflash-1.png" alt="SmarterFlash landing page">
+            <img src="assets/smarterflash-2.png" alt="SmarterFlash dashboard preview">
+          </div>
+
+          <p style="margin:12px 0 0;">
+            <a class="btn primary" href="https://www.smarterflash.com/" target="_blank" rel="noopener">
+              Visit <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </p>
+        </div>
+
+        <!-- Metalingual -->
         <div class="card">
           <i class="big fa-solid fa-language"></i>
           <h3>Metalingual</h3>
@@ -695,6 +714,7 @@
           </ul>
         </div>
 
+        <!-- EarSketch -->
         <div class="card">
           <i class="big fa-solid fa-headphones"></i>
           <h3>EarSketch Usability Evaluation</h3>
@@ -705,6 +725,7 @@
           </ul>
         </div>
 
+        <!-- Systematic Reviews -->
         <div class="card">
           <i class="big fa-solid fa-chart-line"></i>
           <h3>Systematic Reviews in Learning Games</h3>
@@ -1048,40 +1069,33 @@
       </p>
 
       <div class="grid">
-        <!-- Email -->
         <div class="card">
           <i class="big fa-solid fa-envelope"></i>
           <h3>Email</h3>
-          <p class="meta">For collaboration, speaking invitations, and research opportunities.</p>
-          <div class="icon-actions">
-            <a class="icon-btn" href="mailto:s.esmaeiligoujar@ufl.edu" aria-label="Send email">
-              <i class="fa-solid fa-envelope"></i>
-            </a>
-          </div>
+          <p class="meta">
+            <a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a>
+          </p>
+          <p>For collaboration, speaking invitations, and research opportunities.</p>
         </div>
 
-        <!-- LinkedIn -->
         <div class="card">
           <i class="big fa-brands fa-linkedin"></i>
           <h3>LinkedIn</h3>
-          <p class="meta">linkedin.com/in/salah-esmaeili-3a0834b3</p>
-          <div class="icon-actions">
-            <a class="icon-btn" href="https://www.linkedin.com/in/salah-esmaeili-3a0834b3" target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
-              <i class="fa-brands fa-linkedin-in"></i>
+          <p class="meta">
+            <a href="https://www.linkedin.com/in/salah-esmaeili-3a0834b3" target="_blank" rel="noopener">
+              linkedin.com/in/salah-esmaeili-3a0834b3
             </a>
-          </div>
+          </p>
         </div>
 
-        <!-- Google Scholar -->
         <div class="card">
           <i class="big fa-solid fa-graduation-cap"></i>
           <h3>Google Scholar</h3>
-          <p class="meta">Google Scholar Profile</p>
-          <div class="icon-actions">
-            <a class="icon-btn" href="https://scholar.google.com/citations?user=P2xdJTwAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Open Google Scholar profile">
-              <i class="fa-solid fa-graduation-cap"></i>
+          <p class="meta">
+            <a href="https://scholar.google.com/citations?user=P2xdJTwAAAAJ&hl=en" target="_blank" rel="noopener">
+              Google Scholar Profile
             </a>
-          </div>
+          </p>
         </div>
       </div>
     </div>
@@ -1103,6 +1117,7 @@
           <a href="https://www.linkedin.com/in/salah-esmaeili-3a0834b3" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
           <a href="https://scholar.google.com/citations?user=P2xdJTwAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
           <a href="https://legalmind.imsalah.com" target="_blank" rel="noopener" aria-label="LegalMind"><i class="fa-solid fa-gavel"></i></a>
+          <a href="https://www.smarterflash.com/" target="_blank" rel="noopener" aria-label="SmarterFlash"><i class="fa-solid fa-layer-group"></i></a>
         </div>
       </div>
       <div class="copyright">
@@ -1130,7 +1145,7 @@
       });
     });
 
-    // Highlight active section in nav ("button-like" behavior)
+    // Highlight active section in nav
     const navLinks = Array.from(document.querySelectorAll('.nav-link'));
     const sections = navLinks
       .map(a => document.querySelector(a.getAttribute('href')))
@@ -1151,7 +1166,7 @@
     window.addEventListener('scroll', setActiveLink, { passive: true });
     window.addEventListener('load', setActiveLink);
 
-    // Add active state immediately when a nav button is clicked
+    // Add active state immediately on click
     navLinks.forEach(a => {
       a.addEventListener('click', () => {
         navLinks.forEach(x => x.classList.remove('is-active'));
