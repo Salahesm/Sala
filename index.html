@@ -416,30 +416,25 @@
 
 <body>
 
-<!-- NAV (NEW) -->
-<div class="nav-overlay" id="navOverlay"></div>
-
-<nav class="site-nav" id="siteNav">
+<!-- NAV -->
+<nav>
   <div class="container">
-    <div class="nav-wrap">
+    <div class="nav-inner">
 
-      <a class="brand" href="#home" aria-label="Home">
-        <div class="brand-mark">SE</div>
-        <div class="brand-name">SALAH ESMAEILI</div>
-      </a>
+      <a href="#home" class="logo">SALAH ESMAEILI</a>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about" data-section="about">Profile</a></li>
-        <li><a href="#research" data-section="research">Research</a></li>
-        <li><a href="#projects" data-section="projects">Projects</a></li>
-        <li><a href="#experience" data-section="experience">Experience</a></li>
-        <li><a href="#publications" data-section="publications">Publications</a></li>
-        <li><a href="#service" data-section="service">Service</a></li>
-        <li><a href="#contact" data-section="contact">Contact</a></li>
+      <ul class="nav-links">
+        <li><a href="#about">Profile</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#service">Service</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
 
-      <div class="nav-actions">
-        <a class="btn-email" href="mailto:s.esmaeiligoujar@ufl.edu">
+      <div class="nav-cta">
+        <a class="btn primary" href="mailto:s.esmaeiligoujar@ufl.edu">
           <i class="fa-solid fa-envelope"></i> Email
         </a>
 
@@ -449,6 +444,18 @@
       </div>
 
     </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
+      <a href="#about">Profile</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#publications">Publications</a>
+      <a href="#service">Service</a>
+      <a href="#contact">Contact</a>
+    </div>
+
   </div>
 </nav>
 
@@ -1068,6 +1075,7 @@
 
 </body>
 </html>
+
 
 
 
