@@ -21,6 +21,14 @@
       --shadow-strong: 0 18px 45px rgba(0,33,165,0.16);
       --radius: 22px;
       --max: 1180px;
+
+      /* Nav button states */
+      --nav-bg:#f4f7fc;             /* light blue */
+      --nav-btn:#ffffff;            /* button base */
+      --nav-btn-border:#dbe2ff;
+      --nav-btn-hover:#eef3ff;
+      --nav-btn-active:#0021A5;
+      --nav-btn-active-text:#ffffff;
     }
 
     *{ box-sizing:border-box; }
@@ -42,8 +50,8 @@
       top:0;
       width:100%;
       z-index:1000;
-      background:#f4f7fc; /* light blue background */
-      border-bottom:1px solid #eef0f6;
+      background: var(--nav-bg);
+      border-bottom:1px solid #e3e9f8;
     }
     .nav-inner{
       display:flex;
@@ -54,34 +62,60 @@
     }
     .logo{
       font-weight:800;
-      letter-spacing:0.5px;
+      letter-spacing:0.6px;
       color:var(--primary);
       text-decoration:none;
       font-size:1.15rem;
       white-space:nowrap;
     }
+
+    /* Nav links as "buttons" */
     .nav-links{
       display:flex;
       list-style:none;
-      gap:18px;
+      gap:10px;
       margin:0;
       padding:0;
       align-items:center;
     }
-    .nav-links a{
+    .nav-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:14px;
       text-decoration:none;
-      color:var(--text);
-      font-weight:500;
-      padding:10px 10px;
-      border-radius:12px;
-      transition:0.25s;
+      font-weight:700;
+      color: #1c2433;
+      background: var(--nav-btn);
+      border:1px solid var(--nav-btn-border);
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+      user-select:none;
     }
-    .nav-links a:hover{ color:var(--accent); background:#fff7f3; }
+    .nav-link:hover{
+      background: var(--nav-btn-hover);
+      border-color:#c9d4ff;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,33,165,0.08);
+      color: var(--primary);
+    }
+    .nav-link:active{
+      transform: translateY(0px) scale(0.98);
+    }
+    /* Active section highlight (added by JS) */
+    .nav-link.is-active{
+      background: var(--nav-btn-active);
+      border-color: rgba(0,33,165,0.4);
+      color: var(--nav-btn-active-text);
+      box-shadow: 0 14px 30px rgba(0,33,165,0.18);
+    }
+
     .nav-cta{
       display:flex;
       align-items:center;
       gap:10px;
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -90,7 +124,7 @@
       border-radius:14px;
       border:1px solid var(--border);
       text-decoration:none;
-      font-weight:600;
+      font-weight:700;
       transition:0.25s;
       background:#fff;
     }
@@ -109,22 +143,20 @@
 
     .menu-btn{
       display:none;
-      width:44px;
-      height:44px;
+      width:44px; height:44px;
       border-radius:14px;
       border:1px solid var(--border);
       background:#fff;
-      align-items:center;
-      justify-content:center;
+      align-items:center; justify-content:center;
       cursor:pointer;
       transition:0.25s;
     }
     .menu-btn:hover{ box-shadow:var(--shadow); }
     .mobile-panel{
       display:none;
-      border-top:1px solid #eef0f6;
+      border-top:1px solid #e3e9f8;
       padding:10px 0 16px;
-      background:#f4f7fc; /* keep mobile panel consistent with nav */
+      background: var(--nav-bg);
     }
     .mobile-panel a{
       display:block;
@@ -132,10 +164,15 @@
       text-decoration:none;
       border-radius:14px;
       color:var(--text);
-      font-weight:600;
+      font-weight:700;
       transition:0.2s;
+      border: 1px solid transparent;
     }
-    .mobile-panel a:hover{ background:#f5f7ff; color:var(--accent); }
+    .mobile-panel a:hover{
+      background:#eef3ff;
+      color:var(--primary);
+      border-color:#dbe2ff;
+    }
 
     /* HERO */
     header.hero{
@@ -168,20 +205,16 @@
       max-width:760px;
     }
     .pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
+      display:flex; flex-wrap:wrap; gap:10px;
       margin-top:18px;
     }
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
+      display:inline-flex; align-items:center; gap:10px;
       padding:8px 12px;
       border-radius:999px;
       border:1px solid var(--border);
       background:#fff;
-      font-weight:600;
+      font-weight:700;
       color:#273042;
       box-shadow:0 8px 18px rgba(0,0,0,0.03);
       font-size:0.92rem;
@@ -209,10 +242,8 @@
     .feature:hover{ transform:translateY(-6px); box-shadow:var(--shadow-strong); }
     .feature::after{
       content:"";
-      position:absolute;
-      inset:auto -30% -50% auto;
-      width:240px;
-      height:240px;
+      position:absolute; inset:auto -30% -50% auto;
+      width:240px; height:240px;
       background: radial-gradient(circle, rgba(250,70,22,0.18), transparent 60%);
       transform: rotate(18deg);
     }
@@ -227,14 +258,13 @@
       z-index:1;
     }
     .tag{
-      display:inline-flex;
-      align-items:center;
+      display:inline-flex; align-items:center;
       padding:5px 10px;
       border-radius:999px;
       background:var(--accent);
       color:#fff;
       font-size:0.75rem;
-      font-weight:800;
+      font-weight:900;
     }
     .feature p{
       margin:10px 0 0;
@@ -247,7 +277,7 @@
       display:inline-flex;
       align-items:center;
       gap:8px;
-      font-weight:800;
+      font-weight:900;
       color:var(--primary);
       text-decoration:none;
       position:relative;
@@ -301,7 +331,7 @@
     }
     .meta{
       color:var(--muted);
-      font-weight:600;
+      font-weight:700;
       font-size:0.95rem;
       margin:0 0 10px;
     }
@@ -314,9 +344,7 @@
 
     /* TIMELINE LIST */
     .list{
-      list-style:none;
-      margin:0;
-      padding:0;
+      list-style:none; margin:0; padding:0;
       border:1px solid var(--border);
       border-radius: var(--radius);
       overflow:hidden;
@@ -344,10 +372,7 @@
       border-radius:999px;
       margin-bottom:10px;
     }
-    .cite{
-      font-style:italic;
-      color:var(--muted);
-    }
+    .cite{ font-style:italic; color:var(--muted); }
     .title-line{
       display:flex;
       flex-wrap:wrap;
@@ -369,6 +394,37 @@
       grid-template-columns: 1fr 1fr;
       gap:18px;
     }
+
+    /* CONTACT ICON CARDS */
+    .icon-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .icon-btn{
+      width:52px;
+      height:52px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid #dbe2ff;
+      text-decoration:none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+    .icon-btn i{
+      font-size:1.25rem;
+      color:var(--primary);
+    }
+    .icon-btn:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: rgba(0,33,165,0.25);
+      background:#f6f8ff;
+    }
+    .icon-btn:active{ transform: translateY(0px) scale(0.98); }
 
     /* FOOTER */
     footer{
@@ -400,11 +456,8 @@
       justify-content:flex-end;
     }
     .social a{
-      width:48px;
-      height:48px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      width:48px; height:48px;
+      display:inline-flex; align-items:center; justify-content:center;
       border-radius:16px;
       border:1px solid rgba(255,255,255,0.18);
       text-decoration:none;
@@ -434,7 +487,7 @@
       .footer-grid{ grid-template-columns:1fr; }
       .social{ justify-content:flex-start; }
     }
-    @media (max-width: 820px){
+    @media (max-width: 920px){
       .nav-links{ display:none; }
       .menu-btn{ display:inline-flex; }
       .headline{ font-size:2.6rem; }
@@ -451,13 +504,13 @@
         <a href="#home" class="logo">SALAH ESMAEILI</a>
 
         <ul class="nav-links">
-          <li><a href="#about">Profile</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#service">Service</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a class="nav-link" href="#about">Profile</a></li>
+          <li><a class="nav-link" href="#research">Research</a></li>
+          <li><a class="nav-link" href="#projects">Projects</a></li>
+          <li><a class="nav-link" href="#experience">Experience</a></li>
+          <li><a class="nav-link" href="#publications">Publications</a></li>
+          <li><a class="nav-link" href="#service">Service</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
 
         <div class="nav-cta">
@@ -936,7 +989,6 @@
             <li><strong>Master Thesis Research Grant</strong> — Iran’s National Elites Foundation (2017): The Effect of Kahoot! as a Game-Based Environment on Students’ Learning and Motivation.</li>
             <li><strong>Research Grant</strong> (2018): Web-based collaborative learning platforms to promote learning and motivation: case study of Tehran’s 12th district schools.</li>
           </ul>
-          <p class="meta" style="margin-top:10px;">Amounts are omitted to keep the public site focused on outcomes.</p>
         </div>
       </div>
     </div>
@@ -996,23 +1048,40 @@
       </p>
 
       <div class="grid">
+        <!-- Email -->
         <div class="card">
           <i class="big fa-solid fa-envelope"></i>
           <h3>Email</h3>
-          <p class="meta"><a href="mailto:s.esmaeiligoujar@ufl.edu">s.esmaeiligoujar@ufl.edu</a></p>
-          <p>For collaboration, speaking invitations, and research opportunities.</p>
+          <p class="meta">For collaboration, speaking invitations, and research opportunities.</p>
+          <div class="icon-actions">
+            <a class="icon-btn" href="mailto:s.esmaeiligoujar@ufl.edu" aria-label="Send email">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+          </div>
         </div>
 
+        <!-- LinkedIn -->
         <div class="card">
           <i class="big fa-brands fa-linkedin"></i>
           <h3>LinkedIn</h3>
-          <p class="meta"><a href="https://www.linkedin.com/in/salah-esmaeili-3a0834b3" target="_blank" rel="noopener">linkedin.com/in/salah-esmaeili-3a0834b3</a></p>
+          <p class="meta">linkedin.com/in/salah-esmaeili-3a0834b3</p>
+          <div class="icon-actions">
+            <a class="icon-btn" href="https://www.linkedin.com/in/salah-esmaeili-3a0834b3" target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
         </div>
 
+        <!-- Google Scholar -->
         <div class="card">
           <i class="big fa-solid fa-graduation-cap"></i>
           <h3>Google Scholar</h3>
-          <p class="meta"><a href="https://scholar.google.com/citations?user=P2xdJTwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar Profile</a></p>
+          <p class="meta">Google Scholar Profile</p>
+          <div class="icon-actions">
+            <a class="icon-btn" href="https://scholar.google.com/citations?user=P2xdJTwAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Open Google Scholar profile">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1023,7 +1092,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <h3 class="footer-title">Salah Esmaeiligoujar</h3>
+          <h3 class="footer-title">Salah Esmaeili</h3>
           <p class="footer-text">
             Ph.D. Student in Educational Technology at the University of Florida. Research and design in learning games,
             generative AI in education, critical thinking, and assessment.
@@ -1037,7 +1106,7 @@
         </div>
       </div>
       <div class="copyright">
-        &copy; 2025 Salah Esmaeiligoujar.
+        &copy; 2025 Salah Esmaeili.
       </div>
     </div>
   </footer>
@@ -1058,6 +1127,35 @@
       a.addEventListener('click', () => {
         mobilePanel.style.display = 'none';
         mobilePanel.setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    // Highlight active section in nav ("button-like" behavior)
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const sections = navLinks
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    const setActiveLink = () => {
+      const y = window.scrollY + 120;
+      let activeIndex = 0;
+
+      sections.forEach((sec, i) => {
+        if (sec.offsetTop <= y) activeIndex = i;
+      });
+
+      navLinks.forEach(a => a.classList.remove('is-active'));
+      if (navLinks[activeIndex]) navLinks[activeIndex].classList.add('is-active');
+    };
+
+    window.addEventListener('scroll', setActiveLink, { passive: true });
+    window.addEventListener('load', setActiveLink);
+
+    // Add active state immediately when a nav button is clicked
+    navLinks.forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.forEach(x => x.classList.remove('is-active'));
+        a.classList.add('is-active');
       });
     });
   </script>
