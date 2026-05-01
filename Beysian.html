@@ -1,0 +1,455 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+#app{font-family:var(--font-sans,sans-serif);padding:0 0 1rem}
+#net-wrap{width:100%;overflow:hidden;cursor:pointer}
+canvas{display:block;width:100%}
+#panel{border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:14px 16px;margin:10px 0 0;background:var(--color-background-secondary);min-height:100px}
+#p-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+#p-ref{font-size:11px;color:var(--color-text-tertiary);margin-bottom:8px;font-style:italic}
+#p-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:8px}
+#p-bars{}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.bar-label{font-size:11px;color:var(--color-text-secondary);width:52px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:11px;background:var(--color-border-tertiary);border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px;transition:width 0.45s cubic-bezier(.4,0,.2,1)}
+.bar-pct{font-size:11px;font-weight:500;color:var(--color-text-primary);width:32px;text-align:right;flex-shrink:0}
+#p-obs{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.obs-btn{font-size:11px;padding:3px 10px;border-radius:10px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:background .15s}
+.obs-btn:hover{background:var(--color-background-secondary)}
+.obs-H{background:#EAF3DE!important;border-color:#3B6D11!important;color:#27500A!important}
+.obs-L{background:#FCEBEB!important;border-color:#A32D2D!important;color:#791F1F!important}
+#actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
+.act-btn{font-size:12px;padding:5px 13px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer}
+.act-btn:hover{background:var(--color-background-secondary)}
+#legend{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 8px;font-size:11px;color:var(--color-text-secondary);align-items:center}
+.leg{display:flex;align-items:center;gap:5px}
+.leg-dot{width:12px;height:12px;border-radius:3px}
+#hint{font-size:11px;color:var(--color-text-tertiary);margin-top:6px}
+</style>
+
+<h2 class="sr-only">Interactive Bayesian network for critical thinking based on Facione 1990 Delphi Report: six core skills, 16 sub-skills, dispositions, and observable task outcomes grounded in educational assessment literature.</h2>
+
+<div id="app">
+<div id="legend">
+  <div class="leg"><div class="leg-dot" style="background:#EEEDFE;border:1.5px solid #534AB7"></div><span>Disposition (prior)</span></div>
+  <div class="leg"><div class="leg-dot" style="background:#E6F1FB;border:1.5px solid #185FA5"></div><span>Core skill (Facione)</span></div>
+  <div class="leg"><div class="leg-dot" style="background:#E1F5EE;border:1.5px solid #0F6E56"></div><span>Sub-skill</span></div>
+  <div class="leg"><div class="leg-dot" style="background:#FAEEDA;border:1.5px solid #854F0B;border-radius:50%"></div><span>Observable task</span></div>
+  <div class="leg"><div class="leg-dot" style="background:#FBEAF0;border:1.5px solid #993556"></div><span>CT proficiency (outcome)</span></div>
+  <span style="margin-left:auto;font-size:10px">Click any node · Set evidence to propagate beliefs</span>
+</div>
+<div id="net-wrap"><canvas id="cvs" height="780"></canvas></div>
+<div id="panel">
+  <div id="p-title">Click any node to inspect</div>
+  <div id="p-ref"></div>
+  <div id="p-desc">This Bayesian network is grounded in the Facione (1990) Delphi Report — the landmark APA expert consensus on critical thinking for educational assessment. It models CT as six core cognitive skills (Interpretation, Analysis, Evaluation, Inference, Explanation, Self-Regulation), each decomposed into empirically-validated sub-skills, fed by affective dispositions, and producing observable task outcomes that aggregate into an overall CT proficiency score.</div>
+  <div id="p-bars"></div>
+  <div id="p-obs"></div>
+</div>
+<div id="actions">
+  <button class="act-btn" onclick="resetAll()">Reset observations</button>
+  <button class="act-btn" onclick="sendPrompt('Show me the Q-matrix for this critical thinking Bayesian network with the six Facione skills as columns and the observable tasks as rows')">Q-matrix ↗</button>
+  <button class="act-btn" onclick="sendPrompt('What are the conditional probability tables for the Inference skill node in this Bayesian network?')">CPTs for Inference ↗</button>
+  <button class="act-btn" onclick="sendPrompt('How does self-regulation relate to the other five Facione critical thinking skills in a Bayesian network?')">Self-Regulation role ↗</button>
+</div>
+<div id="hint">Tip: Try setting "Truth-seeking" disposition to High, then observe how belief propagates down through Analysis and Inference to the task outcomes.</div>
+</div>
+
+<script>
+const DPR=window.devicePixelRatio||1;
+const cvs=document.getElementById('cvs');
+const ctx=cvs.getContext('2d');
+const DARK=matchMedia('(prefers-color-scheme:dark)').matches;
+
+// ── PALETTE (light/dark) ────────────────────────────────────────────────────
+function pal(l,d){return DARK?d:l}
+const C={
+  disp:{f:pal('#EEEDFE','#3C3489'),s:pal('#534AB7','#AFA9EC'),t:pal('#26215C','#CECBF6'),sub:pal('#534AB7','#AFA9EC')},
+  core:{f:pal('#E6F1FB','#0C447C'),s:pal('#185FA5','#85B7EB'),t:pal('#042C53','#B5D4F4'),sub:pal('#185FA5','#85B7EB')},
+  sub: {f:pal('#E1F5EE','#085041'),s:pal('#0F6E56','#5DCAA5'),t:pal('#04342C','#9FE1CB'),sub:pal('#0F6E56','#5DCAA5')},
+  obs: {f:pal('#FAEEDA','#633806'),s:pal('#854F0B','#EF9F27'),t:pal('#412402','#FAC775'),sub:pal('#854F0B','#EF9F27')},
+  out: {f:pal('#FBEAF0','#72243E'),s:pal('#993556','#ED93B1'),t:pal('#4B1528','#F4C0D1'),sub:pal('#993556','#ED93B1')},
+  edge:pal('rgba(100,98,92,0.22)','rgba(190,188,180,0.22)'),
+  edgeHi:pal('#534AB7','#AFA9EC'),
+  bg:pal('#fff','#1a1a1a'),
+  textP:pal('#2c2c2a','#c2c0b6'),
+  sel:'#E24B4A',
+  gridLine:pal('rgba(0,0,0,0.04)','rgba(255,255,255,0.04)'),
+};
+
+const W=680,H=780;
+
+// ── NODE DEFINITIONS (grounded in Facione 1990 Delphi Report) ────────────────
+// type: 'disp'=disposition, 'core'=core CT skill, 'sub'=sub-skill, 'obs'=observable outcome, 'out'=CT proficiency output
+// priors from empirical literature: CCTST population norming data + Ennis disposition studies
+const N={};
+const NODES=[
+  // ── LAYER 0: Affective Dispositions (Facione & Facione 1992, CCTDI) ──
+  {id:'d_truth',   type:'disp', label:'Truth-seeking',   sub:'Courageous honesty',   x:75,  y:52,  states:['H','L'], priors:[0.48,0.52], parents:[],
+   desc:'Disposition to seek truth even when conclusions are unfavorable. From the California Critical Thinking Disposition Inventory (CCTDI; Facione & Facione, 1992). Truth-seekers ask hard questions and follow evidence wherever it leads.',
+   ref:'Facione & Facione (1992), CCTDI'},
+  {id:'d_open',    type:'disp', label:'Open-mindedness', sub:'Tolerance of views',    x:215, y:52,  states:['H','L'], priors:[0.50,0.50], parents:[],
+   desc:'Willingness to consider alternative viewpoints without prejudice. One of seven mega-dispositions in the CCTDI. Strongly predicts performance on Evaluation and Inference tasks (Facione et al., 2000).',
+   ref:'Facione et al. (2000), Informal Logic'},
+  {id:'d_analytic',type:'disp', label:'Analyticity',     sub:'Alert to hard problems', x:355, y:52,  states:['H','L'], priors:[0.47,0.53], parents:[],
+   desc:'Disposition to anticipate consequences, be alert to the need for careful reasoning, and foresee potential difficulties. Analyticity correlates most strongly with Analysis and Evaluation sub-skills.',
+   ref:'Facione (1990), Delphi Report; CCTDI'},
+  {id:'d_sys',     type:'disp', label:'Systematicity',   sub:'Organized reasoning',   x:495, y:52,  states:['H','L'], priors:[0.45,0.55], parents:[],
+   desc:'Disposition to be organized, orderly, focused, and diligent in inquiry. Systematicity underpins self-regulation; students high in systematicity show stronger self-examination and self-correction behaviors.',
+   ref:'Facione (1992), CCTDI; Ennis (1996)'},
+  {id:'d_inq',     type:'disp', label:'Inquisitiveness', sub:'Intellectual curiosity', x:620, y:52,  states:['H','L'], priors:[0.52,0.48], parents:[],
+   desc:'Intellectual curiosity — desire to learn regardless of immediate utility. Inquisitiveness is the broadest disposition predictor of overall CT performance and correlates with Interpretation and Inference.',
+   ref:'Facione & Facione (1992); Ennis (1996)'},
+
+  // ── LAYER 1: Six Core Skills (Facione 1990, Delphi Report Table 3) ──
+  {id:'c_interp',  type:'core', label:'Interpretation',  sub:'Comprehend & express meaning', x:75,  y:178, states:['H','M','L'], priors:[0.33,0.42,0.25], parents:['d_truth','d_open'],
+   desc:'"To comprehend and express the meaning or significance of a wide variety of experiences, situations, data, events, judgments, conventions, beliefs, rules, procedures, or criteria." (Facione 1990, p.6). Core to reading comprehension and argument understanding tasks.',
+   ref:'Facione (1990), Delphi Report, p.6; APA consensus N>87%'},
+  {id:'c_anal',    type:'core', label:'Analysis',        sub:'Identify inferential relations', x:215, y:178, states:['H','M','L'], priors:[0.30,0.43,0.27], parents:['d_truth','d_analytic'],
+   desc:'"To identify the intended and actual inferential relationships among statements, questions, concepts, descriptions, or other forms of representation." (Facione 1990, p.7). Analysis and Inference are the most intercorrelated core skills (r=0.61, Dwyer et al. 2014).',
+   ref:'Facione (1990), p.7; Dwyer et al. (2014)'},
+  {id:'c_eval',    type:'core', label:'Evaluation',      sub:'Assess claims & arguments',     x:355, y:178, states:['H','M','L'], priors:[0.29,0.44,0.27], parents:['d_open','d_analytic'],
+   desc:'"To assess the credibility of statements and the logical strength of the inferential relationships among statements, questions, or other forms of representation." (Facione 1990, p.8). All major CT assessments (WGCTA, CCTST) include evaluation as a core subscale.',
+   ref:'Facione (1990), p.8; Watson & Glaser (1980); APA N>95%'},
+  {id:'c_inf',     type:'core', label:'Inference',       sub:'Draw justified conclusions',     x:495, y:178, states:['H','M','L'], priors:[0.28,0.44,0.28], parents:['d_analytic','d_inq'],
+   desc:'"To identify and secure elements needed to draw reasonable conclusions; to form conjectures and hypotheses; to consider relevant information and to reason to consequences flowing from data, statements, evidence, judgments." (Facione 1990, p.9). Identified as central at N>95% consensus.',
+   ref:'Facione (1990), p.9; APA Delphi N>95%'},
+  {id:'c_expl',    type:'core', label:'Explanation',     sub:'Present cogent reasoning',       x:620, y:178, states:['H','M','L'], priors:[0.32,0.43,0.25], parents:['d_open','d_inq'],
+   desc:'"To state and to justify that reasoning in terms of evidential, conceptual, methodological, criteriological, and contextual considerations." (Facione 1990, p.10). Explanation includes presenting arguments and justifying procedures — tested in essay and constructed-response formats.',
+   ref:'Facione (1990), p.10; APA Delphi N>87%'},
+  {id:'c_selfreg', type:'core', label:'Self-Regulation', sub:'Monitor & correct own reasoning', x:355, y:312, states:['H','M','L'], priors:[0.27,0.45,0.28], parents:['d_sys','d_truth','c_eval','c_inf'],
+   desc:'"Self-consciously to monitor one\'s cognitive activities, the elements used in those activities, and the results educed, particularly by applying skills in analysis and evaluation to one\'s own inferential judgments." (Facione 1990, p.11). Self-regulation mediates all other skills and is the metacognitive hub of the network.',
+   ref:'Facione (1990), p.11; Flavell (1979) metacognition'},
+
+  // ── LAYER 2: Sub-skills (Facione 1990, Table 4 — expert consensus) ──
+  // Interpretation sub-skills
+  {id:'s_cat',  type:'sub', label:'Categorization',    sub:'Classify & organize',    x:32,  y:432, states:['H','L'], priors:[0.52,0.48], parents:['c_interp'],
+   desc:'Sub-skill of Interpretation: ability to classify and organize experiences and information according to meaningful categories. Example: identifying the type of claim being made (empirical vs. normative; factual vs. evaluative).',
+   ref:'Facione (1990), Table 4 — Interpretation sub-skills'},
+  {id:'s_dec',  type:'sub', label:'Decode significance',sub:'Unpack meaning',         x:118, y:432, states:['H','L'], priors:[0.50,0.50], parents:['c_interp'],
+   desc:'Sub-skill of Interpretation: ability to detect meaning in nonliteral and indirect communication — irony, metaphor, implicit assumptions. Example: recognizing a loaded question or detecting an unstated premise.',
+   ref:'Facione (1990), Table 4 — Interpretation sub-skills'},
+  // Analysis sub-skills
+  {id:'s_exam', type:'sub', label:'Examine ideas',      sub:'Clarify concepts',       x:204, y:432, states:['H','L'], priors:[0.49,0.51], parents:['c_anal'],
+   desc:'Sub-skill of Analysis: ability to identify similarities and differences between concepts, to clarify vague or ambiguous terms, and to define the scope of an idea. Example: distinguishing "necessary" from "sufficient" conditions in a causal claim.',
+   ref:'Facione (1990), Table 4 — Analysis sub-skills'},
+  {id:'s_detect',type:'sub', label:'Detect arguments',  sub:'Identify premises',      x:290, y:432, states:['H','L'], priors:[0.46,0.54], parents:['c_anal'],
+   desc:'Sub-skill of Analysis: ability to identify argument structures — premises, conclusions, implicit assumptions. Example: in a Watson-Glaser item, identifying which statements are premises and which are the conclusion being supported.',
+   ref:'Facione (1990), Table 4; Watson & Glaser (1980)'},
+  // Evaluation sub-skills
+  {id:'s_cred', type:'sub', label:'Assess credibility', sub:'Judge source reliability', x:376, y:432, states:['H','L'], priors:[0.47,0.53], parents:['c_eval'],
+   desc:'Sub-skill of Evaluation: judging whether a source of information is credible — considering expertise, track record, potential bias, consistency. Tested directly in CCTST Section 4 (Credibility of Sources).',
+   ref:'Facione (1990), Table 4; CCTST credibility items'},
+  {id:'s_assarg',type:'sub', label:'Assess arguments',  sub:'Judge logical strength', x:462, y:432, states:['H','L'], priors:[0.45,0.55], parents:['c_eval'],
+   desc:'Sub-skill of Evaluation: judging whether the logical relationship between premises and conclusion is strong enough to accept the argument. Distinguishes deductive validity from inductive strength. Directly tested in Watson-Glaser "Evaluation of Arguments" section.',
+   ref:'Facione (1990), Table 4; Watson & Glaser (1980)'},
+  // Inference sub-skills
+  {id:'s_query',type:'sub', label:'Query evidence',     sub:'Assess data quality',    x:548, y:432, states:['H','L'], priors:[0.48,0.52], parents:['c_inf'],
+   desc:'Sub-skill of Inference: ability to question the quality, relevance, and sufficiency of evidence before drawing conclusions. Example: identifying that a sample is too small, or that correlation is being mistaken for causation.',
+   ref:'Facione (1990), Table 4 — Inference sub-skills'},
+  {id:'s_conj', type:'sub', label:'Conjecture alternatives',sub:'Generate hypotheses', x:634, y:432, states:['H','L'], priors:[0.43,0.57], parents:['c_inf','c_expl'],
+   desc:'Sub-skill of Inference: generating plausible alternative explanations or hypotheses. Closely linked to Explanation. Example: given a set of symptoms, generating multiple diagnostic hypotheses before settling on the most likely.',
+   ref:'Facione (1990), Table 4; links Inference ↔ Explanation'},
+  // Self-Regulation sub-skills
+  {id:'s_selfex',type:'sub', label:'Self-examination',  sub:'Monitor own reasoning',  x:258, y:560, states:['H','L'], priors:[0.40,0.60], parents:['c_selfreg'],
+   desc:'Sub-skill of Self-Regulation: consciously monitoring one\'s own reasoning processes, checking for bias, incomplete evidence, or faulty logic. Metacognitive awareness is necessary for this skill. Lowest base rate among all sub-skills.',
+   ref:'Facione (1990), Table 4; Flavell (1979) metacognition'},
+  {id:'s_selfcor',type:'sub', label:'Self-correction',  sub:'Revise when warranted',  x:462, y:560, states:['H','L'], priors:[0.38,0.62], parents:['c_selfreg'],
+   desc:'Sub-skill of Self-Regulation: willingness and ability to revise one\'s own conclusions, judgments, or reasoning when reflection reveals an error. Requires both cognitive ability (to detect the error) and dispositional willingness (to change one\'s mind).',
+   ref:'Facione (1990), Table 4; ties disposition to cognition'},
+
+  // ── LAYER 3: Observable Task Outcomes (Q-Matrix row entries) ──
+  // Each task is a classic CT assessment item type, mapped to the sub-skills it requires
+  {id:'t_infer',  type:'obs', label:'Inference items',   sub:'CCTST / WGCTA',  x:76,  y:680, states:['Pass','Fail'], priors:[0.58,0.42], parents:['s_cat','s_dec','s_query'],
+   desc:'Observable: Multiple-choice inference tasks (e.g., CCTST Section 3, Watson-Glaser Section 1). Requires Categorization and Decode Significance (Interpretation) to understand the scenario, and Query Evidence (Inference) to evaluate what can be concluded. Q-Matrix: [Interp=1, Anal=0, Eval=0, Inf=1, Expl=0, SR=0].',
+   ref:'CCTST Section 3; Watson & Glaser (1980) Inference scale'},
+  {id:'t_recog',  type:'obs', label:'Assumption recognition', sub:'WGCTA Section 2', x:215, y:680, states:['Pass','Fail'], priors:[0.55,0.45], parents:['s_detect','s_dec'],
+   desc:'Observable: Watson-Glaser "Recognition of Assumptions" items. Test-taker judges whether a stated assumption is taken for granted in a given statement. Requires Detect Arguments (Analysis) and Decode Significance (Interpretation). Q-Matrix: [Interp=1, Anal=1, Eval=0, Inf=0, Expl=0, SR=0].',
+   ref:'Watson & Glaser (1980), Section 2: Recognition of Assumptions'},
+  {id:'t_deduct', type:'obs', label:'Deduction task',    sub:'WGCTA Section 3', x:355, y:680, states:['Pass','Fail'], priors:[0.52,0.48], parents:['s_exam','s_detect','s_query'],
+   desc:'Observable: Watson-Glaser "Deduction" items — given premises, decide if a conclusion follows necessarily. Requires Examine Ideas and Detect Arguments (Analysis) + Query Evidence (Inference). Q-Matrix: [Interp=0, Anal=1, Eval=0, Inf=1, Expl=0, SR=0].',
+   ref:'Watson & Glaser (1980), Section 3: Deduction'},
+  {id:'t_eval',   type:'obs', label:'Argument evaluation',sub:'CCTST / WGCTA',  x:495, y:680, states:['Pass','Fail'], priors:[0.50,0.50], parents:['s_cred','s_assarg','s_selfex'],
+   desc:'Observable: Evaluating-arguments tasks from CCTST (Section 4-5) and WGCTA (Section 5). Test-taker assesses credibility of sources and logical strength of arguments. Requires all Evaluation sub-skills plus Self-Examination from Self-Regulation. Q-Matrix: [Interp=0, Anal=0, Eval=1, Inf=0, Expl=0, SR=1].',
+   ref:'CCTST Sections 4-5; Watson & Glaser (1980) Section 5'},
+  {id:'t_essay',  type:'obs', label:'Constructed response',sub:'CLA+ / CAAP Essay', x:620, y:680, states:['Pass','Fail'], priors:[0.47,0.53], parents:['s_conj','s_assarg','s_selfcor'],
+   desc:'Observable: Open-ended constructed-response / essay tasks (e.g., CLA+, Collegiate Assessment of Academic Proficiency). Requires Conjecture Alternatives (Inference/Explanation), Assess Arguments (Evaluation), and Self-Correction (Self-Regulation). Highest cognitive demand. Q-Matrix: [Interp=0, Anal=0, Eval=1, Inf=1, Expl=1, SR=1].',
+   ref:'CLA+ (CAE, 2013); CAAP (ACT, 2012); Facione (1990)'},
+
+  // ── LAYER 4: CT Proficiency Output ──
+  {id:'ct_out',   type:'out', label:'Critical thinking proficiency', sub:'Facione 1990 consensus', x:348, y:740, states:['Advanced','Proficient','Developing','Beginning'], priors:[0.15,0.35,0.35,0.15], parents:['t_infer','t_recog','t_deduct','t_eval','t_essay'],
+   desc:'Overall CT proficiency — the latent outcome variable that aggregates across all six Facione skills. State labels map to Paul & Elder\'s (2019) CT developmental levels: Advanced Thinker, Practicing Thinker (Proficient), Beginning Thinker (Developing), Unreflective Thinker (Beginning). This is the claim the assessment makes.',
+   ref:'Paul & Elder (2019) CT levels; Facione (1990) consensus definition'},
+];
+
+NODES.forEach(n=>{N[n.id]=n;});
+
+// ── BELIEFS ─────────────────────────────────────────────────────────────────
+const obs={};
+const bel={};
+NODES.forEach(n=>{bel[n.id]=n.priors.slice();});
+
+const TOPO=['d_truth','d_open','d_analytic','d_sys','d_inq',
+  'c_interp','c_anal','c_eval','c_inf','c_expl','c_selfreg',
+  's_cat','s_dec','s_exam','s_detect','s_cred','s_assarg','s_query','s_conj','s_selfex','s_selfcor',
+  't_infer','t_recog','t_deduct','t_eval','t_essay','ct_out'];
+
+function parentMean(node){
+  if(!node.parents.length) return 0.5;
+  let s=0;
+  node.parents.forEach(p=>{s+=bel[p][0];});
+  return s/node.parents.length;
+}
+
+function propagate(){
+  TOPO.forEach(id=>{
+    const n=N[id];
+    if(obs[id]!==undefined){
+      const d=new Array(n.states.length).fill(0); d[obs[id]]=1; bel[id]=d; return;
+    }
+    if(!n.parents.length){bel[id]=n.priors.slice();return;}
+    const pm=parentMean(n);
+    const shift=(pm-0.5)*0.75;
+    if(n.states.length===2){
+      const p=Math.min(0.95,Math.max(0.05,n.priors[0]+shift));
+      bel[id]=[p,1-p];
+    } else if(n.states.length===3){
+      let h=Math.min(0.88,Math.max(0.05,n.priors[0]+shift));
+      let l=Math.min(0.88,Math.max(0.05,n.priors[2]-shift));
+      let m=Math.max(0.04,1-h-l); const s=h+m+l;
+      bel[id]=[h/s,m/s,l/s];
+    } else {
+      const hi=Math.min(0.55,Math.max(0.02,n.priors[0]+shift*0.5));
+      const lo=Math.min(0.55,Math.max(0.02,n.priors[3]-shift*0.5));
+      const mid=(1-hi-lo)/2;
+      bel[id]=[hi,Math.max(0.02,mid),Math.max(0.02,mid),lo];
+    }
+  });
+  // back-propagate observed leaves
+  const obsLeaves=Object.keys(obs).filter(id=>N[id].type==='obs'||N[id].type==='sub');
+  obsLeaves.forEach(oid=>{
+    const isH=obs[oid]===0, boost=isH?0.15:-0.15;
+    function nudge(nid,d){
+      if(d>5||!nid||obs[nid]!==undefined) return;
+      const n=N[nid]; if(!n) return;
+      const b=bel[nid]; const k=1/(d+1);
+      if(b.length===2){
+        b[0]=Math.min(0.95,Math.max(0.05,b[0]+boost*k)); b[1]=1-b[0];
+      } else if(b.length===3){
+        b[0]=Math.min(0.88,Math.max(0.05,b[0]+boost*k));
+        b[2]=Math.min(0.88,Math.max(0.05,b[2]-boost*k));
+        b[1]=Math.max(0.04,1-b[0]-b[2]); const s=b.reduce((a,x)=>a+x,0);
+        bel[nid]=b.map(x=>x/s);
+      }
+      n.parents.forEach(p=>nudge(p,d+1));
+    }
+    N[oid].parents.forEach(p=>nudge(p,1));
+  });
+}
+propagate();
+
+// ── DRAWING ──────────────────────────────────────────────────────────────────
+function scale(){return cvs.parentElement.clientWidth/W;}
+function resize(){
+  const w=cvs.parentElement.clientWidth||W;
+  const sc=w/W;
+  cvs.width=w*DPR; cvs.height=H*sc*DPR;
+  cvs.style.height=(H*sc)+'px';
+  ctx.setTransform(DPR*sc,0,0,DPR*sc,0,0);
+  draw();
+}
+
+const NW=116, NH=44, NR=7;
+let sel=null;
+
+function typeStyle(t){return C[t]||C.sub;}
+
+function barFill(i,len,type){
+  if(type==='out'){return['#639922','#185FA5','#BA7517','#E24B4A'][i]||'#888';}
+  if(len===2){return i===0?'#639922':'#E24B4A';}
+  return['#534AB7','#888780','#E24B4A'][i]||'#888';
+}
+
+function nodeBox(n){
+  return{x:n.x-NW/2,y:n.y-NH/2,w:NW,h:NH};
+}
+
+function arrowPath(x1,y1,x2,y2,isObs){
+  const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy);
+  if(len<4) return;
+  const ux=dx/len,uy=dy/len;
+  const r1=isObs?NH/2+3:NH/2+1;
+  const r2=isObs?NH/2+3:NH/2+1;
+  const sx=x1+ux*r1,sy=y1+uy*r1;
+  const ex=x2-ux*(r2+7),ey=y2-uy*(r2+7);
+  ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(ex,ey); ctx.stroke();
+  const a=Math.atan2(ey-sy,ex-sx);
+  ctx.beginPath();
+  ctx.moveTo(ex+Math.cos(a)*7,ey+Math.sin(a)*7);
+  ctx.lineTo(ex+Math.cos(a-2.3)*5,ey+Math.sin(a-2.3)*5);
+  ctx.lineTo(ex+Math.cos(a+2.3)*5,ey+Math.sin(a+2.3)*5);
+  ctx.closePath(); ctx.fill();
+}
+
+function drawNode(n){
+  const st=typeStyle(n.type);
+  const isSel=sel===n.id;
+  const isObs=obs[n.id]!==undefined;
+  const bx=n.x-NW/2, by=n.y-NH/2;
+
+  ctx.save();
+  if(n.type==='obs'||n.type==='out'){
+    // Ellipse for obs/out
+    ctx.beginPath();
+    const rx=(n.type==='out'?150:NW/2+4), ry=NH/2+4;
+    ctx.ellipse(n.x,n.y,rx,ry,0,0,Math.PI*2);
+    ctx.fillStyle=st.f; ctx.fill();
+    ctx.strokeStyle=isSel?C.sel:st.s; ctx.lineWidth=isSel?2:0.8; ctx.stroke();
+  } else {
+    ctx.beginPath(); ctx.roundRect(bx,by,NW,NH,NR);
+    ctx.fillStyle=st.f; ctx.fill();
+    ctx.strokeStyle=isSel?C.sel:st.s; ctx.lineWidth=isSel?2:0.8; ctx.stroke();
+  }
+
+  // mini prob bar at bottom of node
+  const barH=4, barY=n.y+NH/2-(n.type==='obs'||n.type==='out'?8:6);
+  const barX=n.x-(n.type==='out'?130:NW/2-6), barW=n.type==='out'?260:NW-12;
+  const b=bel[n.id]; let cx=barX;
+  b.forEach((p,i)=>{
+    ctx.fillStyle=barFill(i,b.length,n.type);
+    ctx.fillRect(cx,barY,p*barW,barH);
+    cx+=p*barW;
+  });
+
+  // label
+  ctx.textAlign='center';
+  ctx.fillStyle=st.t; ctx.font='500 11px var(--font-sans,sans-serif)';
+  ctx.fillText(n.label,n.x,n.y-5);
+  ctx.fillStyle=st.sub; ctx.font='9.5px var(--font-sans,sans-serif)';
+  ctx.fillText(n.sub,n.x,n.y+8);
+  // P(H) badge
+  ctx.fillStyle=st.t; ctx.font='500 9px var(--font-sans,sans-serif)';
+  ctx.fillText((b[0]*100).toFixed(0)+'%',n.x,n.y+NH/2-(n.type==='out'?18:12));
+
+  // observed indicator
+  if(isObs){
+    ctx.beginPath(); ctx.arc(n.x+(n.type==='out'?138:NW/2-4),n.y-NH/2+4,5,0,Math.PI*2);
+    ctx.fillStyle='#E24B4A'; ctx.fill();
+  }
+  ctx.restore();
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  // layer stripe guides
+  const stripes=[{y:22,h:80,label:'Affective dispositions — Facione & Facione (1992) CCTDI'},
+    {y:152,h:110,label:'Core CT skills — Facione (1990) Delphi Report, Table 3'},
+    {y:280,h:56,label:'Self-Regulation (metacognitive hub)'},
+    {y:400,h:108,label:'Sub-skills — Facione (1990) Table 4, expert consensus'},
+    {y:530,h:76,label:'Sub-skills (Self-Regulation)'},
+    {y:648,h:84,label:'Observable task outcomes — WGCTA, CCTST, CLA+'},
+    {y:720,h:56,label:'CT proficiency — Paul & Elder (2019) levels'}];
+  stripes.forEach(s=>{
+    ctx.fillStyle=C.gridLine;
+    ctx.fillRect(0,s.y,W,s.h);
+    ctx.fillStyle=pal('rgba(80,78,72,0.4)','rgba(180,178,170,0.4)');
+    ctx.font='9px var(--font-sans,sans-serif)';
+    ctx.textAlign='left';
+    ctx.fillText(s.label,6,s.y+10);
+  });
+
+  // edges
+  NODES.forEach(n=>{
+    n.parents.forEach(pid=>{
+      const p=N[pid]; if(!p) return;
+      const hi=sel===n.id||sel===pid;
+      ctx.strokeStyle=hi?C.edgeHi:C.edge;
+      ctx.fillStyle=hi?C.edgeHi:C.edge;
+      ctx.lineWidth=hi?1.2:0.7;
+      arrowPath(p.x,p.y,n.x,n.y,p.type==='obs');
+    });
+  });
+
+  // nodes
+  NODES.forEach(n=>drawNode(n));
+}
+
+// ── INTERACTION ──────────────────────────────────────────────────────────────
+function hitTest(mx,my){
+  const s=scale();
+  return NODES.find(n=>{
+    const rx=(n.type==='out'?150:NW/2+4), ry=NH/2+4;
+    const dx=(mx/s)-n.x, dy=(my/s)-n.y;
+    return (dx*dx)/(rx*rx)+(dy*dy)/(ry*ry)<=1;
+  });
+}
+
+function stateColor(i,len,type){
+  if(type==='out') return['#3B6D11','#185FA5','#854F0B','#A32D2D'][i]||'#888';
+  if(len===2) return i===0?'#3B6D11':'#A32D2D';
+  return['#534AB7','#5F5E5A','#A32D2D'][i]||'#888';
+}
+
+function showPanel(n){
+  sel=n.id;
+  document.getElementById('p-title').textContent=n.label+(obs[n.id]!==undefined?' [observed]':'');
+  document.getElementById('p-ref').textContent=n.ref||'';
+  document.getElementById('p-desc').textContent=n.desc||'';
+  const bb=document.getElementById('p-bars');
+  bb.innerHTML='';
+  const b=bel[n.id];
+  n.states.forEach((s,i)=>{
+    const pct=Math.round(b[i]*100);
+    bb.innerHTML+=`<div class="bar-row"><div class="bar-label">${s}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${stateColor(i,b.length,n.type)}"></div></div><div class="bar-pct">${pct}%</div></div>`;
+  });
+  // observe buttons
+  const ob=document.getElementById('p-obs');
+  ob.innerHTML='';
+  n.states.forEach((s,i)=>{
+    const btn=document.createElement('button');
+    btn.className='obs-btn'+(obs[n.id]===i?(i===0?' obs-H':' obs-L'):'');
+    btn.textContent='Observe: '+s;
+    btn.onclick=()=>{
+      if(obs[n.id]===i) delete obs[n.id]; else obs[n.id]=i;
+      propagate(); showPanel(n); draw();
+    };
+    ob.appendChild(btn);
+  });
+  const clr=document.createElement('button');
+  clr.className='obs-btn'; clr.textContent='Clear';
+  clr.onclick=()=>{delete obs[n.id]; propagate(); showPanel(n); draw();};
+  ob.appendChild(clr);
+  draw();
+}
+
+cvs.addEventListener('click',e=>{
+  const r=cvs.getBoundingClientRect();
+  const n=hitTest(e.clientX-r.left,e.clientY-r.top);
+  if(n){showPanel(n);}
+  else{
+    sel=null;
+    document.getElementById('p-title').textContent='Click any node to inspect';
+    document.getElementById('p-ref').textContent='';
+    document.getElementById('p-desc').textContent='Network reset. Click a node to see its Facione-grounded description, literature reference, and live probability distribution.';
+    document.getElementById('p-bars').innerHTML='';
+    document.getElementById('p-obs').innerHTML='';
+    draw();
+  }
+});
+
+function resetAll(){
+  Object.keys(obs).forEach(k=>delete obs[k]);
+  NODES.forEach(n=>{bel[n.id]=n.priors.slice();});
+  sel=null;
+  document.getElementById('p-title').textContent='Observations cleared — network at prior';
+  document.getElementById('p-ref').textContent='';
+  document.getElementById('p-desc').textContent='All probability distributions returned to empirical priors derived from CCTST norming data and CCTDI population studies. Click any node to begin exploring.';
+  document.getElementById('p-bars').innerHTML='';
+  document.getElementById('p-obs').innerHTML='';
+  draw();
+}
+
+window.addEventListener('resize',resize);
+resize();
+</script>
