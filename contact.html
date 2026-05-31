@@ -136,7 +136,8 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
     <div class="contact-form-box reveal" style="transition-delay:0.1s">
       <div class="cf-title">Send a Message</div>
       <div class="cf-sub">Fill out the form and I'll get back to you as soon as possible.</div>
-      <div class="form-row">
+      <form action="https://formspree.io/f/mojbzgon" method="POST">
+        <div class="form-row">
         <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane"></div>
         <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"></div>
       </div>
@@ -151,8 +152,9 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
         </select>
       </div>
       <div class="form-group"><label>Message</label><textarea placeholder="Tell me about your project or question..."></textarea></div>
-      <button class="submit-btn" onclick="handleSubmit()">Send Message →</button>
-      <p class="form-note">Or email directly at <a href="mailto:s.esmaeiligoujar@ufl.edu" style="color:var(--blue)">s.esmaeiligoujar@ufl.edu</a></p>
+      <button class="submit-btn" type="submit">Send Message →</button>
+      <p class="form-note">Or email directly at <a href="mailto:salahsmaeili71@gmail.com" style="color:var(--blue)">s.esmaeiligoujar@ufl.edu</a></p>
+        </form>
     </div>
   </div>
 </main>
@@ -162,9 +164,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   <span><a href="index.html" style="color:var(--blue);text-decoration:none">← Back to Home</a></span>
 </footer>
 <script>
-function handleSubmit(){
-  alert('Form submitted! (Connect this form to a service like Formspree or Netlify Forms to enable real submissions.)');
-}
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
