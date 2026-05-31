@@ -174,18 +174,15 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   </div>
 
   <!-- ProductiveMath -->
-  <div class="project-card reveal">
-    <div class="project-inner">
-      <div class="proj-illus">
-        <svg width="200" height="200" viewBox="0 0 200 200">
-          <circle cx="100" cy="100" r="80" fill="none" stroke="#1a6fa8" stroke-width="1.5" opacity="0.3"/>
-          <circle cx="100" cy="100" r="60" fill="none" stroke="#0e9c8a" stroke-width="1" opacity="0.3"/>
-          <text x="100" y="88" text-anchor="middle" fill="#1a6fa8" font-size="32" font-family="serif" font-weight="700">∑</text>
-          <text x="100" y="112" text-anchor="middle" fill="#0a2540" font-size="13" font-family="Plus Jakarta Sans,sans-serif" font-weight="600">Productive</text>
-          <text x="100" y="128" text-anchor="middle" fill="#0e9c8a" font-size="13" font-family="Plus Jakarta Sans,sans-serif" font-weight="600">Failure</text>
-          <text x="100" y="155" text-anchor="middle" fill="#4a6580" font-size="9" font-family="sans-serif" letter-spacing="3">MATH</text>
-        </svg>
-      </div>
+<div class="project-media">
+  <div class="vid-ph" id="pm-ph" onclick="loadVid('pm-ph','pm-fr','https://www.youtube.com/embed/dy1mXRLDfMQ')">
+    <div class="vid-tag">Demo Video</div>
+    <div class="vid-name">ProductiveMath</div>
+    <div class="play-ring"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+    <div class="vid-src">YouTube · Click to play</div>
+  </div>
+  <iframe id="pm-fr" style="display:none" allowfullscreen></iframe>
+</div>
       <div class="proj-body">
         <div class="proj-tag-row">
           <span class="proj-cat">AI Research Platform</span>
