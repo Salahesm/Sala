@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Salah Esmaeiligoujar</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f0f6fa;--white:#ffffff;--navy:#0a2540;--blue:#1a6fa8;--teal:#0e9c8a;--teal-light:#e0f5f2;--blue-light:#deeef9;--muted:#4a6580;--border:rgba(10,37,64,0.1);--sans:'Plus Jakarta Sans',system-ui,sans-serif;}
+body{font-family:var(--sans);background:var(--bg);color:var(--navy);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(240,246,250,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:1rem;font-weight:700;color:var(--navy);text-decoration:none}
+.nav-logo span{color:var(--teal)}
+.nav-links{display:flex;gap:0.25rem;list-style:none}
+.nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.04em;text-decoration:none;color:var(--muted);padding:0.4rem 0.9rem;border-radius:6px;transition:background 0.2s,color 0.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--blue-light);color:var(--blue)}
+.page-hero{padding:8rem 3rem 4rem;background:linear-gradient(160deg,#deeef9 0%,#e0f5f2 100%);position:relative;overflow:hidden}
+.page-hero::after{content:'Papers';position:absolute;right:-1rem;bottom:-2rem;font-size:clamp(5rem,10vw,9rem);font-weight:700;color:rgba(10,37,64,0.04);letter-spacing:-0.04em;pointer-events:none;line-height:1}
+.ph-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:0.75rem;color:var(--muted);margin-bottom:1rem}
+.breadcrumb a{color:var(--blue);text-decoration:none}
+h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:var(--navy);letter-spacing:-0.03em;margin-bottom:0.8rem}
+.ph-sub{font-size:0.95rem;color:var(--muted);max-width:580px;line-height:1.8}
+main{max-width:1100px;margin:0 auto;padding:4rem 3rem}
+
+.pub-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem}
+.ps{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.3rem;text-align:center}
+.ps .n{font-size:2rem;font-weight:700;color:var(--blue);line-height:1}
+.ps .l{font-size:0.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-top:0.35rem}
+
+.tab-bar{display:flex;gap:0.25rem;flex-wrap:wrap;margin-bottom:2.5rem;background:var(--white);padding:0.4rem;border-radius:10px;border:1px solid var(--border)}
+.tab{padding:0.5rem 1.1rem;border-radius:7px;font-size:0.78rem;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;font-family:var(--sans);transition:background 0.2s,color 0.2s}
+.tab.active{background:var(--blue);color:var(--white)}
+.tab:hover:not(.active){background:var(--blue-light);color:var(--blue)}
+.panel{display:none}
+.panel.active{display:block}
+
+.pub-item{padding:1.3rem 1.5rem;background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:0.75rem;transition:box-shadow 0.2s}
+.pub-item:hover{box-shadow:0 4px 18px rgba(10,37,64,0.08)}
+.pub-top{display:flex;align-items:center;gap:0.7rem;margin-bottom:0.5rem;flex-wrap:wrap}
+.pub-badge{font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.22rem 0.65rem;border-radius:100px}
+.pub-badge.journal{background:var(--blue-light);color:var(--blue)}
+.pub-badge.review{background:#fff3cd;color:#856404}
+.pub-badge.book{background:var(--teal-light);color:var(--teal)}
+.pub-badge.conf{background:#f3e8ff;color:#6d28d9}
+.pub-year{font-size:0.72rem;font-weight:600;color:var(--muted)}
+.pub-title{font-size:0.9rem;font-weight:600;color:var(--navy);margin-bottom:0.35rem;line-height:1.5}
+.pub-authors{font-size:0.8rem;color:var(--muted);line-height:1.6}
+.pub-journal{font-size:0.78rem;color:var(--teal);font-style:italic;margin-top:0.3rem}
+.pub-doi{font-size:0.75rem;margin-top:0.4rem}
+.pub-doi a{color:var(--blue);text-decoration:none}
+.pub-doi a:hover{text-decoration:underline}
+
+footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--muted);background:var(--white)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:768px){
+  nav{padding:0.9rem 1.2rem}
+  .nav-links a{padding:0.35rem 0.55rem;font-size:0.7rem}
+  .page-hero{padding:7rem 1.5rem 3rem}
+  main{padding:2.5rem 1.5rem}
+  .pub-stats{grid-template-columns:repeat(2,1fr)}
+  footer{flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Salah <span>E.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="awards.html">Awards</a></li>
+    <li><a href="publications.html" class="active">Publications</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-inner">
+    <div class="breadcrumb reveal"><a href="index.html">Home</a> / Publications</div>
+    <h1 class="reveal" style="transition-delay:0.05s">Publications</h1>
+    <p class="ph-sub reveal" style="transition-delay:0.1s">Peer-reviewed journal articles, book chapters, conference proceedings, and manuscripts under review.</p>
+  </div>
+</div>
+
+<main>
+  <div class="pub-stats reveal">
+    <div class="ps"><div class="n">7</div><div class="l">Journal Articles</div></div>
+    <div class="ps"><div class="n">3</div><div class="l">Books & Chapters</div></div>
+    <div class="ps"><div class="n">13+</div><div class="l">Proceedings</div></div>
+    <div class="ps"><div class="n">3</div><div class="l">Under Review</div></div>
+  </div>
+
+  <div class="tab-bar reveal" style="transition-delay:0.05s">
+    <button class="tab active" onclick="show('j',this)">Journal Articles</button>
+    <button class="tab" onclick="show('r',this)">Under Review</button>
+    <button class="tab" onclick="show('b',this)">Books & Chapters</button>
+    <button class="tab" onclick="show('p',this)">Conference Proceedings</button>
+  </div>
+
+  <!-- JOURNALS -->
+  <div id="j" class="panel active">
+    <div class="pub-item reveal">
+      <div class="pub-top"><span class="pub-badge journal">Journal</span><span class="pub-year">2026</span></div>
+      <div class="pub-title">A Rubric-Guided Multimodal Approach Using High-Capacity LLMs Provides the Most Psychometrically Sound Creativity Assessment in a Learning Game</div>
+      <div class="pub-authors">Rahimi, S., Li, C., Esmaeiligoujar, S., Ercan, D., & Botelho, A.</div>
+      <div class="pub-journal">Creativity Research Journal</div>
+      <div class="pub-doi"><a href="https://doi.org/10.1080/10400419.2026.2638384" target="_blank">doi:10.1080/10400419.2026.2638384 →</a></div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.05s">
+      <div class="pub-top"><span class="pub-badge journal">Journal</span><span class="pub-year">2022</span></div>
+      <div class="pub-title">The Role of Gamification in Learning</div>
+      <div class="pub-authors">Baniamerian, S., & Esmaeeli Gojar, S.</div>
+      <div class="pub-journal">Educational Psychology, 17(62), 107–130 [in Persian]</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.1s">
+      <div class="pub-top"><span class="pub-badge journal">Journal</span><span class="pub-year">2020</span></div>
+      <div class="pub-title">Investigating the Effect of Using Educational Podcasts on Listening Comprehension of Language Learners</div>
+      <div class="pub-authors">Fardavoodi, M., Esmaeiligoujar, S., & Bakhtiarvand, M.</div>
+      <div class="pub-journal">Randwick International of Education and Linguistics Science Journal, 1(1), 101–106</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.15s">
+      <div class="pub-top"><span class="pub-badge journal">Journal</span><span class="pub-year">2019</span></div>
+      <div class="pub-title">The Effect of Online Multi-Player Educational Computer Games on Social Skills and Cognitive Abilities of Students</div>
+      <div class="pub-authors">Esmaeiligoujar, S., & Poorrostaeiardakani, S.</div>
+      <div class="pub-journal">Educational Psychology, 15(51), 211–230 [in Persian]</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.2s">
+      <div class="pub-top"><span class="pub-badge journal">Journal</span><span class="pub-year">2019</span></div>
+      <div class="pub-title">The Effect of Using Computer Games on Students' Cognitive Regulation and Mindfulness</div>
+      <div class="pub-authors">Rajabiyan Dehzireh, M., Dortaj, F., Pourroostaei Ardakani, S., & Esmaeiligoujar, S.</div>
+      <div class="pub-journal">Technology of Education Journal (TEJ), 13(3), 521–535 [in Persian]</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.25s">
+      <div class="pub-top"><span class="pub-badge journal">Journal</span><span class="pub-year">2017</span></div>
+      <div class="pub-title">The Effect of Educational Augmented Reality on Students' Lifelong Learning and Performance</div>
+      <div class="pub-authors">Rajabiyan Dehzireh, M., Maghami, H., Esmaeiligoujar, S., & Sharifati, S.</div>
+      <div class="pub-journal">Technology of Instruction and Learning, 3(9), 63–91 [in Persian]</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.3s">
+      <div class="pub-top"><span class="pub-badge journal">Journal</span><span class="pub-year">2017</span></div>
+      <div class="pub-title">The Effect of Multiplayer Serious Games on Students' Learning and Motivation</div>
+      <div class="pub-authors">Esmaeiligoujar, S., Aliabadi, K., & Poorrostaei, S.</div>
+      <div class="pub-journal">New Media Research, 3(11), 195–223 [in Persian]</div>
+    </div>
+  </div>
+
+  <!-- UNDER REVIEW -->
+  <div id="r" class="panel">
+    <div class="pub-item reveal">
+      <div class="pub-top"><span class="pub-badge review">Under Review</span></div>
+      <div class="pub-title">A Comparative Study of Human and AI Reviews on the Effectiveness of Quizizz for Learning and Engagement</div>
+      <div class="pub-authors">Khodabandelou, R., Esmaeiligoujar, S., Joneidi, F., & Razban, S.</div>
+      <div class="pub-journal">International Journal of Information and Learning Technology</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.05s">
+      <div class="pub-top"><span class="pub-badge review">Under Review</span></div>
+      <div class="pub-title">Digital Games Can Enhance K–12 Students' 21st-Century Skills: A Systematic Review</div>
+      <div class="pub-authors">Esmaeiligoujar, S., & Rahimi, S.</div>
+      <div class="pub-journal">Educational Technology Research and Development</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.1s">
+      <div class="pub-top"><span class="pub-badge review">Under Review</span></div>
+      <div class="pub-title">Game on for Growth Mindset: A Systematic Review of Digital Games Designed to Promote Growth Mindset in PreK–12 Education</div>
+      <div class="pub-authors">Rahimi, S., Esmaeiligoujar, S., Ercan, D., Gao, R., & Keawphonkrang, S.</div>
+      <div class="pub-journal">Educational Technology Research and Development</div>
+    </div>
+  </div>
+
+  <!-- BOOKS -->
+  <div id="b" class="panel">
+    <div class="pub-item reveal">
+      <div class="pub-top"><span class="pub-badge book">Book Chapter</span><span class="pub-year">2026</span></div>
+      <div class="pub-title">Augmenting Human Creativity with Responsible and Ethical Use of Generative AI</div>
+      <div class="pub-authors">Rahimi, S., Dede, C., Esmaeiligoujar, S., & Babaee, M.</div>
+      <div class="pub-journal">In M. Worwood & J.C. Kaufman (Eds.), Generative Artificial Intelligence and Creativity (pp. 87–99). Academic Press.</div>
+      <div class="pub-doi"><a href="https://doi.org/10.1016/B978-0-443-34073-4.00010-1" target="_blank">doi:10.1016/B978-0-443-34073-4.00010-1 →</a></div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.05s">
+      <div class="pub-top"><span class="pub-badge book">Book Chapter</span><span class="pub-year">2026</span></div>
+      <div class="pub-title">Creativity and Generative AI</div>
+      <div class="pub-authors">Rahimi, S., Babaee, M., Esmaeiligoujar, S., & Dede, C.</div>
+      <div class="pub-journal">In R.A. Beghetto (Ed.), The Oxford Handbook of AI and Creativity in Education. Oxford University Press.</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.1s">
+      <div class="pub-top"><span class="pub-badge book">Book</span><span class="pub-year">2018</span></div>
+      <div class="pub-title">Handbook for Teachers: 90 Minutes Teaching, 90 Minutes Life</div>
+      <div class="pub-authors">Dehghan, Z., Khodamoradi, H., & Esmaeiligoujar, S.</div>
+      <div class="pub-journal">Avaye Noor Press [in Persian]</div>
+    </div>
+  </div>
+
+  <!-- PROCEEDINGS -->
+  <div id="p" class="panel">
+    <div class="pub-item reveal">
+      <div class="pub-top"><span class="pub-badge conf">ICLS 2026</span></div>
+      <div class="pub-title">Small vs. Large Language Models: Comparing Language Models in Generating Productive Failure Math Problems</div>
+      <div class="pub-authors">Rahimi, S., Esmaeiligoujar, S., Ercan, D., Babaee, M., & Gao, R.</div>
+      <div class="pub-journal">ICLS 2026, Irvine, CA — Paper Presentation</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.04s">
+      <div class="pub-top"><span class="pub-badge conf">ICLS 2026</span></div>
+      <div class="pub-title">"I Spend All My Energy Preparing": Balancing AI Automation and Agency for Self-Regulated Learning in SmartFlash</div>
+      <div class="pub-authors">Li, H., Esmaeiligoujar, S., Adhami, N., Li, H., & Huang, R.</div>
+      <div class="pub-journal">ICLS 2026, Irvine, CA — Paper Presentation</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.08s">
+      <div class="pub-top"><span class="pub-badge conf">ICLS 2026</span></div>
+      <div class="pub-title">Generative AI for Creative Learning in K-12 Education: Insights from a Systematic Scoping Review</div>
+      <div class="pub-authors">Rahimi, S., Babaee, M., Esmaeiligoujar, S., & Dede, C.</div>
+      <div class="pub-journal">ICLS 2026, Irvine, CA — Paper Presentation</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.12s">
+      <div class="pub-top"><span class="pub-badge conf">AIED 2025</span></div>
+      <div class="pub-title">ProductiveMath: A Generative-AI-Powered App to Support Productive Failure Teaching</div>
+      <div class="pub-authors">Rahimi, S., Ercan, D., Gao, R., Esmaeiligoujar, S., et al.</div>
+      <div class="pub-journal">AIED 2025, Palermo, Italy (pp. 344–351). Springer Nature Switzerland.</div>
+      <div class="pub-doi"><a href="https://doi.org/10.1007/978-3-031-99264-3_43" target="_blank">doi:10.1007/978-3-031-99264-3_43 →</a></div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.16s">
+      <div class="pub-top"><span class="pub-badge conf">ICLS 2025</span></div>
+      <div class="pub-title">Improving Pre-K–12 Students' Executive Functions Using Digital Games: A Systematic Review</div>
+      <div class="pub-authors">Ercan, D., Esmaeiligoujar, S., & Rahimi, S.</div>
+      <div class="pub-journal">ICLS 2025, Helsinki, Finland (pp. 826–834)</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.2s">
+      <div class="pub-top"><span class="pub-badge conf">ICLS 2024</span></div>
+      <div class="pub-title">Using Digital Games to Enhance 21st-Century Skills Development in K-12 Education: A Systematic Review</div>
+      <div class="pub-authors">Esmaeiligoujar, S., Rahimi, S., & Babaee, M.</div>
+      <div class="pub-journal">ICLS 2024, Buffalo, NY (pp. 2197–2198)</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.24s">
+      <div class="pub-top"><span class="pub-badge conf">ICLS 2024</span></div>
+      <div class="pub-title">Fostering K-12 Students' Computational Thinking Skills Using Collaborative Technology-Rich Learning Environments: A Systematic Review</div>
+      <div class="pub-authors">Babaee, M., Rahimi, S., & Esmaeiligoujar, S.</div>
+      <div class="pub-journal">ICLS 2024, Buffalo, NY (pp. 786–792)</div>
+    </div>
+    <div class="pub-item reveal" style="transition-delay:0.28s">
+      <div class="pub-top"><span class="pub-badge conf">ISLS 2023</span></div>
+      <div class="pub-title">Stealth Assessment: A Systematic Review of the Literature</div>
+      <div class="pub-authors">Rahimi, S., Shute, V.J., Khodabandelou, R., Kuba, R., Babaee, M., Esmaeiligoujar, S.</div>
+      <div class="pub-journal">ISLS 2023, Montreal, Canada</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>© 2026 Salah Esmaeiligoujar · University of Florida</span>
+  <span><a href="index.html" style="color:var(--blue);text-decoration:none">← Back to Home</a></span>
+</footer>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  document.querySelectorAll('#'+id+' .reveal').forEach(el=>el.classList.add('visible'));
+}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
+</script>
+</body>
+</html>

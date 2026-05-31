@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Salah Esmaeiligoujar</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f6fa;--white:#ffffff;--surface:#e4eff7;--card:#ffffff;
+  --navy:#0a2540;--blue:#1a6fa8;--teal:#0e9c8a;--teal-light:#e0f5f2;--blue-light:#deeef9;
+  --ink:#0a2540;--muted:#4a6580;--border:rgba(10,37,64,0.1);--border2:rgba(10,37,64,0.16);
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(240,246,250,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:1rem;font-weight:700;color:var(--navy);text-decoration:none}
+.nav-logo span{color:var(--teal)}
+.nav-links{display:flex;gap:0.25rem;list-style:none}
+.nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.04em;text-decoration:none;color:var(--muted);padding:0.4rem 0.9rem;border-radius:6px;transition:background 0.2s,color 0.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--blue-light);color:var(--blue)}
+
+.page-hero{padding:8rem 3rem 4rem;background:linear-gradient(160deg,#deeef9 0%,#e0f5f2 100%);position:relative;overflow:hidden}
+.page-hero::after{content:'Projects';position:absolute;right:-1rem;bottom:-2rem;font-size:clamp(5rem,10vw,9rem);font-weight:700;color:rgba(10,37,64,0.04);letter-spacing:-0.04em;pointer-events:none;line-height:1}
+.ph-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:0.75rem;color:var(--muted);margin-bottom:1rem}
+.breadcrumb a{color:var(--blue);text-decoration:none}
+h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:var(--navy);letter-spacing:-0.03em;margin-bottom:0.8rem}
+.ph-sub{font-size:0.95rem;color:var(--muted);max-width:580px;line-height:1.8}
+
+main{max-width:1100px;margin:0 auto;padding:4rem 3rem}
+
+/* PROJECT CARDS */
+.project-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:2rem;transition:box-shadow 0.2s}
+.project-card:hover{box-shadow:0 8px 40px rgba(10,37,64,0.09)}
+.project-inner{display:grid;grid-template-columns:1fr 1fr}
+.project-inner.flip{direction:rtl}
+.project-inner.flip>*{direction:ltr}
+.project-media{background:var(--surface);min-height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.project-media iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.vid-ph{width:100%;height:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;cursor:pointer;padding:2rem;text-align:center;transition:background 0.2s;background:linear-gradient(135deg,#deeef9 0%,#e0f5f2 100%)}
+.vid-ph:hover{background:linear-gradient(135deg,#cde4f6 0%,#c9ede9 100%)}
+.play-ring{width:66px;height:66px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;transition:background 0.2s,transform 0.2s}
+.vid-ph:hover .play-ring{background:var(--blue);transform:scale(1.06)}
+.play-ring svg{width:22px;height:22px;fill:var(--blue);margin-left:3px}
+.vid-ph:hover .play-ring svg{fill:var(--white)}
+.vid-name{font-size:1rem;font-weight:700;color:var(--navy)}
+.vid-tag{font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.vid-src{font-size:0.68rem;padding:0.25rem 0.75rem;background:var(--white);border-radius:100px;color:var(--blue);font-weight:600;border:1px solid var(--border2)}
+.proj-illus{width:100%;height:100%;min-height:300px;display:flex;align-items:center;justify-content:center;padding:2.5rem;background:linear-gradient(135deg,#deeef9 0%,#e0f5f2 100%)}
+.proj-body{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}
+.proj-tag-row{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;flex-wrap:wrap}
+.proj-cat{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal)}
+.proj-year{font-size:0.68rem;font-weight:600;color:var(--muted);padding:0.2rem 0.6rem;background:var(--surface);border-radius:100px}
+h2.proj-title{font-size:1.5rem;font-weight:700;color:var(--navy);letter-spacing:-0.02em;margin-bottom:0.9rem;line-height:1.25}
+.proj-desc{font-size:0.87rem;color:var(--muted);line-height:1.8;margin-bottom:1.3rem}
+.chip-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.4rem}
+.chip{font-size:0.7rem;font-weight:500;padding:0.28rem 0.7rem;border-radius:6px;background:var(--blue-light);color:var(--blue)}
+.chip.t{background:var(--teal-light);color:var(--teal)}
+.proj-meta-line{font-size:0.78rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6;padding-left:0.8rem;border-left:2px solid var(--teal)}
+.proj-link{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;color:var(--blue);text-decoration:none;transition:gap 0.2s}
+.proj-link:hover{gap:0.7rem}
+
+/* RESEARCH GRID */
+.rg-header{font-size:1.3rem;font-weight:700;color:var(--navy);letter-spacing:-0.02em;margin-bottom:1.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.ri{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.6rem;transition:box-shadow 0.2s,transform 0.2s}
+.ri:hover{box-shadow:0 6px 24px rgba(10,37,64,0.08);transform:translateY(-2px)}
+.ri-n{font-size:1.8rem;font-weight:700;color:rgba(26,111,168,0.12);line-height:1;margin-bottom:0.8rem}
+.ri-cat{font-size:0.67rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.5rem}
+.ri-t{font-size:0.88rem;font-weight:600;color:var(--navy);margin-bottom:0.5rem;line-height:1.4}
+.ri-d{font-size:0.8rem;color:var(--muted);line-height:1.65}
+
+footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--muted);background:var(--white)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:768px){
+  nav{padding:0.9rem 1.2rem}
+  .nav-links a{padding:0.35rem 0.55rem;font-size:0.7rem}
+  .page-hero{padding:7rem 1.5rem 3rem}
+  main{padding:2.5rem 1.5rem}
+  .project-inner,.project-inner.flip{grid-template-columns:1fr;direction:ltr}
+  footer{flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Salah <span>E.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="awards.html">Awards</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-inner">
+    <div class="breadcrumb reveal"><a href="index.html">Home</a> / Projects</div>
+    <h1 class="reveal" style="transition-delay:0.05s">Featured Projects</h1>
+    <p class="ph-sub reveal" style="transition-delay:0.1s">AI-powered educational tools and research platforms I've designed, co-developed, and studied — spanning intelligent assessment, language learning, and game-based pedagogy.</p>
+  </div>
+</div>
+
+<main>
+
+  <!-- LegalMind -->
+  <div class="project-card reveal">
+    <div class="project-inner">
+      <div class="project-media">
+        <div class="vid-ph" id="lm-ph" onclick="loadVid('lm-ph','lm-fr','YOUR_LEGALMIND_EMBED_URL')">
+          <div class="vid-tag">Demo Video</div>
+          <div class="vid-name">LegalMind</div>
+          <div class="play-ring"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="vid-src">YouTube · Click to play</div>
+        </div>
+        <iframe id="lm-fr" style="display:none" allowfullscreen></iframe>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tag-row">
+          <span class="proj-cat">AI-Powered Learning Tool</span>
+          <span class="proj-year">2025–2026</span>
+        </div>
+        <h2 class="proj-title">LegalMind</h2>
+        <p class="proj-desc">An intelligent platform designed to enhance law students' critical thinking through AI-supported case analysis. The tool uses stealth assessment to measure and scaffold legal reasoning skills without disrupting the natural learning flow. Features a rubric-guided AI evaluation system and personalized feedback engine.</p>
+        <div class="chip-row">
+          <span class="chip">Stealth Assessment</span>
+          <span class="chip t">Critical Thinking</span>
+          <span class="chip">AI Feedback</span>
+          <span class="chip t">Legal Education</span>
+          <span class="chip">Rubric Design</span>
+        </div>
+        <p class="proj-meta-line">Presented at UF Graduate Student Research Day & College of Education Research Symposium (2026). Also featured at UF Interface Teaching 2026.</p>
+        <a href="#" class="proj-link">View details →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SmartFlash -->
+  <div class="project-card reveal">
+    <div class="project-inner flip">
+      <div class="proj-body">
+        <div class="proj-tag-row">
+          <span class="proj-cat">AI Learning Platform</span>
+          <span class="proj-year">2025–2026</span>
+        </div>
+        <h2 class="proj-title">SmartFlash</h2>
+        <p class="proj-desc">A generative AI-powered adaptive flashcard application studying self-regulated learning. Research explored how students balance AI automation with personal agency in knowledge review — revealing that learners spend significant cognitive energy preparing rather than passively consuming AI-generated content. Presented at ICLS 2026, Irvine, CA.</p>
+        <div class="chip-row">
+          <span class="chip t">Self-Regulated Learning</span>
+          <span class="chip">Generative AI</span>
+          <span class="chip t">Adaptive Flashcards</span>
+          <span class="chip">ICLS 2026</span>
+        </div>
+        <p class="proj-meta-line">Li, H., Esmaeiligoujar, S., Adhami, N., Li, H., & Huang, R. — International Society of the Learning Sciences 2026, Irvine, CA</p>
+        <a href="#" class="proj-link">View details →</a>
+      </div>
+      <div class="project-media">
+        <div class="vid-ph" id="sf-ph" onclick="loadVid('sf-ph','sf-fr','YOUR_SMARTFLASH_EMBED_URL')">
+          <div class="vid-tag">Demo Video</div>
+          <div class="vid-name">SmartFlash</div>
+          <div class="play-ring"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="vid-src">Google Drive · Click to play</div>
+        </div>
+        <iframe id="sf-fr" style="display:none" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ProductiveMath -->
+  <div class="project-card reveal">
+    <div class="project-inner">
+      <div class="proj-illus">
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#1a6fa8" stroke-width="1.5" opacity="0.3"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="#0e9c8a" stroke-width="1" opacity="0.3"/>
+          <text x="100" y="88" text-anchor="middle" fill="#1a6fa8" font-size="32" font-family="serif" font-weight="700">∑</text>
+          <text x="100" y="112" text-anchor="middle" fill="#0a2540" font-size="13" font-family="Plus Jakarta Sans,sans-serif" font-weight="600">Productive</text>
+          <text x="100" y="128" text-anchor="middle" fill="#0e9c8a" font-size="13" font-family="Plus Jakarta Sans,sans-serif" font-weight="600">Failure</text>
+          <text x="100" y="155" text-anchor="middle" fill="#4a6580" font-size="9" font-family="sans-serif" letter-spacing="3">MATH</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tag-row">
+          <span class="proj-cat">AI Research Platform</span>
+          <span class="proj-year">2024 · $10,000 Grant</span>
+        </div>
+        <h2 class="proj-title">ProductiveMath</h2>
+        <p class="proj-desc">A human-in-the-loop generative AI web application enabling teachers to create algebra problems that support productive failure pedagogy. Compares small vs. large language models for problem quality, uses a custom rubric for automated assessment. Recognized with a Best Paper Nomination at AIED 2025, Palermo, Italy.</p>
+        <div class="chip-row">
+          <span class="chip">Generative AI</span>
+          <span class="chip t">LLM Comparison</span>
+          <span class="chip">Algebra Education</span>
+          <span class="chip t">K-12 Teachers</span>
+          <span class="chip">UF Grant $10K</span>
+          <span class="chip t">AIED 2025</span>
+        </div>
+        <p class="proj-meta-line">Rahimi, Esmaeiligoujar et al. — Best Paper Nomination AIED 2025 · Best Poster FERA 2025 · Best Paper Runner-Up UF COE Symposium 2025</p>
+        <a href="https://doi.org/10.1007/978-3-031-99264-3_43" target="_blank" class="proj-link">View publication →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metalingual -->
+  <div class="project-card reveal">
+    <div class="project-inner flip">
+      <div class="proj-body">
+        <div class="proj-tag-row">
+          <span class="proj-cat">AI Language Tool · Co-Designer</span>
+          <span class="proj-year">2023–2024</span>
+        </div>
+        <h2 class="proj-title">Metalingual</h2>
+        <p class="proj-desc">Co-designed an AI-powered platform for enhancing English language learning with a focus on TOEFL speaking preparation. Integrated AI-driven personalized instruction and feedback loops. Conducted user testing to refine functionality and improve user engagement. Presented at AECT 2024, Kansas City.</p>
+        <div class="chip-row">
+          <span class="chip t">NLP / AI</span>
+          <span class="chip">TOEFL Preparation</span>
+          <span class="chip t">UX Research</span>
+          <span class="chip">Personalized Learning</span>
+          <span class="chip t">AECT 2024</span>
+        </div>
+        <p class="proj-meta-line">Kong, L., Esmaeiligoujar, S., Adhami, N., et al. — AECT Conference, Kansas City, MO (2024)</p>
+        <a href="#" class="proj-link">View details →</a>
+      </div>
+      <div class="proj-illus">
+        <svg width="200" height="180" viewBox="0 0 200 180">
+          <rect x="30" y="20" width="140" height="95" rx="10" fill="none" stroke="#1a6fa8" stroke-width="1.5" opacity="0.4"/>
+          <rect x="30" y="20" width="140" height="28" rx="10" fill="#deeef9"/>
+          <rect x="30" y="38" width="140" height="10" rx="0" fill="#deeef9"/>
+          <circle cx="48" cy="34" r="5" fill="#1a6fa8" opacity="0.5"/>
+          <circle cx="62" cy="34" r="5" fill="none" stroke="#1a6fa8" stroke-width="1" opacity="0.4"/>
+          <text x="100" y="78" text-anchor="middle" fill="#1a6fa8" font-size="26" font-weight="700">Aa</text>
+          <text x="100" y="95" text-anchor="middle" fill="#0e9c8a" font-size="10" letter-spacing="1" font-family="sans-serif">METALINGUAL</text>
+          <path d="M55 130 Q100 112 145 130" fill="none" stroke="#0e9c8a" stroke-width="2" opacity="0.5"/>
+          <circle cx="55" cy="130" r="3" fill="#0e9c8a" opacity="0.6"/>
+          <circle cx="145" cy="130" r="3" fill="#1a6fa8" opacity="0.6"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clues in the News -->
+  <div class="project-card reveal">
+    <div class="project-inner">
+      <div class="proj-illus">
+        <svg width="200" height="190" viewBox="0 0 200 190">
+          <rect x="20" y="15" width="160" height="20" rx="4" fill="#1a6fa8" opacity="0.8"/>
+          <rect x="20" y="43" width="105" height="10" rx="3" fill="#0e9c8a" opacity="0.6"/>
+          <rect x="20" y="62" width="160" height="5" rx="2" fill="#deeef9"/>
+          <rect x="20" y="72" width="135" height="5" rx="2" fill="#deeef9"/>
+          <rect x="20" y="82" width="150" height="5" rx="2" fill="#deeef9"/>
+          <rect x="20" y="100" width="70" height="60" rx="6" fill="none" stroke="#1a6fa8" stroke-width="1.5" opacity="0.5"/>
+          <circle cx="55" cy="127" r="15" fill="none" stroke="#0e9c8a" stroke-width="1.5" opacity="0.6"/>
+          <text x="55" y="132" text-anchor="middle" fill="#1a6fa8" font-size="16" font-weight="700">?</text>
+          <rect x="100" y="100" width="80" height="10" rx="3" fill="#e0f5f2"/>
+          <rect x="100" y="116" width="65" height="10" rx="3" fill="#e0f5f2"/>
+          <rect x="100" y="132" width="72" height="10" rx="3" fill="#e0f5f2"/>
+          <text x="100" y="178" text-anchor="middle" fill="#4a6580" font-size="8" letter-spacing="2.5" font-family="sans-serif">CRITICAL THINKING</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tag-row">
+          <span class="proj-cat">Stealth Assessment · Game-Based</span>
+          <span class="proj-year">2024</span>
+        </div>
+        <h2 class="proj-title">Clues in the News</h2>
+        <p class="proj-desc">Designed a game-based stealth assessment system that measures K-12 students' critical thinking skills through news analysis tasks — without students knowing they're being assessed. The system embeds assessment seamlessly into learning activities, eliminating test anxiety while gathering rich performance data.</p>
+        <div class="chip-row">
+          <span class="chip t">Stealth Assessment</span>
+          <span class="chip">Game-Based Design</span>
+          <span class="chip t">K-12</span>
+          <span class="chip">News Literacy</span>
+          <span class="chip t">AECT 2024</span>
+        </div>
+        <p class="proj-meta-line">Esmaeiligoujar, S., Tanvir, S.H., Bennett, A., Abdrakhmanova, A., & Rahimi, S. — AECT 2024 · UF Interface Teaching 2026 · UF Graduate Student Research Day 2026</p>
+        <a href="#" class="proj-link">View details →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Other Research -->
+  <div class="rg-header reveal">Other Research Projects</div>
+  <div class="rg">
+    <div class="ri reveal">
+      <div class="ri-n">01</div>
+      <div class="ri-cat">Systematic Review</div>
+      <div class="ri-t">Digital Games & 21st-Century Skills in K-12</div>
+      <div class="ri-d">Systematic review on how digital games enhance critical thinking, collaboration, and creativity. Under review at Educational Technology Research and Development.</div>
+    </div>
+    <div class="ri reveal" style="transition-delay:0.05s">
+      <div class="ri-n">02</div>
+      <div class="ri-cat">AI & Creativity</div>
+      <div class="ri-t">Rubric-Guided AI for Creativity Assessment</div>
+      <div class="ri-d">Multimodal LLM approach for psychometrically sound creativity assessment in educational games. Published in Creativity Research Journal (2026).</div>
+    </div>
+    <div class="ri reveal" style="transition-delay:0.1s">
+      <div class="ri-n">03</div>
+      <div class="ri-cat">Systematic Review</div>
+      <div class="ri-t">Digital Games for Growth Mindset in PreK–12</div>
+      <div class="ri-d">Systematic review of games designed to promote growth mindset. Presented ICLS 2025, Helsinki. Under review at ETRD.</div>
+    </div>
+    <div class="ri reveal" style="transition-delay:0.15s">
+      <div class="ri-n">04</div>
+      <div class="ri-cat">Usability Research</div>
+      <div class="ri-t">EarSketch Usability Testing</div>
+      <div class="ri-d">Designed and executed usability tests for EarSketch at UF. Recruited participants, analyzed feedback, and delivered recommendations report.</div>
+    </div>
+    <div class="ri reveal" style="transition-delay:0.2s">
+      <div class="ri-n">05</div>
+      <div class="ri-cat">MA Thesis · Game-Based Learning</div>
+      <div class="ri-t">Kahoot! & Student Learning and Motivation</div>
+      <div class="ri-d">M.A. thesis on Kahoot! as a game-based learning environment. Funded by Iran's National Elites Foundation. Allameh Tabataba'i University, 2017.</div>
+    </div>
+    <div class="ri reveal" style="transition-delay:0.25s">
+      <div class="ri-n">06</div>
+      <div class="ri-cat">Collaborative Learning</div>
+      <div class="ri-t">Web-Based Collaborative Platforms</div>
+      <div class="ri-d">Grant-funded research (80M Rial) studying collaborative platforms for learning and motivation in Tehran's 12th district schools. Advised by Dr. Aliabadi.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>© 2026 Salah Esmaeiligoujar · University of Florida</span>
+  <span><a href="index.html" style="color:var(--blue);text-decoration:none">← Back to Home</a></span>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
+function loadVid(ph,fr,url){
+  if(!url||url.startsWith('YOUR_')){alert('Replace the placeholder URL with your actual YouTube or Google Drive embed URL.');return;}
+  document.getElementById(ph).style.display='none';
+  const f=document.getElementById(fr);f.src=url;f.style.display='block';
+}
+</script>
+</body>
+</html>

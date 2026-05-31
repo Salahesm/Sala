@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills — Salah Esmaeiligoujar</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f0f6fa;--white:#ffffff;--navy:#0a2540;--blue:#1a6fa8;--teal:#0e9c8a;--teal-light:#e0f5f2;--blue-light:#deeef9;--muted:#4a6580;--border:rgba(10,37,64,0.1);--sans:'Plus Jakarta Sans',system-ui,sans-serif;}
+body{font-family:var(--sans);background:var(--bg);color:var(--navy);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(240,246,250,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:1rem;font-weight:700;color:var(--navy);text-decoration:none}
+.nav-logo span{color:var(--teal)}
+.nav-links{display:flex;gap:0.25rem;list-style:none}
+.nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.04em;text-decoration:none;color:var(--muted);padding:0.4rem 0.9rem;border-radius:6px;transition:background 0.2s,color 0.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--blue-light);color:var(--blue)}
+.page-hero{padding:8rem 3rem 4rem;background:linear-gradient(160deg,#deeef9 0%,#e0f5f2 100%);position:relative;overflow:hidden}
+.page-hero::after{content:'Skills';position:absolute;right:-1rem;bottom:-2rem;font-size:clamp(5rem,10vw,9rem);font-weight:700;color:rgba(10,37,64,0.04);letter-spacing:-0.04em;pointer-events:none;line-height:1}
+.ph-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:0.75rem;color:var(--muted);margin-bottom:1rem}
+.breadcrumb a{color:var(--blue);text-decoration:none}
+h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:var(--navy);letter-spacing:-0.03em;margin-bottom:0.8rem}
+.ph-sub{font-size:0.95rem;color:var(--muted);max-width:580px;line-height:1.8}
+main{max-width:1100px;margin:0 auto;padding:4rem 3rem}
+
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+
+.skill-section{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:2rem}
+.skill-section.full{grid-column:1/-1}
+.ss-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:1.4rem;padding-bottom:0.6rem;border-bottom:2px solid var(--teal-light)}
+h3.ss-title{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:1.4rem}
+
+/* SKILL BARS */
+.sbar-group{display:flex;flex-direction:column;gap:1.2rem}
+.sbar-item{}
+.sbar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.sbar-name{font-size:0.85rem;font-weight:500;color:var(--navy)}
+.sbar-pct{font-size:0.75rem;font-weight:700;color:var(--blue)}
+.sbar-track{height:6px;background:var(--blue-light);border-radius:100px;overflow:hidden}
+.sbar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--blue),var(--teal));width:0;transition:width 1.1s cubic-bezier(0.25,0.46,0.45,0.94)}
+
+/* TAG CLOUDS */
+.tag-cloud{display:flex;flex-wrap:wrap;gap:0.5rem}
+.tc{font-size:0.78rem;font-weight:500;padding:0.35rem 0.85rem;border-radius:8px;border:1px solid var(--border);color:var(--muted);transition:background 0.2s,color 0.2s,border-color 0.2s;cursor:default}
+.tc:hover{background:var(--blue-light);color:var(--blue);border-color:rgba(26,111,168,0.3)}
+.tc.t:hover{background:var(--teal-light);color:var(--teal);border-color:rgba(14,156,138,0.3)}
+
+/* MEMBERSHIPS */
+.member-list{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
+.member-item{display:flex;align-items:center;gap:0.8rem;font-size:0.85rem;color:var(--muted)}
+.member-item::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.member-item strong{color:var(--navy);font-weight:600}
+
+/* PEER REVIEW */
+.review-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.review-item{font-size:0.83rem;color:var(--muted);padding:0.6rem 0.9rem;background:var(--bg);border-radius:8px;border-left:3px solid var(--blue)}
+
+footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--muted);background:var(--white)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:768px){
+  nav{padding:0.9rem 1.2rem}
+  .nav-links a{padding:0.35rem 0.55rem;font-size:0.7rem}
+  .page-hero{padding:7rem 1.5rem 3rem}
+  main{padding:2.5rem 1.5rem}
+  .skills-layout{grid-template-columns:1fr}
+  .skill-section.full{grid-column:1}
+  footer{flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Salah <span>E.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="awards.html">Awards</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="skills.html" class="active">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-inner">
+    <div class="breadcrumb reveal"><a href="index.html">Home</a> / Skills</div>
+    <h1 class="reveal" style="transition-delay:0.05s">Skills & Expertise</h1>
+    <p class="ph-sub reveal" style="transition-delay:0.1s">Research methods, technical tools, professional memberships, and service contributions across educational technology and AI.</p>
+  </div>
+</div>
+
+<main>
+  <div class="skills-layout">
+
+    <div class="skill-section reveal">
+      <div class="ss-label">Research Proficiency</div>
+      <h3 class="ss-title">Core Research Methods</h3>
+      <div class="sbar-group">
+        <div class="sbar-item">
+          <div class="sbar-top"><span class="sbar-name">Systematic Review & Meta-Analysis</span><span class="sbar-pct">96%</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="96"></div></div>
+        </div>
+        <div class="sbar-item">
+          <div class="sbar-top"><span class="sbar-name">Educational Assessment Design</span><span class="sbar-pct">94%</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="94"></div></div>
+        </div>
+        <div class="sbar-item">
+          <div class="sbar-top"><span class="sbar-name">Qualitative & Quantitative Methods</span><span class="sbar-pct">92%</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="92"></div></div>
+        </div>
+        <div class="sbar-item">
+          <div class="sbar-top"><span class="sbar-name">Usability Testing & UX Research</span><span class="sbar-pct">90%</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div>
+        </div>
+        <div class="sbar-item">
+          <div class="sbar-top"><span class="sbar-name">Learning Analytics</span><span class="sbar-pct">87%</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="87"></div></div>
+        </div>
+        <div class="sbar-item">
+          <div class="sbar-top"><span class="sbar-name">Instructional Design</span><span class="sbar-pct">93%</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="93"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-section reveal" style="transition-delay:0.08s">
+      <div class="ss-label">Technical</div>
+      <h3 class="ss-title">Tools & Technologies</h3>
+      <div class="tag-cloud">
+        <span class="tc">Generative AI / LLMs</span>
+        <span class="tc t">Prompt Engineering</span>
+        <span class="tc">AI Tool Design</span>
+        <span class="tc t">Python</span>
+        <span class="tc">R (Statistics)</span>
+        <span class="tc t">HTML / CSS</span>
+        <span class="tc">GitHub</span>
+        <span class="tc t">SPSS</span>
+        <span class="tc">Figma</span>
+        <span class="tc t">Augmented Reality</span>
+        <span class="tc">ATLAS.ti</span>
+        <span class="tc t">NVivo</span>
+        <span class="tc">Google Workspace</span>
+        <span class="tc t">Microsoft Office</span>
+      </div>
+    </div>
+
+    <div class="skill-section reveal" style="transition-delay:0.12s">
+      <div class="ss-label">Expertise Areas</div>
+      <h3 class="ss-title">Research & Design</h3>
+      <div class="tag-cloud">
+        <span class="tc t">AI in Education</span>
+        <span class="tc">Game-Based Learning</span>
+        <span class="tc t">Stealth Assessment</span>
+        <span class="tc">Productive Failure</span>
+        <span class="tc t">Creativity Assessment</span>
+        <span class="tc">Self-Regulated Learning</span>
+        <span class="tc t">K-12 Education</span>
+        <span class="tc">Rubric Design</span>
+        <span class="tc t">Critical Thinking</span>
+        <span class="tc">Language Learning</span>
+        <span class="tc t">Computational Thinking</span>
+        <span class="tc">Growth Mindset</span>
+      </div>
+    </div>
+
+    <div class="skill-section reveal" style="transition-delay:0.16s">
+      <div class="ss-label">Languages</div>
+      <h3 class="ss-title">Communication</h3>
+      <div class="sbar-group">
+        <div class="sbar-item">
+          <div class="sbar-top"><span class="sbar-name">English</span><span class="sbar-pct">Fluent</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="95"></div></div>
+        </div>
+        <div class="sbar-item">
+          <div class="sbar-top"><span class="sbar-name">Persian / Farsi</span><span class="sbar-pct">Native</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="100"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-section reveal" style="transition-delay:0.2s">
+      <div class="ss-label">Professional Service</div>
+      <h3 class="ss-title">Peer Review & Organizations</h3>
+      <ul class="member-list">
+        <li class="member-item"><strong>AECT</strong> — Association for Educational Communication & Technology</li>
+        <li class="member-item"><strong>AERA</strong> — American Educational Research Association</li>
+        <li class="member-item"><strong>ISLS</strong> — International Society of the Learning Sciences</li>
+        <li class="member-item"><strong>IAET</strong> — Iranian Association of Educational Technology</li>
+        <li class="member-item"><strong>OREP</strong> — Organization for Educational Research and Planning</li>
+      </ul>
+    </div>
+
+    <div class="skill-section reveal" style="transition-delay:0.24s">
+      <div class="ss-label">Peer Review Service</div>
+      <h3 class="ss-title">Journals & Conferences Reviewed</h3>
+      <ul class="review-list">
+        <li class="review-item">British Journal of Educational Technology</li>
+        <li class="review-item">Creativity Research Journal</li>
+        <li class="review-item">Journal of Research on Technology in Education</li>
+        <li class="review-item">ISLS Annual Meeting 2025 (9 manuscripts)</li>
+        <li class="review-item">ISLS Annual Meeting 2026 (5 manuscripts)</li>
+        <li class="review-item">ISLS Annual Meeting 2024 (4 manuscripts)</li>
+      </ul>
+    </div>
+
+    <div class="skill-section full reveal" style="transition-delay:0.28s">
+      <div class="ss-label">Community</div>
+      <h3 class="ss-title" style="margin-bottom:1rem">Professional Service & Volunteering</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem">
+        <div style="padding:1.2rem;background:var(--bg);border-radius:10px;border-left:3px solid var(--teal)">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--teal);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem">Sep 2025</div>
+          <div style="font-size:0.88rem;font-weight:600;color:var(--navy);margin-bottom:0.3rem">STEM on the Lawn Volunteer</div>
+          <div style="font-size:0.8rem;color:var(--muted)">Florida Semiconductor Institute, University of Florida. Certificate of Recognition for assisting with hands-on STEM education and outreach activities.</div>
+        </div>
+        <div style="padding:1.2rem;background:var(--bg);border-radius:10px;border-left:3px solid var(--blue)">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--blue);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem">2018</div>
+          <div style="font-size:0.88rem;font-weight:600;color:var(--navy);margin-bottom:0.3rem">Festival Referee — Top Teaching Methods</div>
+          <div style="font-size:0.8rem;color:var(--muted)">Ministry of Education, Tehran, Iran. Served as referee for the Top Teaching Methods' Festival, evaluating innovative pedagogical approaches.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span>© 2026 Salah Esmaeiligoujar · University of Florida</span>
+  <span><a href="index.html" style="color:var(--blue);text-decoration:none">← Back to Home</a></span>
+</footer>
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');x.target.querySelectorAll('.sbar-fill').forEach(f=>f.style.width=f.dataset.w+'%')}}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight){el.classList.add('visible');el.querySelectorAll('.sbar-fill').forEach(f=>f.style.width=f.dataset.w+'%')}}));
+</script>
+</body>
+</html>

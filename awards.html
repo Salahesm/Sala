@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awards — Salah Esmaeiligoujar</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f0f6fa;--white:#ffffff;--navy:#0a2540;--blue:#1a6fa8;--teal:#0e9c8a;--teal-light:#e0f5f2;--blue-light:#deeef9;--muted:#4a6580;--border:rgba(10,37,64,0.1);--sans:'Plus Jakarta Sans',system-ui,sans-serif;}
+body{font-family:var(--sans);background:var(--bg);color:var(--navy);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(240,246,250,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:1rem;font-weight:700;color:var(--navy);text-decoration:none}
+.nav-logo span{color:var(--teal)}
+.nav-links{display:flex;gap:0.25rem;list-style:none}
+.nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.04em;text-decoration:none;color:var(--muted);padding:0.4rem 0.9rem;border-radius:6px;transition:background 0.2s,color 0.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--blue-light);color:var(--blue)}
+.page-hero{padding:8rem 3rem 4rem;background:linear-gradient(160deg,#deeef9 0%,#e0f5f2 100%);position:relative;overflow:hidden}
+.page-hero::after{content:'Awards';position:absolute;right:-1rem;bottom:-2rem;font-size:clamp(5rem,10vw,9rem);font-weight:700;color:rgba(10,37,64,0.04);letter-spacing:-0.04em;pointer-events:none;line-height:1}
+.ph-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:0.75rem;color:var(--muted);margin-bottom:1rem}
+.breadcrumb a{color:var(--blue);text-decoration:none}
+h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:var(--navy);letter-spacing:-0.03em;margin-bottom:0.8rem}
+.ph-sub{font-size:0.95rem;color:var(--muted);max-width:580px;line-height:1.8}
+main{max-width:1100px;margin:0 auto;padding:4rem 3rem}
+
+.awards-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3.5rem}
+.aw-stat{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center}
+.aw-stat .n{font-size:2.2rem;font-weight:700;color:var(--blue);line-height:1}
+.aw-stat .l{font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-top:0.4rem}
+
+.award-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:2rem;margin-bottom:1rem;display:grid;grid-template-columns:64px 1fr;gap:1.5rem;align-items:start;transition:box-shadow 0.2s,transform 0.2s}
+.award-card:hover{box-shadow:0 6px 28px rgba(10,37,64,0.09);transform:translateY(-2px)}
+.award-badge{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.award-badge.gold{background:linear-gradient(135deg,#fff3cd,#ffe08a)}
+.award-badge.blue{background:var(--blue-light)}
+.award-badge.teal{background:var(--teal-light)}
+.aw-year{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.35rem}
+.aw-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;line-height:1.35}
+.aw-body{font-size:0.85rem;color:var(--muted);line-height:1.7}
+
+.section-divider{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin:3rem 0 1.5rem;padding-bottom:0.5rem;border-bottom:2px solid var(--teal-light)}
+
+.grants-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.grant-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.6rem}
+.grant-amount{font-size:1.4rem;font-weight:700;color:var(--blue);line-height:1;margin-bottom:0.5rem}
+.grant-title{font-size:0.88rem;font-weight:600;color:var(--navy);margin-bottom:0.4rem;line-height:1.4}
+.grant-agency{font-size:0.78rem;color:var(--muted)}
+.grant-period{font-size:0.72rem;font-weight:600;color:var(--teal);margin-top:0.5rem}
+
+footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--muted);background:var(--white)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:768px){
+  nav{padding:0.9rem 1.2rem}
+  .nav-links a{padding:0.35rem 0.55rem;font-size:0.7rem}
+  .page-hero{padding:7rem 1.5rem 3rem}
+  main{padding:2.5rem 1.5rem}
+  .awards-summary{grid-template-columns:repeat(3,1fr)}
+  .award-card{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Salah <span>E.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="awards.html" class="active">Awards</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-inner">
+    <div class="breadcrumb reveal"><a href="index.html">Home</a> / Awards</div>
+    <h1 class="reveal" style="transition-delay:0.05s">Awards & Recognition</h1>
+    <p class="ph-sub reveal" style="transition-delay:0.1s">Academic honors, fellowships, and research grants recognizing contributions to educational technology and AI in education.</p>
+  </div>
+</div>
+
+<main>
+  <div class="awards-summary reveal">
+    <div class="aw-stat"><div class="n">9</div><div class="l">Total Awards</div></div>
+    <div class="aw-stat"><div class="n">3</div><div class="l">Best Paper / Poster</div></div>
+    <div class="aw-stat"><div class="n">3</div><div class="l">Research Grants</div></div>
+  </div>
+
+  <div class="section-divider reveal">Awards & Honors</div>
+
+  <div class="award-card reveal">
+    <div class="award-badge gold">🥇</div>
+    <div>
+      <div class="aw-year">2025 — FERA Conference</div>
+      <div class="aw-title">Best Poster Award</div>
+      <div class="aw-body">Florida Educational Research Association (FERA) Annual Conference, Fort Myers, FL. Ercan, D., Rahimi, S., Esmaeiligoujar, S., Babaee, M., & Gao, R. — <em>Designing an AI-powered Platform to Support Teachers in Creating Algebra Problems for Productive Failure Teaching in K-12 Classes.</em></div>
+    </div>
+  </div>
+
+  <div class="award-card reveal" style="transition-delay:0.05s">
+    <div class="award-badge blue">📑</div>
+    <div>
+      <div class="aw-year">2025 — AIED Conference · Palermo, Italy</div>
+      <div class="aw-title">Late Breaking Results Best Paper Nomination</div>
+      <div class="aw-body">International Conference on Artificial Intelligence in Education (AIED 2025). Rahimi, S., Ercan, D., Gao, R., Esmaeiligoujar, S., et al. — <em>ProductiveMath: A Generative-AI-Powered App to Support Productive Failure Teaching.</em> (pp. 344–351). Springer Nature Switzerland.</div>
+    </div>
+  </div>
+
+  <div class="award-card reveal" style="transition-delay:0.1s">
+    <div class="award-badge teal">🏅</div>
+    <div>
+      <div class="aw-year">2025 — UF College of Education Research Symposium</div>
+      <div class="aw-title">Best Paper Runner-Up Award</div>
+      <div class="aw-body">University of Florida College of Education Research Symposium, Gainesville, FL. Ercan, D., Rahimi, S., Esmaeiligoujar, S., Babaee, M., & Gao, R. — <em>Fail Forward: Designing a Platform to Support Productive Failure in the Classroom.</em></div>
+    </div>
+  </div>
+
+  <div class="award-card reveal" style="transition-delay:0.15s">
+    <div class="award-badge blue">🎓</div>
+    <div>
+      <div class="aw-year">2024 — University of Florida</div>
+      <div class="aw-title">The Fenton Family Scholarship</div>
+      <div class="aw-body">Awarded by the University of Florida in recognition of academic excellence and research contributions in the College of Education.</div>
+    </div>
+  </div>
+
+  <div class="award-card reveal" style="transition-delay:0.2s">
+    <div class="award-badge teal">🎤</div>
+    <div>
+      <div class="aw-year">2024 — AECT International Convention</div>
+      <div class="aw-title">Presidential Presentation</div>
+      <div class="aw-body">Selected for Presidential Presentation at the Association for Educational Communications and Technology (AECT) 2024 International Convention — one of the highest honors at the conference.</div>
+    </div>
+  </div>
+
+  <div class="award-card reveal" style="transition-delay:0.25s">
+    <div class="award-badge gold">⭐</div>
+    <div>
+      <div class="aw-year">2017 — Allameh Tabataba'i University</div>
+      <div class="aw-title">Best Student Award — Graduate Student Excellence</div>
+      <div class="aw-body">Recognized as the top graduate student in the Educational Technology program at Allameh Tabataba'i University, Tehran, Iran.</div>
+    </div>
+  </div>
+
+  <div class="award-card reveal" style="transition-delay:0.3s">
+    <div class="award-badge blue">🥇</div>
+    <div>
+      <div class="aw-year">2016 — Allameh Tabataba'i University</div>
+      <div class="aw-title">Ranked #1 Candidate in Educational Technology Program</div>
+      <div class="aw-body">Ranked first among all candidates in the Educational Technology doctoral program at Allameh Tabataba'i University.</div>
+    </div>
+  </div>
+
+  <div class="award-card reveal" style="transition-delay:0.35s">
+    <div class="award-badge teal">🏆</div>
+    <div>
+      <div class="aw-year">2014 — National Entrance Examination</div>
+      <div class="aw-title">Ranked #1 Among 20,221 Applicants</div>
+      <div class="aw-body">Achieved the top rank among 20,221 educational sciences applicants in the entrance examination for Iranian universities — a nationwide competitive achievement.</div>
+    </div>
+  </div>
+
+  <div class="award-card reveal" style="transition-delay:0.4s">
+    <div class="award-badge gold">🥉</div>
+    <div>
+      <div class="aw-year">2014 — Scientific Students' Olympiad</div>
+      <div class="aw-title">Bronze Medal — 3rd Place</div>
+      <div class="aw-body">Awarded the bronze medal (3rd place) in the Scientific Students' Olympiad, recognizing outstanding academic achievement in the sciences.</div>
+    </div>
+  </div>
+
+  <div class="section-divider reveal">Research Grants</div>
+
+  <div class="grants-grid">
+    <div class="grant-card reveal">
+      <div class="grant-amount">$10,000</div>
+      <div class="grant-title">Let's Fail Together: Supporting Teachers to Prepare for Productive Failure Using an AI-powered Math Problem Generator</div>
+      <div class="grant-agency">Agency: University of Florida</div>
+      <div class="grant-period">May – December 2024</div>
+    </div>
+    <div class="grant-card reveal" style="transition-delay:0.08s">
+      <div class="grant-amount">20M Rial</div>
+      <div class="grant-title">Master Thesis Research Grant: The Effect of Kahoot! As a Game-Based Environment on Student's Learning and Motivation</div>
+      <div class="grant-agency">Agency: Iran's National Elites Foundation</div>
+      <div class="grant-period">February – May 2017</div>
+    </div>
+    <div class="grant-card reveal" style="transition-delay:0.16s">
+      <div class="grant-amount">80M Rial</div>
+      <div class="grant-title">Using Web-Based Collaborative Learning Platforms to Promote Learning and Motivation: A Case Study of Tehran's 12th District Schools</div>
+      <div class="grant-agency">Agency: Tehran Education Department</div>
+      <div class="grant-period">October 2018 – May 2019</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>© 2026 Salah Esmaeiligoujar · University of Florida</span>
+  <span><a href="index.html" style="color:var(--blue);text-decoration:none">← Back to Home</a></span>
+</footer>
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
+</script>
+</body>
+</html>
