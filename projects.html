@@ -5,15 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Salah Esmaeiligoujar</title>
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-  rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<script
-  defer
-  src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js">
-</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
 
 <style>
 *,*::before,*::after{
@@ -37,6 +31,7 @@
   --border:rgba(10,37,64,0.1);
   --border2:rgba(10,37,64,0.16);
   --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --digital-edge:50%;
 }
 
 html{scroll-behavior:smooth}
@@ -48,7 +43,100 @@ body{
   font-weight:400;
   line-height:1.7;
   -webkit-font-smoothing:antialiased;
+  isolation:isolate;
 }
+
+/* PAGE-WIDE INTERACTIVE ENVIRONMENT */
+
+#world-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.world-nature,
+.world-digital{
+  position:absolute;
+  inset:0;
+}
+
+.world-nature{
+  background:#a0b391;
+}
+
+.world-nature svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.world-digital{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(84,184,240,.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      rgba(84,184,240,.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(140deg,#092861,#17619b);
+
+  background-size:48px 48px,48px 48px,auto;
+
+  clip-path:
+    inset(0 calc(100% - var(--digital-edge)) 0 0);
+
+  transition:clip-path 900ms ease;
+}
+
+/* A subtle cover reaches across the content without blocking it. */
+
+#world-veil{
+  position:fixed;
+  inset:0;
+  z-index:101;
+  pointer-events:none;
+
+  background:linear-gradient(
+    90deg,
+    rgba(31,105,188,.07) 50%,
+    rgba(94,145,74,.04) 50%
+  );
+
+  transition:background .8s;
+}
+
+body[data-world="delegate"] #world-veil{
+  background:rgba(33,112,209,.12);
+}
+
+body[data-world="own"] #world-veil{
+  background:rgba(104,153,73,.055);
+}
+
+body[data-world="delegate"]{
+  --white:#e4eefb;
+  --surface:#d5e6fa;
+  --bg:#164f87;
+}
+
+body[data-world="own"]{
+  --white:#f2f5e8;
+  --surface:#e3ecd8;
+  --bg:#779e7c;
+}
+
+body[data-world="guide"]{
+  --white:#f4f6f1;
+  --surface:#e2ebe8;
+  --bg:#829d9b;
+}
+
+/* NAVIGATION */
 
 nav{
   position:fixed;
@@ -60,7 +148,7 @@ nav{
   align-items:center;
   justify-content:space-between;
   padding:1rem 3rem;
-  background:rgba(240,246,250,0.94);
+  background:rgba(240,246,250,.94);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
 }
@@ -76,19 +164,19 @@ nav{
 
 .nav-links{
   display:flex;
-  gap:0.25rem;
+  gap:.25rem;
   list-style:none;
 }
 
 .nav-links a{
-  font-size:0.78rem;
+  font-size:.78rem;
   font-weight:500;
-  letter-spacing:0.04em;
+  letter-spacing:.04em;
   text-decoration:none;
   color:var(--muted);
-  padding:0.4rem 0.9rem;
+  padding:.4rem .9rem;
   border-radius:6px;
-  transition:background 0.2s,color 0.2s;
+  transition:background .2s,color .2s;
 }
 
 .nav-links a:hover,
@@ -97,9 +185,15 @@ nav{
   color:var(--blue);
 }
 
+/* PAGE HEADER */
+
 .page-hero{
   padding:8rem 3rem 4rem;
-  background:linear-gradient(160deg,#deeef9 0%,#e0f5f2 100%);
+  background:linear-gradient(
+    160deg,
+    rgba(222,238,249,.92),
+    rgba(224,245,242,.90)
+  );
   position:relative;
   overflow:hidden;
 }
@@ -111,8 +205,8 @@ nav{
   bottom:-2rem;
   font-size:clamp(5rem,10vw,9rem);
   font-weight:700;
-  color:rgba(10,37,64,0.04);
-  letter-spacing:-0.04em;
+  color:rgba(10,37,64,.04);
+  letter-spacing:-.04em;
   pointer-events:none;
   line-height:1;
 }
@@ -125,7 +219,7 @@ nav{
 }
 
 .breadcrumb{
-  font-size:0.75rem;
+  font-size:.75rem;
   color:var(--muted);
   margin-bottom:1rem;
 }
@@ -139,12 +233,12 @@ h1{
   font-size:clamp(2rem,4vw,3.2rem);
   font-weight:700;
   color:var(--navy);
-  letter-spacing:-0.03em;
-  margin-bottom:0.8rem;
+  letter-spacing:-.03em;
+  margin-bottom:.8rem;
 }
 
 .ph-sub{
-  font-size:0.95rem;
+  font-size:.95rem;
   color:var(--muted);
   max-width:580px;
   line-height:1.8;
@@ -164,11 +258,11 @@ main{
   border-radius:16px;
   overflow:hidden;
   margin-bottom:2rem;
-  transition:box-shadow 0.2s;
+  transition:box-shadow .2s,background .8s;
 }
 
 .project-card:hover{
-  box-shadow:0 8px 40px rgba(10,37,64,0.09);
+  box-shadow:0 8px 40px rgba(10,37,64,.09);
 }
 
 .project-inner{
@@ -209,12 +303,12 @@ main{
   cursor:pointer;
   padding:2rem;
   text-align:center;
-  transition:background 0.2s;
-  background:linear-gradient(135deg,#deeef9 0%,#e0f5f2 100%);
+  transition:background .2s;
+  background:linear-gradient(135deg,#deeef9,#e0f5f2);
 }
 
 .vid-ph:hover{
-  background:linear-gradient(135deg,#cde4f6 0%,#c9ede9 100%);
+  background:linear-gradient(135deg,#cde4f6,#c9ede9);
 }
 
 .play-ring{
@@ -225,7 +319,7 @@ main{
   display:flex;
   align-items:center;
   justify-content:center;
-  transition:background 0.2s,transform 0.2s;
+  transition:background .2s,transform .2s;
 }
 
 .vid-ph:hover .play-ring{
@@ -240,7 +334,9 @@ main{
   margin-left:3px;
 }
 
-.vid-ph:hover .play-ring svg{fill:var(--white)}
+.vid-ph:hover .play-ring svg{
+  fill:var(--white);
+}
 
 .vid-name{
   font-size:1rem;
@@ -249,32 +345,21 @@ main{
 }
 
 .vid-tag{
-  font-size:0.7rem;
+  font-size:.7rem;
   font-weight:600;
-  letter-spacing:0.1em;
+  letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--muted);
 }
 
 .vid-src{
-  font-size:0.68rem;
-  padding:0.25rem 0.75rem;
+  font-size:.68rem;
+  padding:.25rem .75rem;
   background:var(--white);
   border-radius:100px;
   color:var(--blue);
   font-weight:600;
   border:1px solid var(--border2);
-}
-
-.proj-illus{
-  width:100%;
-  height:100%;
-  min-height:300px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:2.5rem;
-  background:linear-gradient(135deg,#deeef9 0%,#e0f5f2 100%);
 }
 
 .proj-body{
@@ -287,24 +372,24 @@ main{
 .proj-tag-row{
   display:flex;
   align-items:center;
-  gap:0.6rem;
-  margin-bottom:0.9rem;
+  gap:.6rem;
+  margin-bottom:.9rem;
   flex-wrap:wrap;
 }
 
 .proj-cat{
-  font-size:0.68rem;
+  font-size:.68rem;
   font-weight:700;
-  letter-spacing:0.1em;
+  letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--teal);
 }
 
 .proj-year{
-  font-size:0.68rem;
+  font-size:.68rem;
   font-weight:600;
   color:var(--muted);
-  padding:0.2rem 0.6rem;
+  padding:.2rem .6rem;
   background:var(--surface);
   border-radius:100px;
 }
@@ -313,13 +398,13 @@ h2.proj-title{
   font-size:1.5rem;
   font-weight:700;
   color:var(--navy);
-  letter-spacing:-0.02em;
-  margin-bottom:0.9rem;
+  letter-spacing:-.02em;
+  margin-bottom:.9rem;
   line-height:1.25;
 }
 
 .proj-desc{
-  font-size:0.87rem;
+  font-size:.87rem;
   color:var(--muted);
   line-height:1.8;
   margin-bottom:1.3rem;
@@ -328,14 +413,14 @@ h2.proj-title{
 .chip-row{
   display:flex;
   flex-wrap:wrap;
-  gap:0.4rem;
+  gap:.4rem;
   margin-bottom:1.4rem;
 }
 
 .chip{
-  font-size:0.7rem;
+  font-size:.7rem;
   font-weight:500;
-  padding:0.28rem 0.7rem;
+  padding:.28rem .7rem;
   border-radius:6px;
   background:var(--blue-light);
   color:var(--blue);
@@ -347,28 +432,28 @@ h2.proj-title{
 }
 
 .proj-meta-line{
-  font-size:0.78rem;
+  font-size:.78rem;
   color:var(--muted);
   margin-bottom:1.2rem;
   line-height:1.6;
-  padding-left:0.8rem;
+  padding-left:.8rem;
   border-left:2px solid var(--teal);
 }
 
 .proj-link{
   display:inline-flex;
   align-items:center;
-  gap:0.4rem;
-  font-size:0.78rem;
+  gap:.4rem;
+  font-size:.78rem;
   font-weight:600;
   color:var(--blue);
   text-decoration:none;
-  transition:gap 0.2s;
+  transition:gap .2s;
 }
 
-.proj-link:hover{gap:0.7rem}
+.proj-link:hover{gap:.7rem}
 
-/* INTERACTIVE POSTCARD */
+/* INTERACTIVE PROJECT */
 
 .noticing-layout{
   display:grid;
@@ -391,32 +476,34 @@ h2.proj-title{
 .noticing-blog h3{
   font-size:1rem;
   line-height:1.4;
-  margin:1.7rem 0 0.7rem;
+  margin:1.7rem 0 .7rem;
   color:var(--navy);
 }
 
 .noticing-blog p,
 .noticing-blog li{
-  font-size:0.85rem;
+  font-size:.85rem;
   line-height:1.85;
   color:var(--muted);
   margin-bottom:1rem;
 }
 
-.noticing-blog ul{padding-left:1.2rem}
+.noticing-blog ul{
+  padding-left:1.2rem;
+}
 
 .noticing-design{
-  background:linear-gradient(145deg,#e0f5f2,#deeef9);
+  background:rgba(226,238,229,.86);
   align-self:stretch;
 }
 
 .noticing-design h3{
   font-size:1.1rem;
-  margin-bottom:0.7rem;
+  margin-bottom:.7rem;
 }
 
 .noticing-help{
-  font-size:0.8rem;
+  font-size:.8rem;
   color:var(--muted);
   line-height:1.7;
   margin-bottom:1rem;
@@ -431,27 +518,44 @@ h2.proj-title{
 }
 
 #noticing>p{
-  font-size:0.84rem;
+  font-size:.84rem;
   line-height:1.7;
   margin:1rem 0;
   min-height:4.5em;
 }
 
+.noticing-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0;
+}
+
+.noticing-controls button{
+  padding:10px 12px;
+  border:1px solid #8aabb5;
+  border-radius:7px;
+  font:inherit;
+  cursor:pointer;
+}
+
 #noticing button{
   color:var(--navy);
   background:white;
-  font-size:0.74rem!important;
+  font-size:.74rem;
   line-height:1.5;
-  transition:background 0.2s;
+  transition:background .2s,color .2s;
 }
 
-#noticing button:hover:not(:disabled){
+#noticing button:hover{
   background:var(--teal-light);
 }
 
-#noticing button:disabled{
-  opacity:0.45;
-  cursor:default!important;
+.noticing-controls button[aria-pressed="true"]{
+  background:var(--navy)!important;
+  color:white!important;
+  border-color:var(--navy);
+  box-shadow:0 0 0 2px #9db7ac;
 }
 
 #noticing button:focus-visible,
@@ -461,6 +565,9 @@ h2.proj-title{
 }
 
 #noticing>section{
+  background:#fff5da;
+  padding:20px;
+  border:1px solid #dccb9d;
   border-radius:10px;
   margin-top:1rem;
 }
@@ -472,13 +579,13 @@ h2.proj-title{
 
 #noticing>section p{
   font-family:Georgia,serif;
-  font-size:0.88rem;
+  font-size:.88rem;
   line-height:1.7;
   margin:1rem 0;
 }
 
 .noticing-note{
-  font-size:0.72rem;
+  font-size:.72rem;
   line-height:1.7;
   color:var(--muted);
   margin-top:1.2rem;
@@ -490,7 +597,7 @@ h2.proj-title{
   font-size:1.3rem;
   font-weight:700;
   color:var(--navy);
-  letter-spacing:-0.02em;
+  letter-spacing:-.02em;
   margin-bottom:1.5rem;
   padding-top:2rem;
   border-top:1px solid var(--border);
@@ -507,41 +614,41 @@ h2.proj-title{
   border:1px solid var(--border);
   border-radius:12px;
   padding:1.6rem;
-  transition:box-shadow 0.2s,transform 0.2s;
+  transition:box-shadow .2s,transform .2s,background .8s;
 }
 
 .ri:hover{
-  box-shadow:0 6px 24px rgba(10,37,64,0.08);
+  box-shadow:0 6px 24px rgba(10,37,64,.08);
   transform:translateY(-2px);
 }
 
 .ri-n{
   font-size:1.8rem;
   font-weight:700;
-  color:rgba(26,111,168,0.12);
+  color:rgba(26,111,168,.12);
   line-height:1;
-  margin-bottom:0.8rem;
+  margin-bottom:.8rem;
 }
 
 .ri-cat{
-  font-size:0.67rem;
+  font-size:.67rem;
   font-weight:700;
-  letter-spacing:0.1em;
+  letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--teal);
-  margin-bottom:0.5rem;
+  margin-bottom:.5rem;
 }
 
 .ri-t{
-  font-size:0.88rem;
+  font-size:.88rem;
   font-weight:600;
   color:var(--navy);
-  margin-bottom:0.5rem;
+  margin-bottom:.5rem;
   line-height:1.4;
 }
 
 .ri-d{
-  font-size:0.8rem;
+  font-size:.8rem;
   color:var(--muted);
   line-height:1.65;
 }
@@ -552,15 +659,21 @@ footer{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-size:0.75rem;
+  font-size:.75rem;
   color:var(--muted);
   background:var(--white);
+}
+
+nav,
+footer,
+.page-hero{
+  transition:background .8s,color .8s;
 }
 
 .reveal{
   opacity:0;
   transform:translateY(20px);
-  transition:opacity 0.7s ease,transform 0.7s ease;
+  transition:opacity .7s ease,transform .7s ease;
 }
 
 .reveal.visible{
@@ -571,7 +684,9 @@ footer{
 /* RESPONSIVE */
 
 @media(max-width:900px){
-  .noticing-layout{grid-template-columns:1fr}
+  .noticing-layout{
+    grid-template-columns:1fr;
+  }
 
   .noticing-blog{
     max-height:none;
@@ -585,15 +700,22 @@ footer{
 }
 
 @media(max-width:768px){
-  nav{padding:0.9rem 1.2rem}
-
-  .nav-links a{
-    padding:0.35rem 0.55rem;
-    font-size:0.7rem;
+  nav{
+    padding:.9rem 1.2rem;
   }
 
-  .page-hero{padding:7rem 1.5rem 3rem}
-  main{padding:2.5rem 1.5rem}
+  .nav-links a{
+    padding:.35rem .55rem;
+    font-size:.7rem;
+  }
+
+  .page-hero{
+    padding:7rem 1.5rem 3rem;
+  }
+
+  main{
+    padding:2.5rem 1.5rem;
+  }
 
   .project-inner,
   .project-inner.flip{
@@ -603,7 +725,7 @@ footer{
 
   footer{
     flex-direction:column;
-    gap:0.5rem;
+    gap:.5rem;
     text-align:center;
   }
 }
@@ -611,18 +733,23 @@ footer{
 @media(max-width:600px){
   nav{
     flex-wrap:wrap;
-    gap:0.4rem;
+    gap:.4rem;
   }
 
   .nav-links{
     width:100%;
     overflow-x:auto;
     white-space:nowrap;
-    padding-bottom:0.2rem;
+    padding-bottom:.2rem;
   }
 
-  .nav-links li{flex-shrink:0}
-  .page-hero{padding-top:9rem}
+  .nav-links li{
+    flex-shrink:0;
+  }
+
+  .page-hero{
+    padding-top:9rem;
+  }
 
   .noticing-blog,
   .noticing-design{
@@ -631,17 +758,84 @@ footer{
 }
 
 @media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
+  html{
+    scroll-behavior:auto;
+  }
 
+  .world-digital,
+  #world-veil,
+  .project-card,
+  nav,
+  footer,
+  .page-hero,
   .reveal{
     transition:none;
+  }
+
+  .reveal{
     transform:none;
   }
 }
 </style>
 </head>
 
-<body>
+<body data-world="guide">
+
+<!-- PAGE-WIDE BACKGROUND -->
+
+<div id="world-backdrop" aria-hidden="true">
+
+  <div class="world-nature">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1440 1000"
+      preserveAspectRatio="xMidYMid slice">
+
+      <defs>
+        <linearGradient id="nature-sky" x2="0" y2="1">
+          <stop stop-color="#f4deb0"/>
+          <stop offset="1" stop-color="#82a88c"/>
+        </linearGradient>
+      </defs>
+
+      <rect
+        width="1440"
+        height="1000"
+        fill="url(#nature-sky)"/>
+
+      <circle
+        cx="1160"
+        cy="170"
+        r="90"
+        fill="#f5cd78"/>
+
+      <path
+        d="M0 650L230 280 430 570 690 220 1000 580 1210 300 1440 600V1000H0Z"
+        fill="#95a58a"/>
+
+      <path
+        d="M0 800L320 470 620 750 980 410 1440 730V1000H0Z"
+        fill="#527c63"/>
+
+      <ellipse
+        cx="1030"
+        cy="950"
+        rx="650"
+        ry="220"
+        fill="#8eb5aa"/>
+
+      <path
+        d="M40 940L120 620 200 940ZM200 1000L290 670 380 1000ZM1200 900L1270 610 1340 900Z"
+        fill="#315a47"/>
+    </svg>
+  </div>
+
+  <div class="world-digital"></div>
+</div>
+
+<div id="world-veil" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
 
 <nav>
   <a class="nav-logo" href="index.html">
@@ -659,34 +853,40 @@ footer{
   </ul>
 </nav>
 
+<!-- PAGE HEADER -->
+
 <div class="page-hero">
   <div class="ph-inner">
+
     <div class="breadcrumb reveal">
       <a href="index.html">Home</a> / Projects
     </div>
 
-    <h1 class="reveal" style="transition-delay:0.05s">
+    <h1 class="reveal" style="transition-delay:.05s">
       Featured Projects
     </h1>
 
-    <p class="ph-sub reveal" style="transition-delay:0.1s">
+    <p class="ph-sub reveal" style="transition-delay:.1s">
       AI-powered educational tools and research platforms I've
       designed, co-developed, and studied — spanning intelligent
       assessment, language learning, and game-based pedagogy.
     </p>
+
   </div>
 </div>
 
 <main>
 
-<!-- NEW PROJECT: BLOG LEFT / INTERACTIVE DESIGN RIGHT -->
+<!-- INTERACTIVE PROJECT -->
 
 <section
   class="project-card"
-  id="the-things-we-didnt-notice"
+  id="somewhere-along-the-way"
   aria-labelledby="noticing-title">
 
   <div class="noticing-layout">
+
+    <!-- BLOG -->
 
     <article
       class="noticing-blog"
@@ -701,12 +901,12 @@ footer{
       </div>
 
       <h2 class="proj-title" id="noticing-title">
-        The Things We Didn't Notice
+        Somewhere Along the Way
       </h2>
 
       <p>
-        A postcard about attention, convenience, and the parts
-        of a place we make time to encounter.
+        Use AI. Keep your curiosity, creativity,
+        and connection to the world.
       </p>
 
       <div class="chip-row">
@@ -716,145 +916,179 @@ footer{
         <span class="chip t">Arts of Noticing</span>
       </div>
 
-      <h3>Concept: a finished task, an unfinished encounter</h3>
+      <h3>Concept: staying connected while using AI</h3>
 
       <p>
-        My original postcard paired the instruction to use AI for
-        everything with a concern about losing our own participation
-        in thinking. For this interactive version, that concern
-        becomes a small visit to a forest. The visitor has a familiar
-        task: write a postcard. The question is how that postcard
-        comes into being. Does the visitor explore the place, accept
-        ready-made descriptions, or combine assistance with personal
-        attention?
+        My original postcard shows two worlds sharing one image.
+        On the left, a robotic hand reaches through a blue
+        technological space beneath the words “USE AI FOR
+        EVERYTHING. They said.” On the right, a person sits on
+        books beside a warm landscape. The books name critical
+        thinking, creativity, curiosity, and humanity. Above the
+        landscape, the postcard says, “But somewhere along the
+        way, we stopped thinking.” This interactive project
+        brings that tension into a world that responds to the
+        visitor's decisions.
       </p>
 
       <p>
-        The motivation is to create a moment of reflection about
-        convenience. A completed piece of writing can look like
-        evidence of an experience, even when its author has engaged
-        very little with the subject. Here, the visitor can finish
-        the postcard by repeatedly delegating its lines. The system
-        produces acceptable sentences, but they contain fewer
-        particular details than the observations available through
-        exploration. This difference is deliberately authored.
-        It expresses the project's question rather than demonstrating
-        that real AI always writes generally or that using it
-        necessarily weakens thinking.
-      </p>
-
-      <h3>Process: making meaning through rules</h3>
-
-      <p>
-        The postcard's landscape becomes a scene drawn with p5.js
-        shapes: mountains, trees, water, mushrooms, and birds.
-        Warm paper colors connect the environment to the original
-        postcard. Moving reflections and birds give the place a
-        continuing rhythm. Four numbered locations offer small
-        narrative fragments. Their order is flexible, so each
-        visitor can assemble a different sequence of observations.
+        The concept is that we should use AI without becoming
+        overly dependent on it. AI can help with tasks and offer
+        useful guidance. However, when we give it every decision,
+        question, and creative opportunity, we may leave less
+        room for our own participation. In this project, nature
+        represents both the living world around us and the human
+        capacities named on the books. Moving away from nature
+        is a metaphor for losing contact with curiosity,
+        reflection, imagination, and direct experience.
       </p>
 
       <p>
-        The central design decision is to connect every action to
-        the final postcard. Exploring a location contributes a
-        specific observation. Delegating contributes a generic
-        sentence and turns that location's marker blue. Repeated
-        delegation also gradually cools the sky's colors. Asking
-        for a hint highlights an unexplored location without
-        writing its sentence. This third option matters because
-        it gives assistance a constructive role: the system can
-        direct attention while leaving the encounter to the visitor.
+        The motivation is to make that concern visible through
+        interaction. The visitor can choose full delegation,
+        independent exploration, or AI guidance. Each choice
+        directly changes the state of the whole scene and the
+        surrounding webpage. These three states make different
+        relationships between the technological space and the
+        landscape visible immediately. The project does not
+        propose a fixed number of acceptable AI uses. Its
+        question is whether assistance is leaving us actively
+        involved.
+      </p>
+
+      <h3>Process: turning the postcard into a system</h3>
+
+      <p>
+        The scene preserves the postcard's main visual elements:
+        the blue technological world, the reaching robotic hand,
+        a seated human figure, the books, and a forest beside
+        water and mountains. The environment is drawn with
+        p5.js shapes, so its boundaries and positions can change
+        while the visitor watches. The original image becomes
+        an unfolding relationship rather than a fixed composition.
       </p>
 
       <p>
-        Each location contributes only one line per visit. This rule
-        makes a choice consequential, while the restart button makes
-        it possible to compare alternatives. The final postcard
-        preserves the order of contributions and identifies their
-        sources. Finishing early leaves some details unwritten.
-        There is no winning score. The ending asks the visitor to
-        consider which words feel connected to their own participation.
+        Choosing “Let AI do it for me” covers the entire scene
+        with the blue technological world. The surrounding
+        webpage also takes on a blue cover, while its text and
+        controls remain readable. The robotic hand occupies
+        the digital environment, and the person remains visible
+        on the books. This exaggerated state represents handing
+        over everything, rather than suggesting that one
+        ordinary use of AI causes harm.
+      </p>
+
+      <p>
+        Choosing “Explore for myself” removes the digital cover
+        and fills the scene with nature. The webpage takes on
+        green and warm landscape colors. Choosing “Ask AI to
+        guide me” creates a balanced composition: technology
+        occupies one side while nature remains visible on the
+        other. This state represents assistance that leaves
+        room for human participation. Its equal visual split
+        is a design metaphor, not a recommendation to use AI
+        exactly half the time.
+      </p>
+
+      <p>
+        The transitions are reversible. Visitors can compare
+        the three worlds in any order and use the reflection
+        button to review their choices. The human figure has a
+        more detailed face, thoughtful posture, jacket, bent
+        legs, and shoes. Keeping the person visible in every
+        state emphasizes that the question concerns our
+        relationship with technology, rather than whether
+        humans disappear from the world.
       </p>
 
       <h3>Stumbling blocks and design responses</h3>
 
       <p>
-        A central design challenge is avoiding an overly simple
-        moral in which technology is always harmful and independent
-        action is always good. The hint option responds to this
-        problem. Another challenge is representing attention without
-        pretending to measure it. Clicking a marker cannot establish
-        curiosity, understanding, or learning. The interaction
-        therefore uses exploration as a symbolic action and explicitly
-        describes its visual changes as metaphors.
+        A central challenge is avoiding a message that treats
+        all AI use as harmful. If every interaction with AI
+        made the environment worse, the system would contradict
+        the idea of using AI thoughtfully. Separating delegation
+        from guidance addresses that problem. Another challenge
+        is making the metaphor understandable without presenting
+        it as scientific evidence. The changing boundary is an
+        authored illustration of dependence, not a calculation
+        of intelligence, creativity, or an individual's actual
+        relationship with technology.
       </p>
 
       <p>
-        A further tension is between discovery and accessibility.
-        Completely hidden targets could make the environment
-        frustrating, especially on a small screen. Numbered markers
-        and matching HTML buttons make the available actions visible
-        and provide keyboard access. These are design trade-offs in
-        the prototype, rather than claims about difficulties observed
-        in a user study.
+        There is also a tension between visual simplicity and
+        meaningful action. Selecting a button does not
+        demonstrate deep reflection. Here, selecting exploration
+        stands for choosing to attend and is accompanied by a
+        reflective message. The rules are intentionally limited
+        so that visitors can understand the relationship between
+        their choices and the scene. These are design
+        considerations, not findings from a user study.
       </p>
 
-      <h3>Breakthrough: the postcard remembers the visit</h3>
+      <h3>Breakthrough: assistance can lead us back</h3>
 
       <p>
-        The key conceptual breakthrough is making the postcard the
-        record of the interaction. Instead of displaying the same
-        warning after every visit, the ending contains the visitor's
-        actual sequence of choices. Someone who delegates everything
-        receives a different text from someone who explores. A mixed
-        approach produces a mixed postcard. The narrative becomes
-        personal within a small, deliberately limited set of
-        possibilities.
+        The key design insight is that AI can point toward the
+        world instead of taking our place in it. The guidance
+        state keeps both the technological world and the natural
+        world visible. AI has a place, while the person retains
+        room for curiosity and judgment. This makes the project
+        more than a choice between accepting and rejecting
+        technology. It creates room for a relationship in which
+        assistance and human participation coexist. The ability
+        to reverse the visual separation also matters: the story
+        offers a way to reconnect.
       </p>
 
       <h3>Connections to the readings</h3>
 
       <p>
-        Smed, Suovuo, Skult, and Skult (2021, pp. 4–6) describe
-        interactive storytelling through the relationships among
-        designer, platform, storyworld, and interactor. Their
-        distinction between a designed storyworld and the story
-        instance experienced through participation directly informs
-        this project. The code defines the available places and
-        rules, while the visitor determines the sequence and source
-        of the postcard's lines. The result is bounded participation,
-        not unlimited authorship.
+        Smed, Suovuo, Skult, and Skult (2021, pp. 4–6)
+        distinguish the storyworld designed by a creator from
+        the particular story experienced through an interactor's
+        participation. Here, the designer establishes the
+        landscape, available actions, and consequences.
+        The visitor creates a particular sequence: full
+        delegation, independent exploration, a balanced use of
+        guidance, or movement among these possibilities.
+        The narrative is expressed through changes in the world
+        as well as through text.
       </p>
 
       <p>
-        Tsing's (2015, chapter 1) arts of noticing offers a second
-        connection. Her discussion attends to lives and relationships
-        overlooked by dominant narratives of progress, including
-        mushroom gathering in disturbed forests. This project adapts
-        that invitation to attend to overlooked details. The small
-        mushrooms are especially relevant: the fallen branch becomes
-        a place around which life continues. Tsing's argument concerns
-        ecological and social relationships; applying it to
-        AI-mediated attention is my interpretive extension, not
-        her claim about AI.
+        Tsing's (2015, chapter 1) arts of noticing offers a
+        complementary connection. Her discussion asks readers
+        to attend to lives and relationships that dominant
+        stories of progress can overlook. This project adapts
+        that invitation by making space for observation within
+        an environment shaped by technological convenience.
+        Tsing's argument concerns ecological and social
+        relationships; applying it to AI overreliance is an
+        interpretation developed for this project, not a claim
+        she makes about AI.
       </p>
 
       <p>
-        The procedural meaning lies in how the rules distribute
-        opportunities to participate. A hint leaves a discovery open;
-        delegation fills a place in the postcard; exploration selects
-        a specific detail. The system makes those differences visible
-        through its outputs. It invites visitors to ask what kind of
-        assistance they want, and what parts of an encounter they
-        want to keep doing themselves.
+        The procedural meaning comes from the rules: full
+        delegation covers the landscape, independent exploration
+        restores it, and guidance preserves a visible place for
+        both worlds. The visitor experiences these relationships
+        through choices. The final reflection returns to the
+        postcard's concern: a healthier future needs human
+        thinking. AI can be part of that future while we
+        continue to notice, question, create, and connect
+        for ourselves.
       </p>
 
       <h3>References</h3>
 
       <ul>
         <li>
-          Smed, J., Suovuo, T., Skult, N., &amp; Skult, P. (2021).
+          Smed, J., Suovuo, T., Skult, N., &amp; Skult, P.
+          (2021).
           <em>Handbook on interactive storytelling</em>.
           Wiley. Chapter 1, supplied course excerpt.
         </li>
@@ -872,40 +1106,49 @@ footer{
 
     </article>
 
+    <!-- INTERACTIVE DESIGN -->
+
     <div class="noticing-design">
 
-      <h3>Enter the landscape</h3>
+      <h3>“USE AI FOR EVERYTHING.”</h3>
 
       <p class="noticing-help">
-        Click a numbered place or its Explore button. Ask for a
-        hint, or let AI write the next line. Collect four lines or
-        finish early. Restart to compare different visits.
+        They said. But somewhere along the way,
+        we stopped thinking.
       </p>
 
-      <!-- The canvas, buttons, and final postcard appear here. -->
+      <p class="noticing-help">
+        Choose a relationship with AI.
+        “Let AI do it for me” turns the scene fully blue.
+        “Explore for myself” fills it with nature.
+        “Ask AI to guide me” brings both worlds into balance.
+        The webpage changes with your choice.
+      </p>
+
       <div id="noticing"></div>
 
       <noscript>
-        Enable JavaScript to play the interactive postcard.
+        Enable JavaScript to use the interactive design.
       </noscript>
 
       <p class="noticing-note">
-        The AI character uses prewritten responses. No AI service
-        is connected. The colors and writing are narrative metaphors,
-        not measurements of intelligence. Your choices stay in this
-        page and reset when it reloads.
+        AI guidance is scripted. This is an artistic metaphor
+        about overreliance, not a measurement of intelligence
+        or a recommended limit on AI use. Nothing is stored
+        or sent.
       </p>
 
     </div>
   </div>
 </section>
 
-<!-- LegalMind -->
+<!-- LEGALMIND -->
 
 <div class="project-card reveal">
   <div class="project-inner">
 
     <div class="project-media">
+
       <div
         class="vid-ph"
         id="lm-ph"
@@ -925,9 +1168,11 @@ footer{
 
       <iframe
         id="lm-fr"
+        title="LegalMind demonstration"
         style="display:none"
         allowfullscreen>
       </iframe>
+
     </div>
 
     <div class="proj-body">
@@ -963,11 +1208,12 @@ footer{
       </p>
 
       <a href="#" class="proj-link">View details →</a>
+
     </div>
   </div>
 </div>
 
-<!-- ProductiveMath -->
+<!-- PRODUCTIVEMATH -->
 
 <div class="project-card reveal">
   <div class="project-inner flip">
@@ -984,12 +1230,13 @@ footer{
       <p class="proj-desc">PI: Dr: Seyedahmad Rahimi</p>
 
       <p class="proj-desc">
-        A human-in-the-loop generative AI web application enabling
-        teachers to create algebra problems that support productive
-        failure pedagogy. Compares small vs. large language models
-        for problem quality, uses a custom rubric for automated
-        assessment. Recognized with a Best Paper Nomination at
-        AIED 2025, Palermo, Italy.
+        A human-in-the-loop generative AI web application
+        enabling teachers to create algebra problems that
+        support productive failure pedagogy. Compares small
+        vs. large language models for problem quality, uses
+        a custom rubric for automated assessment.
+        Recognized with a Best Paper Nomination at AIED 2025,
+        Palermo, Italy.
       </p>
 
       <div class="chip-row">
@@ -1003,19 +1250,22 @@ footer{
 
       <p class="proj-meta-line">
         Rahimi, Esmaeiligoujar et al. — Best Paper Nomination
-        AIED 2025 · Best Poster FERA 2025 · Best Paper Runner-Up
-        UF COE Symposium 2025
+        AIED 2025 · Best Poster FERA 2025 · Best Paper
+        Runner-Up UF COE Symposium 2025
       </p>
 
       <a
         href="https://doi.org/10.1007/978-3-031-99264-3_43"
         target="_blank"
+        rel="noopener"
         class="proj-link">
         View publication →
       </a>
+
     </div>
 
     <div class="project-media">
+
       <div
         class="vid-ph"
         id="pm-ph"
@@ -1035,14 +1285,16 @@ footer{
 
       <iframe
         id="pm-fr"
+        title="ProductiveMath demonstration"
         style="display:none"
         allowfullscreen>
       </iframe>
+
     </div>
   </div>
 </div>
 
-<!-- SmarterFlash -->
+<!-- SMARTERFLASH -->
 
 <div class="project-card reveal">
   <div class="project-inner flip">
@@ -1058,11 +1310,12 @@ footer{
 
       <p class="proj-desc">
         A generative AI-powered adaptive flashcard application
-        studying self-regulated learning. Research explored how
-        students balance AI automation with personal agency in
-        knowledge review — revealing that learners spend significant
-        cognitive energy preparing rather than passively consuming
-        AI-generated content. Presented at ICLS 2026, Irvine, CA.
+        studying self-regulated learning. Research explored
+        how students balance AI automation with personal agency
+        in knowledge review — revealing that learners spend
+        significant cognitive energy preparing rather than
+        passively consuming AI-generated content. Presented
+        at ICLS 2026, Irvine, CA.
       </p>
 
       <div class="chip-row">
@@ -1073,12 +1326,13 @@ footer{
       </div>
 
       <p class="proj-meta-line">
-        Li, H., Esmaeiligoujar, S., Adhami, N., Li, H., &amp;
-        Huang, R. — International Society of the Learning
-        Sciences 2026, Irvine, CA
+        Li, H., Esmaeiligoujar, S., Adhami, N., Li, H.,
+        &amp; Huang, R. — International Society of the
+        Learning Sciences 2026, Irvine, CA
       </p>
 
       <a href="#" class="proj-link">View details →</a>
+
     </div>
 
     <div
@@ -1104,14 +1358,16 @@ footer{
 
       <iframe
         id="sf-fr"
+        title="SmarterFlash demonstration"
         style="display:none"
         allowfullscreen>
       </iframe>
+
     </div>
   </div>
 </div>
 
-<!-- Metalingual -->
+<!-- METALINGUAL -->
 
 <div class="project-card reveal">
   <div class="project-inner flip">
@@ -1129,10 +1385,11 @@ footer{
 
       <p class="proj-desc">
         Co-designed an AI-powered platform for enhancing English
-        language learning with a focus on TOEFL speaking preparation.
-        Integrated AI-driven personalized instruction and feedback
-        loops. Conducted user testing to refine functionality and
-        improve user engagement. Presented at AECT 2024, Kansas City.
+        language learning with a focus on TOEFL speaking
+        preparation. Integrated AI-driven personalized instruction
+        and feedback loops. Conducted user testing to refine
+        functionality and improve user engagement. Presented
+        at AECT 2024, Kansas City.
       </p>
 
       <div class="chip-row">
@@ -1148,8 +1405,7 @@ footer{
         AECT Conference, Kansas City, MO (2024)
       </p>
 
-      <p
-        style="font-size:0.82rem;color:var(--muted);margin-bottom:1.2rem;">
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.2rem;">
         This project is a prototype. For more information,
         visit the project website.
       </p>
@@ -1157,9 +1413,11 @@ footer{
       <a
         href="https://sites.google.com/ufl.edu/metalingual/research"
         target="_blank"
-        style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.4rem;background:var(--teal);color:white;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none;">
+        rel="noopener"
+        style="display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;background:var(--teal);color:white;border-radius:8px;font-size:.82rem;font-weight:700;text-decoration:none;">
         Visit Project Website →
       </a>
+
     </div>
 
     <div
@@ -1168,15 +1426,16 @@ footer{
 
       <iframe
         src="https://embed.figma.com/proto/9XdlkmS7xLD4OdsEzSPvuC/HCI_Metahuman_Design?node-id=6-12&embed-host=share"
+        title="Metalingual interactive prototype"
         style="position:absolute;inset:0;width:100%;height:100%;border:none;"
         allowfullscreen>
       </iframe>
-    </div>
 
+    </div>
   </div>
 </div>
 
-<!-- Clues in the News -->
+<!-- CLUES IN THE NEWS -->
 
 <div class="project-card reveal">
   <div class="project-inner">
@@ -1189,6 +1448,7 @@ footer{
         src="cluesphoto.png"
         alt="Clues in the News"
         style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+
     </div>
 
     <div class="proj-body">
@@ -1204,11 +1464,11 @@ footer{
 
       <p class="proj-desc">
         Designed a game-based stealth assessment system that
-        measures K-12 students' critical thinking skills through
-        news analysis tasks — without students knowing they're
-        being assessed. The system embeds assessment seamlessly
-        into learning activities, eliminating test anxiety while
-        gathering rich performance data.
+        measures K-12 students' critical thinking skills
+        through news analysis tasks — without students knowing
+        they're being assessed. The system embeds assessment
+        seamlessly into learning activities, eliminating test
+        anxiety while gathering rich performance data.
       </p>
 
       <div class="chip-row">
@@ -1230,9 +1490,11 @@ footer{
   </div>
 </div>
 
-<!-- Other Research -->
+<!-- OTHER RESEARCH -->
 
-<div class="rg-header reveal">Other Research Projects</div>
+<div class="rg-header reveal">
+  Other Research Projects
+</div>
 
 <div class="rg">
 
@@ -1251,7 +1513,7 @@ footer{
     </div>
   </div>
 
-  <div class="ri reveal" style="transition-delay:0.05s">
+  <div class="ri reveal" style="transition-delay:.05s">
     <div class="ri-n">02</div>
     <div class="ri-cat">AI &amp; Creativity</div>
 
@@ -1260,13 +1522,13 @@ footer{
     </div>
 
     <div class="ri-d">
-      Multimodal LLM approach for psychometrically sound creativity
-      assessment in educational games. Published in Creativity
-      Research Journal (2026).
+      Multimodal LLM approach for psychometrically sound
+      creativity assessment in educational games.
+      Published in Creativity Research Journal (2026).
     </div>
   </div>
 
-  <div class="ri reveal" style="transition-delay:0.1s">
+  <div class="ri reveal" style="transition-delay:.1s">
     <div class="ri-n">03</div>
     <div class="ri-cat">Systematic Review</div>
 
@@ -1276,24 +1538,27 @@ footer{
 
     <div class="ri-d">
       Systematic review of games designed to promote growth
-      mindset. Presented ICLS 2025, Helsinki. Under review at ETRD.
+      mindset. Presented ICLS 2025, Helsinki.
+      Under review at ETRD.
     </div>
   </div>
 
-  <div class="ri reveal" style="transition-delay:0.15s">
+  <div class="ri reveal" style="transition-delay:.15s">
     <div class="ri-n">04</div>
     <div class="ri-cat">Usability Research</div>
 
-    <div class="ri-t">EarSketch Usability Testing</div>
+    <div class="ri-t">
+      EarSketch Usability Testing
+    </div>
 
     <div class="ri-d">
-      Designed and executed usability tests for EarSketch at UF.
-      Recruited participants, analyzed feedback, and delivered
-      recommendations report.
+      Designed and executed usability tests for EarSketch
+      at UF. Recruited participants, analyzed feedback,
+      and delivered recommendations report.
     </div>
   </div>
 
-  <div class="ri reveal" style="transition-delay:0.2s">
+  <div class="ri reveal" style="transition-delay:.2s">
     <div class="ri-n">05</div>
     <div class="ri-cat">MA Thesis · Game-Based Learning</div>
 
@@ -1302,17 +1567,19 @@ footer{
     </div>
 
     <div class="ri-d">
-      M.A. thesis on Kahoot! as a game-based learning environment.
-      Funded by Iran's National Elites Foundation.
-      Allameh Tabataba'i University, 2017.
+      M.A. thesis on Kahoot! as a game-based learning
+      environment. Funded by Iran's National Elites
+      Foundation. Allameh Tabataba'i University, 2017.
     </div>
   </div>
 
-  <div class="ri reveal" style="transition-delay:0.25s">
+  <div class="ri reveal" style="transition-delay:.25s">
     <div class="ri-n">06</div>
     <div class="ri-cat">Collaborative Learning</div>
 
-    <div class="ri-t">Web-Based Collaborative Platforms</div>
+    <div class="ri-t">
+      Web-Based Collaborative Platforms
+    </div>
 
     <div class="ri-d">
       Grant-funded research (80M Rial) studying collaborative
@@ -1322,7 +1589,6 @@ footer{
   </div>
 
 </div>
-
 </main>
 
 <footer>
@@ -1339,26 +1605,32 @@ footer{
   </span>
 </footer>
 
-<!-- EXISTING PAGE BEHAVIOR -->
+<!-- EXISTING WEBSITE INTERACTIONS -->
 
 <script>
-const obs = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.08 }
-);
+const revealElements = document.querySelectorAll(".reveal");
 
-document.querySelectorAll(".reveal").forEach(element => {
-  obs.observe(element);
-});
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+
+  revealElements.forEach(element => observer.observe(element));
+} else {
+  revealElements.forEach(element => {
+    element.classList.add("visible");
+  });
+}
 
 window.addEventListener("load", () => {
-  document.querySelectorAll(".reveal").forEach(element => {
+  revealElements.forEach(element => {
     if (element.getBoundingClientRect().top < window.innerHeight) {
       element.classList.add("visible");
     }
@@ -1367,10 +1639,7 @@ window.addEventListener("load", () => {
 
 function loadVid(placeholderId, frameId, url) {
   if (!url || url.startsWith("YOUR_")) {
-    alert(
-      "Replace the placeholder URL with your actual " +
-      "YouTube or Google Drive embed URL."
-    );
+    alert("Please add a valid video URL.");
     return;
   }
 
@@ -1382,14 +1651,14 @@ function loadVid(placeholderId, frameId, url) {
 }
 </script>
 
-<!-- EMBEDDED P5.JS PROJECT -->
+<!-- P5.JS INTERACTIVE ENVIRONMENT -->
 
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   if (typeof p5 === "undefined") {
     document.getElementById("noticing").textContent =
-      "The interactive scene could not load. " +
-      "Check your internet connection and reload the page.";
+      "The scene could not load. " +
+      "Check your connection and reload.";
 
     return;
   }
@@ -1397,625 +1666,745 @@ window.addEventListener("DOMContentLoaded", function () {
   new p5(p => {
     let host;
     let status;
-    let card;
-    let buttons;
-    let places;
-    let entries;
-    let hint;
-    let done;
+    let result;
+    let canvas;
 
-    let cool = 0;
+    let target = 0.5;
+    let visual = 0.5;
+    let history = [];
+    let mode = "guide";
+    let still = false;
 
-    function make(tag, text, parent) {
+    const choices = {};
+
+    const words = {
+      delegate:
+        "AI takes over the whole scene. Everything is handled, " +
+        "but the landscape disappears behind the blue world. " +
+        "What do we lose when we delegate everything?",
+
+      own:
+        "Nature fills the scene. You make space for your own " +
+        "attention, curiosity, creativity, and experience.",
+
+      guide:
+        "AI and nature share the scene. AI offers a starting " +
+        "point; you remain involved in noticing, questioning, " +
+        "and deciding."
+    };
+
+    function el(tag, text, parent) {
       const element = document.createElement(tag);
-
-      if (text) {
-        element.textContent = text;
-      }
-
+      element.textContent = text;
       parent.appendChild(element);
       return element;
     }
 
-    function reset() {
-      places = [
-        {
-          x: 0.19,
-          y: 0.73,
-          name: "Forest floor",
+    function setMode(next, record = true) {
+      mode = next;
 
-          detail:
-            "Small mushrooms gathered beside a fallen branch. " +
-            "Life continued around what had broken.",
+      target =
+        next === "delegate" ? 1 :
+        next === "own" ? 0 :
+        0.5;
 
-          auto:
-            "The forest floor was interesting."
-        },
+      // Update the whole webpage.
+      document.body.dataset.world = next;
 
-        {
-          x: 0.43,
-          y: 0.77,
-          name: "Water",
+      document.documentElement.style.setProperty(
+        "--digital-edge",
+        `${target * 100}%`
+      );
 
-          detail:
-            "The sun broke into moving pieces on the water. " +
-            "The reflection would not stay still.",
-
-          auto:
-            "The lake was beautiful."
-        },
-
-        {
-          x: 0.75,
-          y: 0.51,
-          name: "Tree",
-
-          detail:
-            "One tree leaned away from the others. " +
-            "Its crooked outline interrupted the repeated shapes.",
-
-          auto:
-            "The trees were green."
-        },
-
-        {
-          x: 0.58,
-          y: 0.24,
-          name: "Sky",
-
-          detail:
-            "Two birds crossed the sky together, " +
-            "then followed different directions.",
-
-          auto:
-            "The sky was peaceful."
-        }
-      ];
-
-      entries = [];
-      hint = -1;
-      done = false;
-
-      card.replaceChildren();
-      card.hidden = true;
-
-      buttons.forEach(button => {
-        button.disabled = false;
-      });
-
-      status.textContent =
-        "Write a postcard from this place. " +
-        "Explore a numbered detail, ask for a hint, " +
-        "or delegate a line.";
-    }
-
-    function record(index, source) {
-      if (done || places[index].source) {
-        return;
-      }
-
-      places[index].source = source;
-
-      entries.push({
-        i: index,
-        source: source
-      });
-
-      hint = -1;
-
-      const sentence =
-        source === "You"
-          ? places[index].detail
-          : places[index].auto;
-
-      status.textContent =
-        sentence + ` (${entries.length}/4 lines collected)`;
-
-      if (entries.length === 4) {
-        finish();
-      }
-    }
-
-    function finish() {
-      if (done) {
-        return;
-      }
-
-      done = true;
-      hint = -1;
-
-      buttons.forEach(button => {
-        button.disabled = true;
-      });
-
-      card.hidden = false;
-      card.replaceChildren();
-
-      make("h3", "Your postcard from the forest", card);
-      make("p", "Dear future me,", card);
-
-      entries.forEach(entry => {
-        const place = places[entry.i];
-
-        const sentence =
-          entry.source === "You"
-            ? place.detail
-            : place.auto;
-
-        make(
-          "p",
-          `${sentence} [${entry.source}]`,
-          card
+      Object.entries(choices).forEach(([key, button]) => {
+        button.setAttribute(
+          "aria-pressed",
+          String(key === next)
         );
       });
 
-      const own = entries.filter(entry => {
-        return entry.source === "You";
-      }).length;
-
-      const delegated = entries.length - own;
-      const unwritten = 4 - entries.length;
-
-      make(
-        "p",
-        `${own} lines explored by you · ` +
-        `${delegated} delegated · ` +
-        `${unwritten} left unwritten.`,
-        card
-      );
-
-      let ending;
-
-      if (entries.length === 0) {
-        ending =
-          "You left a blank postcard. " +
-          "What might you return to notice?";
-
-      } else if (own === 0) {
-        ending =
-          "The postcard is written. " +
-          "Which details feel like your memories?";
-
-      } else if (own === entries.length) {
-        ending =
-          "You chose each detail. " +
-          "What else might exist outside these four places?";
-
-      } else {
-        ending =
-          "Some words came from exploring; " +
-          "some arrived ready-made. " +
-          "Where do you recognize your own attention?";
+      if (record) {
+        history.push(next);
       }
 
-      make("p", ending, card);
+      status.textContent = words[next];
 
-      status.textContent =
-        "Your postcard is below. " +
-        "Restart to try a different way of visiting.";
+      canvas.elt.setAttribute(
+        "aria-label",
+        words[next]
+      );
+
+      if (!result.hidden) {
+        reflect();
+      }
+    }
+
+    function reflect() {
+      result.hidden = false;
+      result.replaceChildren();
+
+      el(
+        "h3",
+        "A healthier future needs human thinking.",
+        result
+      );
+
+      el("p", words[mode], result);
+
+      const counts = [
+        "delegate",
+        "own",
+        "guide"
+      ].map(type => {
+        return history.filter(choice => choice === type).length;
+      });
+
+      el(
+        "p",
+        `Your choices: ${counts[0]} delegated; ` +
+        `${counts[1]} independent; ` +
+        `${counts[2]} guided.`,
+        result
+      );
+
+      el(
+        "p",
+        "The balance shown here is symbolic—not a recommendation " +
+        "to use AI exactly half the time. Use help where it is " +
+        "useful, and keep participating in your own thinking " +
+        "and experience.",
+        result
+      );
+
+      el(
+        "p",
+        "What would you ask AI to help with, and what would " +
+        "you choose to experience yourself?",
+        result
+      );
     }
 
     p.setup = () => {
       host = document.getElementById("noticing");
 
-      if (!host) {
-        host = make("section", "", document.body);
-        host.id = "noticing";
-      }
+      still = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
 
-      host.style.maxWidth = "960px";
-      host.style.margin = "auto";
+      const width = Math.max(1, host.clientWidth);
 
-      const canvas = p.createCanvas(
-        Math.max(1, host.clientWidth),
-        420
+      canvas = p.createCanvas(
+        width,
+        Math.max(350, width * 0.68)
       );
 
       canvas.parent(host);
-      canvas.style("display", "block");
-      canvas.style("width", "100%");
 
       canvas.elt.setAttribute("role", "img");
 
-      canvas.elt.setAttribute(
-        "aria-label",
-        "Forest, lake and sky with four numbered places. " +
-        "Matching explore buttons are below."
-      );
-
-      status = make("p", "", host);
+      status = el("p", "", host);
       status.setAttribute("aria-live", "polite");
 
-      const controls = make("div", "", host);
-
-      controls.style.cssText =
-        "display:flex;" +
-        "flex-wrap:wrap;" +
-        "gap:8px;" +
-        "margin:16px 0";
+      const controls = el("div", "", host);
+      controls.className = "noticing-controls";
 
       function button(label, action) {
-        const element = make("button", label, controls);
+        const buttonElement = el("button", label, controls);
 
-        element.type = "button";
-        element.onclick = action;
+        buttonElement.type = "button";
+        buttonElement.onclick = action;
 
-        element.style.cssText =
-          "padding:10px 14px;" +
-          "border:1px solid #68756c;" +
-          "border-radius:6px;" +
-          "cursor:pointer;" +
-          "font:inherit";
-
-        return element;
+        return buttonElement;
       }
 
-      buttons = [
-        "Floor",
-        "Water",
-        "Tree",
-        "Sky"
-      ].map((name, index) => {
-        return button(
-          `Explore ${index + 1}: ${name}`,
-          () => record(index, "You")
-        );
+      choices.delegate = button(
+        "Let AI do it for me",
+        () => setMode("delegate")
+      );
+
+      choices.own = button(
+        "Explore for myself",
+        () => setMode("own")
+      );
+
+      choices.guide = button(
+        "Ask AI to guide me",
+        () => setMode("guide")
+      );
+
+      button(
+        "Reflect on my choices",
+        reflect
+      );
+
+      button("Start again", () => {
+        history = [];
+        result.hidden = true;
+
+        setMode("guide", false);
       });
 
-      buttons.push(
-        button("Ask AI for a hint", () => {
-          hint = places.findIndex(place => {
-            return !place.source;
-          });
-
-          if (hint >= 0) {
-            status.textContent =
-              `Look closer at ` +
-              `${places[hint].name.toLowerCase()} ` +
-              `(${hint + 1}). ` +
-              "The hint leaves the discovery to you.";
-          }
-        })
-      );
-
-      buttons.push(
-        button("Let AI write a line", () => {
-          const index = places.findIndex(place => {
-            return !place.source;
-          });
-
-          if (index >= 0) {
-            record(index, "AI");
-          }
-        })
-      );
-
-      buttons.push(
-        button("Finish postcard", finish)
-      );
-
-      button("Restart", reset);
-
-      card = make("section", "", host);
-
-      card.style.cssText =
-        "background:#f8efd9;" +
-        "color:#243b34;" +
-        "padding:24px;" +
-        "border:1px solid #b4a786";
-
-      reset();
+      result = el("section", "", host);
+      result.hidden = true;
 
       p.textFont("Georgia");
 
-      if (
-        window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches
-      ) {
-        p.frameRate(10);
-      }
+      setMode("guide", false);
     };
 
-    p.draw = () => {
-      const w = p.width;
-      const h = p.height;
-
-      const automated = entries.filter(entry => {
-        return entry.source === "AI";
-      }).length;
-
-      cool = p.lerp(
-        cool,
-        automated / 4,
-        0.035
-      );
-
+    function drawNature(time) {
       p.noStroke();
 
-      // SKY
-
-      for (let y = 0; y < h; y += 3) {
-        const warm = p.lerpColor(
-          p.color("#edce92"),
-          p.color("#769a8c"),
-          y / h
+      // Warm sky.
+      for (let y = 0; y < 580; y += 4) {
+        p.fill(
+          p.lerpColor(
+            p.color("#f7dfad"),
+            p.color("#91b09a"),
+            y / 580
+          )
         );
 
-        const skyColor = p.lerpColor(
-          warm,
-          p.color("#427194"),
-          cool * 0.65
-        );
-
-        p.fill(skyColor);
-        p.rect(0, y, w, 3);
+        p.rect(0, y, 900, 4);
       }
 
-      // SUN
+      // Sun and halo.
+      p.fill(255, 219, 133, 50);
+      p.circle(766, 98, 150);
 
-      p.fill("#f7df9b");
-      p.circle(
-        w * 0.79,
-        h * 0.2,
-        58
-      );
+      p.fill("#f4c76a");
+      p.circle(766, 98, 70);
 
-      // MOUNTAINS
-
+      // Mountain layers.
       const mountainColors = [
-        "#9aa695",
-        "#758c80",
-        "#496c61"
+        "#b4b69a",
+        "#839a83",
+        "#4d7560"
       ];
 
       for (let layer = 0; layer < 3; layer++) {
         p.fill(mountainColors[layer]);
 
         p.beginShape();
-        p.vertex(0, h);
+        p.vertex(0, 580);
 
-        for (let x = 0; x <= w + 12; x += 12) {
+        for (let x = 0; x <= 920; x += 20) {
           const y =
-            h * (0.36 + layer * 0.12) -
-            p.noise(x * 0.004, layer * 8) * h * 0.2;
+            230 +
+            layer * 54 -
+            p.noise(x * 0.004, layer * 7) * 125;
 
           p.vertex(x, y);
         }
 
-        p.vertex(w, h);
+        p.vertex(900, 580);
         p.endShape(p.CLOSE);
       }
 
-      // LAKE
+      // Lake.
+      p.fill("#91b5a4");
+      p.ellipse(610, 485, 850, 340);
 
-      p.fill("#719b9b");
+      // Reflections.
+      p.stroke("#e4dfb6");
+      p.strokeWeight(2);
 
-      p.ellipse(
-        w * 0.55,
-        h * 0.88,
-        w * 0.82,
-        h * 0.58
-      );
-
-      // WATER REFLECTIONS
-
-      p.stroke("#bbcec0");
-      p.strokeWeight(1);
-
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < 21; i++) {
         const x =
-          w * (0.30 + i * 0.035) +
-          Math.sin(p.millis() * 0.0005 + i) * 6;
+          300 +
+          i * 27 +
+          Math.sin(time * 0.7 + i) * 7;
 
         const y =
-          h * (0.67 + (i % 5) * 0.055);
+          365 + (i % 8) * 23;
 
         p.line(
           x,
           y,
-          x + w * 0.08,
+          x + 35 + (i % 3) * 10,
           y
         );
       }
 
       p.noStroke();
 
-      // TREES
-
-      for (let i = 0; i < 19; i++) {
-        const x = (i / 18) * w;
+      // Trees.
+      for (let i = 0; i < 24; i++) {
+        const x = i * 40;
 
         const base =
-          h * (0.64 + 0.06 * Math.sin(i * 3));
+          340 + Math.sin(i * 2) * 20;
 
-        if (
-          x > w * 0.30 &&
-          x < w * 0.69
-        ) {
-          continue;
-        }
+        const height =
+          60 + (i % 4) * 20;
 
-        const treeHeight =
-          55 + (i % 4) * 15;
-
-        p.fill("#244d42");
+        p.fill(
+          i % 2
+            ? "#315a47"
+            : "#416b52"
+        );
 
         p.rect(
           x - 3,
-          base - treeHeight * 0.5,
+          base - height / 2,
           6,
-          treeHeight * 0.6
+          height / 2 + 12
         );
 
         p.triangle(
           x - 23,
           base,
-          x,
-          base - treeHeight,
+          x + (i === 18 ? 12 : 0),
+          base - height,
           x + 23,
           base
         );
       }
 
-      // FOREGROUND
+      // Foreground.
+      p.fill("#8a9569");
+      p.ellipse(350, 585, 800, 180);
 
-      p.fill("#b99b68");
-
-      p.ellipse(
-        w * 0.17,
-        h * 0.91,
-        w * 0.35,
-        h * 0.3
-      );
-
-      // MUSHROOMS
-
-      for (let i = 0; i < 4; i++) {
-        const x =
-          w * 0.12 + i * 11;
-
-        const y =
-          h * 0.83 + (i % 2) * 8;
-
-        p.fill("#efe0b9");
-        p.rect(x - 2, y, 4, 13);
-
-        p.fill("#a96549");
-
-        p.arc(
-          x,
-          y,
-          18,
-          15,
-          p.PI,
-          p.TWO_PI
-        );
-      }
-
-      // BIRDS
-
-      p.stroke("#29433f");
+      // Birds.
+      p.stroke("#365641");
       p.noFill();
 
-      const drift =
-        Math.sin(p.millis() * 0.0004) * 12;
-
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < 3; i++) {
         const x =
-          w * 0.56 + drift + i * 23;
+          600 +
+          i * 49 +
+          Math.sin(time * 0.35 + i) * 16;
 
         const y =
-          h * 0.18 + i * 13;
+          135 + i * 14;
 
-        p.line(
-          x - 7,
-          y - 3,
-          x,
-          y
-        );
-
-        p.line(
-          x,
-          y,
-          x + 7,
-          y - 3
-        );
+        p.line(x - 9, y - 4, x, y);
+        p.line(x, y, x + 9, y - 4);
       }
 
-      // INTERACTIVE MARKERS
-
       p.noStroke();
-      p.textAlign(p.CENTER, p.CENTER);
-      p.textSize(16);
+    }
 
-      places.forEach((place, index) => {
-        const x = place.x * w;
-        const y = place.y * h;
-
-        if (hint === index) {
-          p.noFill();
-          p.stroke("#ffe9a8");
-          p.strokeWeight(3);
-          p.circle(x, y, 52);
-          p.noStroke();
-        }
-
-        if (place.source === "AI") {
-          p.fill("#214d78");
-
-        } else if (place.source === "You") {
-          p.fill("#345c46");
-
-        } else {
-          p.fill("#fcf1d8");
-        }
-
-        p.circle(x, y, 36);
-
-        p.fill(
-          place.source
-            ? "#ffffff"
-            : "#213c32"
-        );
-
-        p.text(
-          place.source === "You"
-            ? "✓"
-            : index + 1,
-          x,
-          y
-        );
-      });
-
-      // TOP CAPTION
-
-      p.fill("#17362c");
-      p.rect(0, 0, w, 39);
-
-      p.fill("#fff4d8");
-      p.textSize(14);
-
-      const caption = done
-        ? "A visit becomes a postcard."
-        : `${entries.length}/4 lines · What will you notice?`;
-
-      p.text(
-        caption,
-        w / 2,
-        20
-      );
-    };
-
-    p.mousePressed = () => {
-      if (
-        done ||
-        p.mouseX < 0 ||
-        p.mouseX > p.width ||
-        p.mouseY < 0 ||
-        p.mouseY > p.height
-      ) {
+    function drawDigital(amount, time) {
+      if (amount <= 0) {
         return;
       }
 
-      places.forEach((place, index) => {
-        const distance = p.dist(
-          p.mouseX,
-          p.mouseY,
-          place.x * p.width,
-          place.y * p.height
+      const edge = 900 * amount;
+
+      // Clip the blue world to the chosen proportion.
+      const context = p.drawingContext;
+
+      context.save();
+      context.beginPath();
+      context.rect(0, 0, edge, 580);
+      context.clip();
+
+      p.noStroke();
+
+      // Blue background.
+      for (let y = 0; y < 580; y += 4) {
+        p.fill(
+          p.lerpColor(
+            p.color("#0a2861"),
+            p.color("#17619b"),
+            y / 580
+          )
         );
 
-        if (distance < 24) {
-          record(index, "You");
-        }
-      });
+        p.rect(0, y, 900, 4);
+      }
+
+      // Digital grid.
+      p.stroke(96, 193, 244, 45);
+      p.strokeWeight(1);
+
+      for (let x = 0; x < 900; x += 32) {
+        p.line(x, 0, x, 580);
+      }
+
+      for (let y = 0; y < 580; y += 32) {
+        p.line(0, y, 900, y);
+      }
+
+      // Circuit-like details.
+      for (let i = 0; i < 18; i++) {
+        const x =
+          25 + (i * 73) % 850;
+
+        const y =
+          50 + (i * 47) % 460;
+
+        p.stroke(90, 200, 255, 90);
+
+        p.line(x, y, x + 30, y);
+        p.line(x + 30, y, x + 30, y + 20);
+
+        p.noStroke();
+        p.fill(103, 206, 255, 100);
+        p.circle(x, y, 5);
+      }
+
+      // Robotic arm.
+      p.push();
+      p.translate(130, 345);
+      p.rotate(-0.35);
+
+      p.stroke("#6389ad");
+      p.strokeWeight(46);
+      p.line(-170, 65, -20, 15);
+
+      p.stroke("#cee2ef");
+      p.strokeWeight(31);
+      p.line(-170, 57, -20, 8);
+
+      p.stroke("#7d9dbb");
+      p.strokeWeight(34);
+      p.line(-20, 15, 70, -10);
+
+      p.stroke("#e0edf3");
+      p.strokeWeight(22);
+      p.line(-20, 8, 70, -17);
+
+      // Joint.
+      p.noStroke();
+      p.fill("#284b70");
+      p.circle(-20, 12, 43);
+
+      p.fill("#a9c5d9");
+      p.circle(-20, 12, 25);
+
+      // Palm.
+      p.fill("#dae8ef");
+      p.rect(61, -45, 70, 55, 12);
+
+      p.fill("#91b5cd");
+      p.rect(75, -35, 33, 35, 5);
+
+      // Fingers.
+      for (let i = 0; i < 4; i++) {
+        const y =
+          -38 + i * 14;
+
+        p.stroke("#d9e8f0");
+        p.strokeWeight(10);
+
+        p.line(128, y, 164, y - 9);
+        p.line(164, y - 9, 182, y - 3);
+
+        p.noStroke();
+        p.fill("#7097b3");
+        p.circle(162, y - 8, 8);
+      }
+
+      // Thumb.
+      p.stroke("#d9e8f0");
+      p.strokeWeight(12);
+
+      p.line(85, 5, 111, 29);
+      p.line(111, 29, 139, 16);
+
+      p.pop();
+
+      context.restore();
+
+      // Boundary between the worlds.
+      if (amount < 1) {
+        p.stroke(230, 232, 203, 140);
+        p.strokeWeight(2);
+
+        p.line(edge, 0, edge, 580);
+
+        p.noStroke();
+      }
+    }
+
+    function drawPerson(x, time) {
+      p.push();
+      p.translate(x, 0);
+
+      // The books from the original postcard.
+      const labels = [
+        "Humanity",
+        "Curiosity",
+        "Creativity",
+        "Critical thinking"
+      ];
+
+      const colors = [
+        "#bd945b",
+        "#bea86d",
+        "#a6754c",
+        "#8c9668"
+      ];
+
+      for (let i = 0; i < 4; i++) {
+        const y =
+          548 - i * 25;
+
+        p.noStroke();
+
+        p.fill(colors[i]);
+        p.rect(-85, y, 185, 24, 4);
+
+        // Visible page edges.
+        p.fill("#e8d9b6");
+        p.rect(85, y + 4, 13, 15, 2);
+
+        p.fill("#273d35");
+        p.textAlign(p.CENTER, p.CENTER);
+        p.textSize(17);
+
+        p.text(labels[i], 0, y + 12);
+      }
+
+      // Far leg.
+      p.noFill();
+      p.stroke("#25394b");
+      p.strokeWeight(29);
+
+      p.bezier(
+        -13, 442,
+        12, 448,
+        51, 451,
+        65, 462
+      );
+
+      p.bezier(
+        65, 462,
+        76, 480,
+        77, 501,
+        91, 517
+      );
+
+      // Near leg and bent knee.
+      p.stroke("#334c60");
+      p.strokeWeight(34);
+
+      p.bezier(
+        -7, 437,
+        20, 429,
+        68, 431,
+        78, 446
+      );
+
+      p.bezier(
+        78, 446,
+        88, 466,
+        91, 489,
+        103, 506
+      );
+
+      // Trouser highlight.
+      p.stroke("#506679");
+      p.strokeWeight(4);
+
+      p.bezier(
+        10, 434,
+        40, 433,
+        64, 437,
+        70, 446
+      );
+
+      // Shoes.
+      p.noStroke();
+      p.fill("#ede7d8");
+
+      p.ellipse(110, 516, 48, 18);
+      p.ellipse(94, 527, 43, 16);
+
+      p.fill("#1d303d");
+      p.rect(87, 521, 49, 5, 3);
+      p.rect(74, 531, 43, 4, 3);
+
+      // Shoe laces.
+      p.stroke("#76838a");
+      p.strokeWeight(2);
+
+      p.line(100, 512, 111, 516);
+      p.line(105, 509, 116, 514);
+
+      // Jacket.
+      p.noStroke();
+      p.fill("#263c3b");
+
+      p.beginShape();
+
+      p.vertex(-18, 350);
+
+      p.bezierVertex(
+        -48, 364,
+        -55, 401,
+        -42, 433
+      );
+
+      p.bezierVertex(
+        -19, 450,
+        11, 451,
+        29, 433
+      );
+
+      p.bezierVertex(
+        23, 409,
+        8, 381,
+        17, 359
+      );
+
+      p.bezierVertex(
+        9, 348,
+        -3, 345,
+        -18, 350
+      );
+
+      p.endShape(p.CLOSE);
+
+      // Jacket highlight.
+      p.fill("#3e5750");
+
+      p.beginShape();
+
+      p.vertex(-16, 359);
+
+      p.bezierVertex(
+        -36, 379,
+        -34, 413,
+        -22, 435
+      );
+
+      p.vertex(-39, 430);
+
+      p.bezierVertex(
+        -49, 399,
+        -38, 368,
+        -16, 359
+      );
+
+      p.endShape(p.CLOSE);
+
+      // Neck.
+      p.fill("#b97e59");
+      p.rect(-1, 338, 18, 24, 5);
+
+      // Face.
+      p.fill("#d5a47d");
+      p.ellipse(9, 325, 40, 49);
+
+      // Nose profile.
+      p.triangle(
+        25, 323,
+        34, 331,
+        23, 335
+      );
+
+      // Hair.
+      p.fill("#25312e");
+
+      p.arc(
+        6,
+        315,
+        44,
+        39,
+        p.PI,
+        2 * p.PI
+      );
+
+      p.ellipse(-10, 323, 15, 31);
+      p.ellipse(0, 304, 32, 17);
+
+      // Ear.
+      p.fill("#c48b64");
+      p.ellipse(-6, 329, 9, 13);
+
+      // Eye.
+      p.stroke("#293730");
+      p.strokeWeight(2);
+      p.line(18, 322, 23, 323);
+
+      // Mouth.
+      p.stroke("#8a5f49");
+      p.line(23, 340, 28, 339);
+
+      // Upper arm.
+      p.stroke("#314b43");
+      p.strokeWeight(21);
+      p.line(-5, 370, 45, 396);
+
+      // Forearm.
+      p.stroke("#425d51");
+      p.strokeWeight(17);
+      p.line(45, 396, 44, 359);
+
+      // Hand supporting the chin.
+      p.stroke("#d5a47d");
+      p.strokeWeight(10);
+      p.line(44, 358, 29, 343);
+
+      p.noStroke();
+      p.fill("#d5a47d");
+      p.ellipse(27, 342, 14, 10);
+
+      p.pop();
+    }
+
+    p.draw = () => {
+      // Smooth transition, or immediate change for reduced motion.
+      visual = still
+        ? target
+        : p.lerp(visual, target, 0.055);
+
+      // Reach exactly 0%, 50%, or 100%.
+      if (Math.abs(visual - target) < 0.002) {
+        visual = target;
+      }
+
+      const time = still
+        ? 0
+        : p.millis() * 0.001;
+
+      // Uniform scaling keeps the person correctly proportioned.
+      const scale = Math.min(
+        p.width / 900,
+        p.height / 580
+      );
+
+      p.background(
+        mode === "delegate"
+          ? "#123f79"
+          : mode === "own"
+          ? "#a9b99a"
+          : "#849c9a"
+      );
+
+      p.push();
+
+      p.translate(
+        (p.width - 900 * scale) / 2,
+        (p.height - 580 * scale) / 2
+      );
+
+      p.scale(scale);
+
+      drawNature(time);
+      drawDigital(visual, time);
+
+      // The person remains visible in all three worlds.
+      drawPerson(
+        575 - visual * 100,
+        time
+      );
+
+      p.pop();
     };
 
     p.windowResized = () => {
+      const width = Math.max(
+        1,
+        host.clientWidth
+      );
+
       p.resizeCanvas(
-        Math.max(1, host.clientWidth),
-        420
+        width,
+        Math.max(350, width * 0.68)
       );
     };
   });
