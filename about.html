@@ -67,11 +67,15 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   footer{flex-direction:column;gap:0.5rem;text-align:center}
 }
 </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="index.html">Salah <span>E.</span></a>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  </button>
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html" class="active">About</a></li>
     <li><a href="projects.html">Projects</a></li>
@@ -109,7 +113,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
 
     <div class="about-text">
       <h2 class="reveal">Educational technologist at the intersection of AI, games, and human learning.</h2>
-      <p class="reveal" style="transition-delay:0.05s">I'm a PhD student in Educational Technology at the University of Florida's College of Education, working in the CLASS Lab under the supervision of Dr. Seyedahmad Rahimi. My research sits at the crossroads of artificial intelligence, game-based learning, and intelligent assessment — designing tools that make learning more effective, engaging, and equitable.</p>
+      <p class="reveal" style="transition-delay:0.05s">I am a PhD student in Digital Media at Georgia Tech, where I work in the CLASS Lab with Dr. Seyedahmad Rahimi. My research explores how AI, educational games, and assessment can support the way people learn.</p>
       <p class="reveal" style="transition-delay:0.1s">Before coming to UF, I earned my M.A. from Allameh Tabataba'i University in Tehran — where I ranked #1 in my cohort and was recognized as the best graduate student — and my B.S. in Learning Sciences from Tabriz University. Along the way, I worked as a project manager for a nationwide educational event in Iran, an assessment manager at the Ministry of Education, and an educational consultant for teachers and students.</p>
       <p class="reveal" style="transition-delay:0.15s">I'm currently a Research Assistant at Georgia Institute of Technology. I'm researching about AI-powered educational tools, stealth assessment, and productive failure pedagogy. I've presented my work at AIED, ICLS, AECT, AERA, and FERA — and I serve as a peer reviewer for the British Journal of Educational Technology, Creativity Research Journal, and ISLS annual meetings.</p>
 
@@ -223,5 +227,6 @@ const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
 </script>
+  <script src="site.js" defer></script>
 </body>
 </html>
