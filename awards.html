@@ -61,11 +61,15 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   footer{flex-direction:column;gap:0.5rem;text-align:center}
 }
 </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="index.html">Salah <span>E.</span></a>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  </button>
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="projects.html">Projects</a></li>
@@ -201,5 +205,6 @@ const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
 </script>
+  <script src="site.js" defer></script>
 </body>
 </html>
