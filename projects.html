@@ -777,6 +777,7 @@ footer,
   }
 }
 </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 
 <body data-world="guide">
@@ -841,8 +842,11 @@ footer,
   <a class="nav-logo" href="index.html">
     Salah <span>E.</span>
   </a>
+  <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  </button>
 
-  <ul class="nav-links">
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="projects.html" class="active">Projects</a></li>
@@ -2404,5 +2408,6 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+  <script src="site.js" defer></script>
 </body>
 </html>
