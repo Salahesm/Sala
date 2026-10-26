@@ -71,7 +71,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   footer{flex-direction:column;gap:0.5rem;text-align:center}
 }
 </style>
-  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="site.css?v=20261026c">
 </head>
 <body>
 <nav>
@@ -168,6 +168,6 @@ const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
 </script>
-  <script src="site.js" defer></script>
+  <script src="site.js?v=20261026c" defer></script>
 </body>
 </html>
