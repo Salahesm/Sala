@@ -130,3 +130,5 @@ footer{padding:1.3rem max(1.5rem,calc((100vw - 1120px)/2));background:transparen
   footer{padding:1.2rem 1.4rem}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Final consolidated change: let GitHub Pages publish the complete redesign. */
