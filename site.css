@@ -210,3 +210,10 @@ input, textarea, select { border-radius:0; background:var(--white); border:1px s
  .work-name { grid-column:1; }
  .work-arrow { grid-column:2; grid-row:1 / span 2; }
 }
+
+/* Final alignment refinements for the new home direction. */
+nav { display:flex; align-items:center; justify-content:space-between; }
+.nav-links { display:flex; align-items:center; list-style:none; margin:0; padding:0; }
+main { margin:0 auto; }
+.home-hero h1 { font-size:clamp(3.25rem,7.1vw,6.6rem); }
+@media(max-width:820px) { nav { display:flex; align-items:center; justify-content:space-between; } .nav-links { display:none; } nav.nav-open .nav-links { display:flex; } }
