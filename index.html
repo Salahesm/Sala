@@ -103,12 +103,16 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   footer{flex-direction:column;gap:0.5rem;text-align:center}
 }
 </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
 
 <nav>
   <a class="nav-logo" href="index.html">Salah <span>E.</span></a>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  </button>
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="projects.html">Projects</a></li>
@@ -123,7 +127,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   <div class="hero-shapes"><div class="shape1"></div><div class="shape2"></div><div class="shape3"></div></div>
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-badge reveal">PhD Student · University of Florida</div>
+      <div class="hero-badge reveal">PhD Student · Georgia Institute of Technology</div>
       <h1 class="reveal" style="transition-delay:0.08s">Salah<br><span class="teal">Esmaeiligoujar</span></h1>
       <p class="hero-role reveal" style="transition-delay:0.12s">Educational Technology & AI in Education</p>
       <p class="hero-desc reveal" style="transition-delay:0.16s">
@@ -144,7 +148,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
     <div class="hero-right reveal" style="transition-delay:0.2s">
       <div class="info-card">
         <h4>Current Position</h4>
-        <p><strong>Research Assistant</strong><br>Georgia Institute of Technolgy<br><span style="color:var(--teal)">August 2026 – Present</span></p>
+        <p><strong>Research Assistant</strong><br>Georgia Institute of Technology<br><span style="color:var(--teal)">August 2026 – Present</span></p>
       </div>
       <div class="info-card">
         <h4>Research Lab</h4>
@@ -228,5 +232,6 @@ const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
 </script>
+  <script src="site.js" defer></script>
 </body>
 </html>
