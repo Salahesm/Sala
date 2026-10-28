@@ -777,6 +777,7 @@ footer,
   }
 }
 </style>
+  <link rel="stylesheet" href="site.css?v=20261028">
 </head>
 
 <body data-world="guide">
@@ -837,17 +838,17 @@ footer,
 
 <!-- NAVIGATION -->
 
-<nav>
-  <a class="nav-logo" href="index.html">
-    Salah <span>E.</span>
-  </a>
-
-  <ul class="nav-links">
+<nav class="site-nav" aria-label="Main navigation">
+  <a class="nav-logo" href="index.html" aria-label="Salah Esmaeiligoujar, home">Salah <span>E.</span></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open menu">
+    <span></span><span></span>
+  </button>
+  <ul class="nav-links" id="site-navigation">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="projects.html" class="active">Projects</a></li>
-    <li><a href="awards.html">Awards</a></li>
+    <li><a href="projects.html" aria-current="page" class="active">Projects</a></li>
     <li><a href="publications.html">Publications</a></li>
+    <li><a href="awards.html">Awards</a></li>
     <li><a href="skills.html">Skills</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
@@ -2404,5 +2405,6 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+  <script src="site.js?v=20261028" defer></script>
 </body>
 </html>
