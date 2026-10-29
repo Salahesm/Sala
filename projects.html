@@ -777,10 +777,10 @@ footer,
   }
 }
 </style>
-  <link rel="stylesheet" href="site.css?v=20261028">
+  <link rel="stylesheet" href="site.css?v=20261029">
 </head>
 
-<body data-world="guide">
+<body data-world="guide" class="projects-page">
 
 <!-- PAGE-WIDE BACKGROUND -->
 
@@ -856,43 +856,89 @@ footer,
 
 <!-- PAGE HEADER -->
 
-<div class="page-hero">
-  <div class="ph-inner">
-
-    <div class="breadcrumb reveal">
-      <a href="index.html">Home</a> / Projects
-    </div>
-
-    <h1 class="reveal" style="transition-delay:.05s">
-      Featured Projects
-    </h1>
-
-    <p class="ph-sub reveal" style="transition-delay:.1s">
-      AI-powered educational tools and research platforms I've
-      designed, co-developed, and studied — spanning intelligent
-      assessment, language learning, and game-based pedagogy.
-    </p>
-
+<section class="projects-hero" aria-labelledby="projects-title">
+  <div class="projects-hero-main">
+    <p class="eyebrow"><span class="eyebrow-mark"></span> Projects · Research in practice</p>
+    <h1 id="projects-title">Ideas you can <em>try.</em></h1>
+    <p>Learning tools, games, and experiments shaped by questions about AI, agency, and how people learn.</p>
   </div>
-</div>
-
+  <div class="projects-hero-aside">
+    <span class="project-count">01 — 12</span>
+    <p>From interactive stories and classroom tools to research that makes learning visible.</p>
+    <a class="text-link" href="#project-library">Explore the work <span aria-hidden="true">↓</span></a>
+  </div>
+</section>
 <main>
+<section class="project-library" id="project-library" aria-labelledby="library-title">
+  <div class="project-library-head">
+    <div><p class="eyebrow">Selected work</p><h2 id="library-title">Browse projects</h2></div>
+    <p>Choose a topic to narrow the list. Open a project to see the full story, demo, or publication.</p>
+  </div>
+  <div class="project-filters" role="group" aria-label="Filter projects">
+    <button type="button" class="project-filter is-active" data-project-filter="all" aria-pressed="true">All work</button>
+    <button type="button" class="project-filter" data-project-filter="ai" aria-pressed="false">AI & learning</button>
+    <button type="button" class="project-filter" data-project-filter="games" aria-pressed="false">Games & interaction</button>
+    <button type="button" class="project-filter" data-project-filter="assessment" aria-pressed="false">Assessment</button>
+    <button type="button" class="project-filter" data-project-filter="language" aria-pressed="false">Language</button>
+    <span class="project-filter-count" aria-live="polite">6 projects</span>
+  </div>
+  <div class="project-index-grid">
+    <a class="project-tile project-tile-feature" href="#somewhere-along-the-way" data-project-tile data-project-topic="ai games">
+      <span class="tile-no">01</span><span class="tile-type">Interactive narrative · 2026</span>
+      <strong>Somewhere Along the Way</strong>
+      <span class="tile-copy">Use AI while keeping curiosity, creativity, and connection in the picture.</span>
+      <span class="tile-link">Open the experience <span aria-hidden="true">↗</span></span>
+    </a>
+    <a class="project-tile" href="#case-legalmind" data-project-tile data-project-topic="ai assessment">
+      <span class="tile-no">02</span><span class="tile-type">AI · Critical thinking</span>
+      <strong>LegalMind</strong>
+      <span class="tile-copy">AI-supported case analysis for practicing legal reasoning.</span>
+      <span class="tile-link">View project <span aria-hidden="true">↗</span></span>
+    </a>
+    <a class="project-tile" href="#case-productivemath" data-project-tile data-project-topic="ai games assessment">
+      <span class="tile-no">03</span><span class="tile-type">AI · Productive failure</span>
+      <strong>ProductiveMath</strong>
+      <span class="tile-copy">A human-in-the-loop tool for creating algebra problems for productive failure.</span>
+      <span class="tile-link">View project <span aria-hidden="true">↗</span></span>
+    </a>
+    <a class="project-tile" href="#case-smarterflash" data-project-tile data-project-topic="ai learning">
+      <span class="tile-no">04</span><span class="tile-type">AI · Self-regulated learning</span>
+      <strong>SmarterFlash</strong>
+      <span class="tile-copy">Adaptive flashcards exploring how learners share review work with AI.</span>
+      <span class="tile-link">View project <span aria-hidden="true">↗</span></span>
+    </a>
+    <a class="project-tile" href="#case-metalingual" data-project-tile data-project-topic="ai language">
+      <span class="tile-no">05</span><span class="tile-type">AI · Language learning</span>
+      <strong>Metalingual</strong>
+      <span class="tile-copy">An AI-supported TOEFL speaking prototype with personalized feedback.</span>
+      <span class="tile-link">View prototype <span aria-hidden="true">↗</span></span>
+    </a>
+    <a class="project-tile project-tile-image" href="#case-clues" data-project-tile data-project-topic="games assessment">
+      <span class="tile-image"><img src="cluesphoto.png" alt="" loading="lazy"></span>
+      <span class="tile-no">06</span><span class="tile-type">Game-based · Stealth assessment</span>
+      <strong>Clues in the News</strong>
+      <span class="tile-copy">A news-analysis game for making critical thinking visible through play.</span>
+      <span class="tile-link">View project <span aria-hidden="true">↗</span></span>
+    </a>
+  </div>
+  <p class="project-filter-empty" hidden>No projects match this topic yet.</p>
+</section>
+<div class="project-stories-label"><span>Project stories</span><span>Open a project for more</span></div>
+
 
 <!-- INTERACTIVE PROJECT -->
 
 <section
-  class="project-card"
+  class="project-card project-primary"
   id="somewhere-along-the-way"
+  data-project-topic="ai games"
   aria-labelledby="noticing-title">
 
   <div class="noticing-layout">
 
     <!-- BLOG -->
 
-    <article
-      class="noticing-blog"
-      tabindex="0"
-      aria-label="Project blog post; scroll to read">
+    <details class="noticing-blog project-writeup"><summary>Read the concept, process, and design notes</summary><div class="noticing-writeup-content">
 
       <div class="proj-tag-row">
         <span class="proj-cat">
@@ -1098,7 +1144,7 @@ footer,
         </li>
       </ul>
 
-    </article>
+    </div></details>
 
     <!-- INTERACTIVE DESIGN -->
 
@@ -1138,7 +1184,7 @@ footer,
 
 <!-- LEGALMIND -->
 
-<div class="project-card reveal">
+<div class="project-card reveal" id="case-legalmind" data-project-topic="ai assessment">
   <div class="project-inner">
 
     <div class="project-media">
@@ -1209,7 +1255,7 @@ footer,
 
 <!-- PRODUCTIVEMATH -->
 
-<div class="project-card reveal">
+<div class="project-card reveal" id="case-productivemath" data-project-topic="ai games assessment">
   <div class="project-inner flip">
 
     <div class="proj-body">
@@ -1290,7 +1336,7 @@ footer,
 
 <!-- SMARTERFLASH -->
 
-<div class="project-card reveal">
+<div class="project-card reveal" id="case-smarterflash" data-project-topic="ai learning">
   <div class="project-inner flip">
 
     <div class="proj-body">
@@ -1363,7 +1409,7 @@ footer,
 
 <!-- METALINGUAL -->
 
-<div class="project-card reveal">
+<div class="project-card reveal" id="case-metalingual" data-project-topic="ai language">
   <div class="project-inner flip">
 
     <div class="proj-body">
@@ -1431,7 +1477,7 @@ footer,
 
 <!-- CLUES IN THE NEWS -->
 
-<div class="project-card reveal">
+<div class="project-card reveal" id="case-clues" data-project-topic="games assessment">
   <div class="project-inner">
 
     <div
@@ -2405,6 +2451,6 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-  <script src="site.js?v=20261028" defer></script>
+  <script src="site.js?v=20261029" defer></script>
 </body>
 </html>

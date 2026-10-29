@@ -101,9 +101,9 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   footer{flex-direction:column;gap:0.5rem;text-align:center}
 }
 </style>
-  <link rel="stylesheet" href="site.css?v=20261028">
+  <link rel="stylesheet" href="site.css?v=20261029">
 </head>
-<body>
+<body class="skills-page">
 
 <nav class="site-nav" aria-label="Main navigation">
   <a class="nav-logo" href="index.html" aria-label="Salah Esmaeiligoujar, home">Salah <span>E.</span></a>
@@ -125,187 +125,92 @@ footer{border-top:1px solid var(--border);padding:1.5rem 3rem;display:flex;justi
   <div class="ph-inner">
     <div class="breadcrumb reveal"><a href="index.html">Home</a> / Skills</div>
     <h1 class="reveal" style="transition-delay:0.05s">Skills & Expertise</h1>
-    <p class="ph-sub reveal" style="transition-delay:0.1s">Research expertise, technical tools, languages, professional memberships, and academic service contributions.</p>
+    <p class="ph-sub reveal" style="transition-delay:0.1s">Methods, tools, and service that shape how I design and study learning experiences.</p>
   </div>
 </div>
 
-<main>
-
-  <!-- ROW 1: Research Skills + Technical Tools -->
-  <div class="grid-2">
-
-    <div class="card reveal">
-      <div class="sec-label">Research</div>
-      <div class="sec-title">Research Skills</div>
-
-      <div class="skill-category">
-        <div class="skill-cat-label">Methods</div>
-        <div class="skill-pills">
-          <span class="pill b">Systematic Review</span>
-          <span class="pill b">Qualitative Research</span>
-          <span class="pill b">Quantitative Research</span>
-        </div>
+<main class="skills-main">
+  <section class="skills-explorer" aria-labelledby="skills-explorer-title">
+    <div class="skills-explorer-head">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-mark"></span> Practice, not a checklist</p>
+        <h2 id="skills-explorer-title">How I work</h2>
       </div>
-
-      <div class="skill-category">
-        <div class="skill-cat-label">Design & Assessment</div>
-        <div class="skill-pills">
-          <span class="pill t">Instructional Design</span>
-          <span class="pill t">Educational Assessment</span>
-          <span class="pill t">Usability Testing</span>
-          <span class="pill t">UX Research</span>
-          <span class="pill t">Rubric Design</span>
-          <span class="pill t">Stealth Assessment</span>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-cat-label">Expertise Areas</div>
-        <div class="skill-pills">
-          <span class="pill">AI in Education</span>
-          <span class="pill">Critical Thinking</span>
-          <span class="pill">Game-Based Learning</span>
-          <span class="pill">Stealth Assessment</span>
-        </div>
-      </div>
+      <p>Browse research methods, tools, languages, and service. Search within any area to find a specific skill.</p>
     </div>
-
-    <div class="card reveal" style="transition-delay:0.08s">
-      <div class="sec-label">Technical</div>
-      <div class="sec-title">Tools & Technologies</div>
-
-      <div class="skill-category">
-        <div class="skill-cat-label">AI & Data</div>
-        <div class="skill-pills">
-          <span class="pill b">Prompt Engineering</span>
-          <span class="pill b">AI Tool Design</span>
-          <span class="pill b">R (Statistics)</span>
-          <span class="pill b">SPSS</span>
-        </div>
+    <div class="skills-controls">
+      <div class="skills-tabs" role="tablist" aria-label="Skill areas">
+        <button class="skills-tab is-active" type="button" role="tab" id="tab-research" aria-controls="panel-research" aria-selected="true" data-skill-tab="research">Research</button>
+        <button class="skills-tab" type="button" role="tab" id="tab-tools" aria-controls="panel-tools" aria-selected="false" data-skill-tab="tools">Tools</button>
+        <button class="skills-tab" type="button" role="tab" id="tab-languages" aria-controls="panel-languages" aria-selected="false" data-skill-tab="languages">Languages</button>
+        <button class="skills-tab" type="button" role="tab" id="tab-service" aria-controls="panel-service" aria-selected="false" data-skill-tab="service">Service</button>
       </div>
-
-      <div class="skill-category">
-        <div class="skill-cat-label">Design & Web</div>
-        <div class="skill-pills">
-          <span class="pill t">Figma</span>
-          <span class="pill t">HTML / CSS</span>
-          <span class="pill t">GitHub</span>
-          <span class="pill t">Augmented Reality</span>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-cat-label">Qualitative Tools</div>
-        <div class="skill-pills">
-          <span class="pill">NVivo</span>
-          <span class="pill">Google Workspace</span>
-          <span class="pill">Microsoft Office</span>
-        </div>
-      </div>
+      <label class="skills-search"><span class="visually-hidden">Search this skill area</span><input type="search" id="skills-search" placeholder="Find a method, tool, or topic…" autocomplete="off"><span aria-hidden="true">⌕</span></label>
     </div>
+    <p class="skills-status" id="skills-status" aria-live="polite">Showing research skills</p>
 
-  </div>
-
-  <!-- ROW 2: Languages + Memberships + Peer Review -->
-  <div class="grid-3">
-
-    <div class="card reveal" style="transition-delay:0.05s">
-      <div class="sec-label">Communication</div>
-      <div class="sec-title">Languages</div>
-      <div class="lang-item">
-        <span class="lang-name">English</span>
-        <span class="lang-level fluent">Fluent</span>
+    <section class="skills-panel is-active" id="panel-research" role="tabpanel" aria-labelledby="tab-research" data-skill-panel="research">
+      <div class="skills-panel-intro"><span>01 / RESEARCH</span><h3>Questions, methods, and design.</h3><a class="text-link" href="projects.html">See them in projects <span aria-hidden="true">↗</span></a></div>
+      <div class="skills-groups">
+        <div class="skill-group" data-skill-group><h4>Methods</h4><div class="skill-tags">
+          <span class="skill-tag" data-skill-entry>Systematic review</span><span class="skill-tag" data-skill-entry>Qualitative research</span><span class="skill-tag" data-skill-entry>Quantitative research</span>
+        </div></div>
+        <div class="skill-group" data-skill-group><h4>Design & assessment</h4><div class="skill-tags">
+          <span class="skill-tag" data-skill-entry>Instructional design</span><span class="skill-tag" data-skill-entry>Educational assessment</span><span class="skill-tag" data-skill-entry>Usability testing</span><span class="skill-tag" data-skill-entry>UX research</span><span class="skill-tag" data-skill-entry>Rubric design</span><span class="skill-tag" data-skill-entry>Stealth assessment</span>
+        </div></div>
+        <div class="skill-group" data-skill-group><h4>Research areas</h4><div class="skill-tags">
+          <span class="skill-tag" data-skill-entry>AI in education</span><span class="skill-tag" data-skill-entry>Critical thinking</span><span class="skill-tag" data-skill-entry>Game-based learning</span><span class="skill-tag" data-skill-entry>Creativity assessment</span><span class="skill-tag" data-skill-entry>Productive failure</span>
+        </div></div>
       </div>
-      <div class="lang-item">
-        <span class="lang-name">Persian / Farsi</span>
-        <span class="lang-level native">Native</span>
+    </section>
+
+    <section class="skills-panel" id="panel-tools" role="tabpanel" aria-labelledby="tab-tools" data-skill-panel="tools" hidden>
+      <div class="skills-panel-intro"><span>02 / TOOLS</span><h3>Tools used to make, study, and analyze.</h3><a class="text-link" href="projects.html">See them in projects <span aria-hidden="true">↗</span></a></div>
+      <div class="skills-groups">
+        <div class="skill-group" data-skill-group><h4>AI & data</h4><div class="skill-tags">
+          <span class="skill-tag" data-skill-entry>Prompt engineering</span><span class="skill-tag" data-skill-entry>AI tool design</span><span class="skill-tag" data-skill-entry>R (statistics)</span><span class="skill-tag" data-skill-entry>SPSS</span>
+        </div></div>
+        <div class="skill-group" data-skill-group><h4>Design & web</h4><div class="skill-tags">
+          <span class="skill-tag" data-skill-entry>Figma</span><span class="skill-tag" data-skill-entry>HTML / CSS</span><span class="skill-tag" data-skill-entry>GitHub</span><span class="skill-tag" data-skill-entry>Augmented reality</span>
+        </div></div>
+        <div class="skill-group" data-skill-group><h4>Research software</h4><div class="skill-tags">
+          <span class="skill-tag" data-skill-entry>NVivo</span><span class="skill-tag" data-skill-entry>Google Workspace</span><span class="skill-tag" data-skill-entry>Microsoft Office</span>
+        </div></div>
       </div>
-      <div class="lang-item">
-        <span class="lang-name">Kurdish</span>
-        <span class="lang-level native">Native</span>
+    </section>
+
+    <section class="skills-panel" id="panel-languages" role="tabpanel" aria-labelledby="tab-languages" data-skill-panel="languages" hidden>
+      <div class="skills-panel-intro"><span>03 / LANGUAGES</span><h3>Language is part of the work.</h3><p>Communication across research, teaching, and community settings.</p></div>
+      <div class="language-list">
+        <div class="language-row" data-skill-entry><span>01</span><strong>English</strong><span class="language-level">Fluent</span></div>
+        <div class="language-row" data-skill-entry><span>02</span><strong>Persian / Farsi</strong><span class="language-level">Native</span></div>
+        <div class="language-row" data-skill-entry><span>03</span><strong>Kurdish</strong><span class="language-level">Native</span></div>
       </div>
-    </div>
+    </section>
 
-    <div class="card reveal" style="transition-delay:0.1s">
-      <div class="sec-label">Professional Service</div>
-      <div class="sec-title">Peer Review & Organizations</div>
-      <ul class="member-list">
-        <li class="member-item">
-          <div class="member-abbr">AECT</div>
-          <div class="member-name"><strong>AECT</strong>Association for Educational Communication & Technology</div>
-        </li>
-        <li class="member-item">
-          <div class="member-abbr">AERA</div>
-          <div class="member-name"><strong>AERA</strong>American Educational Research Association</div>
-        </li>
-        <li class="member-item">
-          <div class="member-abbr t">ISLS</div>
-          <div class="member-name"><strong>ISLS</strong>International Society of the Learning Sciences</div>
-        </li>
-        <li class="member-item">
-          <div class="member-abbr t">IAET</div>
-          <div class="member-name"><strong>IAET</strong>Iranian Association of Educational Technology</div>
-        </li>
-        <li class="member-item">
-          <div class="member-abbr">OREP</div>
-          <div class="member-name"><strong>OREP</strong>Organization for Educational Research and Planning</div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="card reveal" style="transition-delay:0.15s">
-      <div class="sec-label">Peer Review Service</div>
-      <div class="sec-title">Journals & Conferences Reviewed</div>
-      <ul class="review-list">
-        <li class="review-item">
-          <div class="review-dot"></div>
-          <div class="review-text"><strong>British Journal of Educational Technology</strong></div>
-        </li>
-        <li class="review-item teal">
-          <div class="review-dot t"></div>
-          <div class="review-text"><strong>Creativity Research Journal</strong></div>
-        </li>
-        <li class="review-item">
-          <div class="review-dot"></div>
-          <div class="review-text"><strong>Journal of Research on Technology in Education</strong></div>
-        </li>
-        <li class="review-item teal">
-          <div class="review-dot t"></div>
-          <div class="review-text">ISLS Annual Meeting 2026 <span class="review-count t">5 manuscripts</span></div>
-        </li>
-        <li class="review-item teal">
-          <div class="review-dot t"></div>
-          <div class="review-text">ISLS Annual Meeting 2025 <span class="review-count t">9 manuscripts</span></div>
-        </li>
-        <li class="review-item">
-          <div class="review-dot"></div>
-          <div class="review-text">ISLS Annual Meeting 2024 <span class="review-count">4 manuscripts</span></div>
-        </li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- ROW 3: Volunteering -->
-  <div class="grid-full">
-    <div class="card reveal" style="transition-delay:0.1s">
-      <div class="sec-label">Community</div>
-      <div class="sec-title">Professional Service & Volunteering</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem">
-        <div class="service-card">
-          <div class="service-year">September 2025</div>
-          <div class="service-name">STEM on the Lawn Volunteer</div>
-          <div class="service-desc">Florida Semiconductor Institute, University of Florida. Certificate of Recognition for assisting with hands-on STEM education and outreach activities promoting science, technology, engineering, and mathematics engagement.</div>
-        </div>
-        <div class="service-card blue">
-          <div class="service-year">2018</div>
-          <div class="service-name">Festival Referee — Top Teaching Methods</div>
-          <div class="service-desc">Ministry of Education, Tehran, Iran. Served as referee for the Top Teaching Methods Festival, evaluating innovative pedagogical approaches submitted by teachers nationwide.</div>
-        </div>
+    <section class="skills-panel" id="panel-service" role="tabpanel" aria-labelledby="tab-service" data-skill-panel="service" hidden>
+      <div class="skills-panel-intro"><span>04 / SERVICE</span><h3>Contributing to the field.</h3><p>Peer review, professional communities, and educational outreach.</p></div>
+      <div class="service-columns">
+        <div class="service-group"><h4>Peer review</h4><ul class="service-list">
+          <li data-skill-entry>British Journal of Educational Technology</li>
+          <li data-skill-entry>Creativity Research Journal</li>
+          <li data-skill-entry>Journal of Research on Technology in Education</li>
+          <li data-skill-entry>ISLS Annual Meeting <span>2024–2026</span></li>
+        </ul></div>
+        <div class="service-group"><h4>Organizations</h4><ul class="service-list">
+          <li data-skill-entry>AECT · Association for Educational Communication & Technology</li>
+          <li data-skill-entry>AERA · American Educational Research Association</li>
+          <li data-skill-entry>ISLS · International Society of the Learning Sciences</li>
+          <li data-skill-entry>IAET · Iranian Association of Educational Technology</li>
+          <li data-skill-entry>OREP · Organization for Educational Research and Planning</li>
+        </ul></div>
+        <div class="service-group"><h4>Outreach</h4><ul class="service-list">
+          <li data-skill-entry><strong>STEM on the Lawn</strong><span>Volunteer · Florida Semiconductor Institute · 2025</span></li>
+          <li data-skill-entry><strong>Top Teaching Methods Festival</strong><span>Referee · Ministry of Education, Tehran · 2018</span></li>
+        </ul></div>
       </div>
-    </div>
-  </div>
-
+    </section>
+  </section>
 </main>
 
 <footer>
@@ -318,6 +223,6 @@ const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 window.addEventListener('load',()=>document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible')}));
 </script>
-  <script src="site.js?v=20261028" defer></script>
+  <script src="site.js?v=20261029" defer></script>
 </body>
 </html>
