@@ -313,3 +313,5 @@ body:not([data-world]) .tab.active{border-color:var(--blue)!important}
 body.projects-page{--bg:#fbfaf7!important;--blue:#d74a34!important;--teal:#d2e85a!important;background:#fbfaf7!important;color:#181818!important}
 .projects-page .projects-hero{background:#fbfaf7!important}
 .site-nav .nav-logo span{background:transparent!important;color:var(--blue)!important}
+
+.page-hero::after{display:none!important;content:none!important}
